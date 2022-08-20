@@ -76,7 +76,126 @@ const Contacts = [
       }
     ],
     primaryEmailAddress: "6@email.com"
-  }
+  },
+  
+  {
+    company: "T6",
+    contactName: "Teodor Sixth",
+    id: "6",
+    phoneNumbers: [
+      {
+        category: "HOME",
+        id: "6",
+        phoneNumberFormatted: "666-66-666666#6"
+      }
+    ],
+    primaryEmailAddress: "6@email.com"
+  },
+  {
+    company: "T6",
+    contactName: "Teodor Sixth",
+    id: "6",
+    phoneNumbers: [
+      {
+        category: "HOME",
+        id: "6",
+        phoneNumberFormatted: "666-66-666666#6"
+      }
+    ],
+    primaryEmailAddress: "6@email.com"
+  },
+  {
+    company: "T6",
+    contactName: "Teodor Sixth",
+    id: "6",
+    phoneNumbers: [
+      {
+        category: "HOME",
+        id: "6",
+        phoneNumberFormatted: "666-66-666666#6"
+      }
+    ],
+    primaryEmailAddress: "6@email.com"
+  },
+  {
+    company: "T6",
+    contactName: "Teodor Sixth",
+    id: "6",
+    phoneNumbers: [
+      {
+        category: "HOME",
+        id: "6",
+        phoneNumberFormatted: "666-66-666666#6"
+      }
+    ],
+    primaryEmailAddress: "6@email.com"
+  },
+  {
+    company: "T6",
+    contactName: "Teodor Sixth",
+    id: "6",
+    phoneNumbers: [
+      {
+        category: "HOME",
+        id: "6",
+        phoneNumberFormatted: "666-66-666666#6"
+      }
+    ],
+    primaryEmailAddress: "6@email.com"
+  },
+  {
+    company: "T6",
+    contactName: "Teodor Sixth",
+    id: "6",
+    phoneNumbers: [
+      {
+        category: "HOME",
+        id: "6",
+        phoneNumberFormatted: "666-66-666666#6"
+      }
+    ],
+    primaryEmailAddress: "6@email.com"
+  },
+  {
+    company: "T6",
+    contactName: "Teodor Sixth",
+    id: "6",
+    phoneNumbers: [
+      {
+        category: "HOME",
+        id: "6",
+        phoneNumberFormatted: "666-66-666666#6"
+      }
+    ],
+    primaryEmailAddress: "6@email.com"
+  },
+  {
+    company: "T6",
+    contactName: "Teodor Sixth",
+    id: "6",
+    phoneNumbers: [
+      {
+        category: "HOME",
+        id: "6",
+        phoneNumberFormatted: "666-66-666666#6"
+      }
+    ],
+    primaryEmailAddress: "6@email.com"
+  },
+  {
+    company: "T6",
+    contactName: "Teodor Sixth",
+    id: "6",
+    phoneNumbers: [
+      {
+        category: "HOME",
+        id: "6",
+        phoneNumberFormatted: "666-66-666666#6"
+      }
+    ],
+    primaryEmailAddress: "6@email.com"
+  },
+
 ];
 
 export default Contacts

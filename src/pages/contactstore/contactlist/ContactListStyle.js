@@ -63,7 +63,8 @@ const OptionButton = styled.input `
   width: 100%;
   height: 100%;
   &:checked + ${OptionLabel} {
-    background-color: #d29dfb;
+    background-color: ${(({cancelled}) => cancelled ? "transparent" : "#d29dfb" )}
+      ;
   }
 `
 

@@ -12,28 +12,29 @@ import Contacts from "./Contacts"
 
 const ContactDetails = () => {
 
-  const [optionValue, setOptionValue] = useState(false)
+  const [optionValue, setOptionValue] = useState(true)
   const [cancelled, setCancelled] = useState(false)
-  const selectRef = useRef()
+  // const selectRef = useRef()
 
   const changeValue = (e) => {
-    setOptionValue(e.target.checked)
+    e.preventDefault()
+    // setCancelled(!cancelled)
     console.log("target", e.target.checked)
     console.log("optionvalue", optionValue)
   }
 
   const cancelButton = (e) => {
     e.preventDefault()
-    setOptionValue(false)
-    selectRef.current.focus()
-    console.log("target", e.target.checked)
-    console.log("optionvalue", optionValue)
+    setCancelled(!cancelled)
+    console.log(cancelled)
+    // console.log("target", e.target.checked)
+    // console.log("optionvalue", optionValue)
     // setOptionValue(true)
   }
 
-useEffect (() => {
-  selectRef.current.focus()
-}, [optionValue])
+// useEffect (() => {
+//   selectRef.current.focus()
+// }, [optionValue])
 
   return (
     <>
@@ -41,16 +42,17 @@ useEffect (() => {
         <DataBoxNav>Select Contact</DataBoxNav>
         <DataWrapper>
           <SearchField type="text" placeholder="type your text" />
-            <SelectList>
+            <SelectList onClick={(() => setCancelled(false))}>
               {Contacts.map((val, ind) => {
                 return <OptiontWrapper key={ind}
                 >
                 <OptionButton type="radio" 
                 name="contacts" id={val.id}
-                checked={optionValue}
-                onChange={changeValue}
+                // checked={true}
+                // onChange={e => e.target.value}
+                cancelled={cancelled}
                 // onClick={changeValue}
-                ref={selectRef}
+                // ref={selectRef}
                  />
                 <OptionLabel>
                     {val.contactName}
