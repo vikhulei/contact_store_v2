@@ -18,7 +18,7 @@ const DetailsLabel = styled(Label) `
 const DetailsInput = styled(Input) `
     position: relative;
     width: 70%;
-    height: 1.8rem;
+    height: 1.5rem;
 
 `
 
@@ -30,7 +30,7 @@ const NumbersWrapper = styled.div `
 `
 
 const CountryCode = styled.select `
-    height: 1.8rem;
+    height: 1.5rem;
     width: 18%;
     padding-left: 5px;
     background-color: #F2E0FB;
