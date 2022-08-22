@@ -1,5 +1,5 @@
 import {NavBarWrapper, Title, Logo, SignOut} from "./NavBarStyle"
-import logo from "../../../assets/logo.png"
+import logo from "../../assets/logo.png"
 
 const NavBar = () => {
     return (

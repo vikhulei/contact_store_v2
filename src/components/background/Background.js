@@ -1,18 +1,14 @@
-import NavBar from "./navbar/NavBar";
+import NavBar from "../navbar/NavBar";
 import {Wrapper, BackgroundColor, BackgroundImage} from "./BackgroundStyle"
 import background from "../../assets/background.jpg"
 
 
-const Background = () => {
+const Background = ({children}) => {
   return (
-    <>
-    <NavBar/>
     <Wrapper>
-    <BackgroundColor>
         <BackgroundImage src={background} alt="background image" />
-    </BackgroundColor>
+        {children}
     </Wrapper>
-    </>
   );
 }
 

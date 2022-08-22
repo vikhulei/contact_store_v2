@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { DataBox, DataBoxNav, SmallButton } from "../../../components/ui/StyledComponents";
 import {
   DataWrapper,
@@ -13,6 +13,7 @@ import Contacts from "./Contacts"
 const ContactDetails = () => {
 
   const [cancelled, setCancelled] = useState(false)
+  const refTarget = useRef(false)
 
   const showSelection = () => {
     setCancelled(false)
@@ -23,19 +24,34 @@ const ContactDetails = () => {
     setCancelled(!cancelled)
   }
 
+const clickOutside = (e) => {
+  if(e.target.name !== refTarget.current.name) {
+    setCancelled(!cancelled)
+  }
+}
+
+  useEffect(() => {
+    window.addEventListener("click", clickOutside)
+    return () => window.removeEventListener("click", clickOutside)
+  }, [window])
+
   return (
     <>
       <DataBox>
         <DataBoxNav>Select Contact</DataBoxNav>
         <DataWrapper>
           <SearchField type="text" placeholder="type your text" />
-            <SelectList onClick={showSelection}>
+            <SelectList
+            onClick={showSelection}
+            >
               {Contacts.map((val, ind) => {
-                return <OptiontWrapper key={ind}
+                return <OptiontWrapper
+                key={val.id}
                 >
                 <OptionButton type="radio" 
                 name="contacts" id={val.id}
                 cancelled={cancelled}
+                ref={refTarget}
                  />
                 <OptionLabel>
                     {val.contactName}

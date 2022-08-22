@@ -5,12 +5,12 @@ position: fixed;
 width: 100%;
 height: 80px;
 background-color: #F5EAFB;
-z-index: 99;
 display: flex;
 justify-content: space-between;
 align-items: center;
 padding-left: min(30px, 1vw);
 padding-right: min(30px, 3vw);
+z-index: 99;
 `
 
 const Title = styled.h1 `

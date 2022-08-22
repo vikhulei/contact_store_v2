@@ -5,6 +5,7 @@ import ContactDetails from "./contactdetails/ContactDetails"
 import Buttons from "./buttons/Buttons"
 
 const ContactStore = () => {
+
     return (
         <Wrapper>
             <ProfileWrapper>
