@@ -15,6 +15,7 @@ const BackgroundColor = styled.div`
   height: 500px;
   min-height: calc(100vh - 80px);
   background-color: #bd9ce8;
+  background-color: #a398fb;
   overflow: hidden;
   @media screen and (max-width: 1450px) {
     height: 1750px;
