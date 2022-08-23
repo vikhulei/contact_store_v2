@@ -14,7 +14,7 @@ const ContactStore = () => {
             <ContactsWrapper>
                 <ContactList />
                 <ContactDetails />
-                {/* <Buttons /> */}
+                <Buttons />
             </ContactsWrapper>
         </Wrapper>
     )
