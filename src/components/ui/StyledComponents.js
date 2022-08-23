@@ -20,8 +20,7 @@ font-weight: bold;
 
 const Input = styled.input `
     height: 25px;
-    width: 55%;
-    // max-width: 150px;
+    max-width: 55%;
     padding-left: 5px;
     background-color: #F2E0FB;
     border: black 1px solid;
@@ -77,14 +76,18 @@ const DataBoxNav = styled.div `
     background-color: #6F04C3;
     color: white;
     text-align: center;
-    line-height: 1.5;
-    font-size: 2rem;
+    line-height: 2;
+    font-size: 1.8rem;
+    @media screen and (max-width: 600px) {
+        font-size: 1.5rem;
+        height: 50px;
+    }
 `
 const Visibility = styled(VisibilityIcon) `
 position: absolute;
-right: 15px;
+right: 5%;
 opacity: 0.7;
-transform: scale(0.8);
+transform: scale(0.7);
 `
 
 export {Form, Input, Label, SmallButton, LargeButton, ErrorText, DataBox, DataBoxNav, Visibility}

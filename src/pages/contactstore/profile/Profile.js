@@ -21,7 +21,7 @@ const Profile = () => {
   return (
     <>
       <DataBox>
-        <DataBoxNavProfile>Profile</DataBoxNavProfile>
+        <DataBoxNavProfile>PROFILE</DataBoxNavProfile>
         <TopImageText>Click the image to change it:</TopImageText>
         <ImageWrapper>
           <Image src={camberbech} />
@@ -56,7 +56,7 @@ const Profile = () => {
                 <Visibility/>
             </Label>
             </InputsGroup>
-            <ErrorText>New password does not meet the requirements</ErrorText>
+            <ErrorText style={{"textAlign": "center"}}>New password does not meet the requirements</ErrorText>
             <SmallButton>Change</SmallButton>
           </Fieldset>
         </PasswordForm>
