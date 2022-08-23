@@ -1,12 +1,13 @@
 import { DataBox, Label, Input, SmallButton, ErrorText, Visibility } from "../../../components/ui/StyledComponents";
 import {
   DataBoxNavProfile,
+  ImageDataContainer,
   ImageWrapper,
   InputImage,
   Image,
   TopImageText,
   ErrorImageText,
-  ErrorImageInfo,
+  ErrorDataText,
   InfoWrapper,
   InfoLabel,
   InfoData,
@@ -22,14 +23,18 @@ const Profile = () => {
     <>
       <DataBox>
         <DataBoxNavProfile>PROFILE</DataBoxNavProfile>
+        <ImageDataContainer>
         <TopImageText>Click the image to change it:</TopImageText>
         <ImageWrapper>
           <Image src={camberbech} />
           <InputImage type="file" size="1" />
         </ImageWrapper>
         <ErrorImageText>The image was not uploaded</ErrorImageText>
-        <ErrorImageInfo>Errror accesing data</ErrorImageInfo>
+        </ImageDataContainer>
+
+        
         <InfoWrapper>
+        <ErrorDataText>Errror accesing data</ErrorDataText>
           <InfoLabel>First Name:</InfoLabel>
           <InfoData>Doctor</InfoData>
           <InfoLabel>Last Name:</InfoLabel>
