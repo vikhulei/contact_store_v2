@@ -5,18 +5,33 @@ import { DataBoxNav, ErrorText } from "../../../components/ui/StyledComponents"
 const DataBoxNavProfile = styled(DataBoxNav)`
     background-color: #A809CF;
 `
-const TopImageText = styled.p`
+
+const ImageDataContainer = styled.div `
     position: absolute;
-    font-size: 0.7rem;
-    font-weight: 600;
-    top: 65px;
-    right: 5px;
+    left: 50%;
+    transform: translate(-50%);
+    top: 12%;
+    width: 90%;
+    height: 22%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: space-between;
+    z-index: 99;
+    // background-color: red;
 `
 
+const TopImageText = styled.p`
+    position: relative;
+    font-size: 0.7rem;
+    font-weight: 600;
+    // top: 65px;
+    // right: 5px;
+`
 const ImageWrapper = styled.div`
-    position: absolute;
-    top: 85px;
-    right: 5px;
+    position: relative;
+    // top: 85px;
+    // right: 5px;
     height: 100px;
     width: 100px;
 `
@@ -43,46 +58,52 @@ const Image = styled.img`
     object-fit: cover;
 `
 const ErrorImageText = styled(ErrorText)`
-    position: absolute;
+    // position: absolute;
     top: 190px;
     right: 5px;
-    // display: none;
+    // visibility: hidden;
 `
 
-const ErrorImageInfo = styled(ErrorImageText)`
-      top: 80px;
-      left: 15px;
-    //   display: none;
+const ErrorDataText = styled(ErrorText) `
+      grid-column: 1/3;
+      @media screen and (max-width: 600px) {
+          grid-column: 1/2;
+      }
+    //   visibility: hidden;
 `
 
 const InfoWrapper = styled.div`
       position: absolute;
       left: 50%;
       transform: translate(-50%);
-      top: 17%;
+      top: 12%;
       width: 90%;
-      height: 35%;
+      height: 38%;
       display: grid;
-      grid-template-rows: repeat(4, 1fr);
       grid-template-columns: 1fr 1fr;
       font-size: 0.8rem;
       @media screen and (max-width: 600px) {
-          grid-template-rows: repeat(8, 1fr);
           grid-template-columns: 1fr;
-          height: 30%;
+          grid-template-row: repeat(8, 1fr);
+          top: 9%;
+          height: 38%;
       }
 `
 
 const InfoLabel = styled.p`
     font-weight: bold;
+    @media screen and (max-width: 600px) {
+     display: flex;
+     align-items: flex-end;   
+     line-height: 2;
+    }
 `
 
 const InfoData = styled.p`
     color: #31047B;
     font-weight: bold;
-    @media screen and (max-width: 600px) {
-        line-height: 0.5;
-    }
+
+    // background-color: red;
         
 `
 const PasswordForm = styled.form`
@@ -123,4 +144,4 @@ const InputsGroup = styled.div`
       font-size: 0.5rem;
 `
 
-export { DataBoxNavProfile, ImageWrapper, InputImage, Image, TopImageText, ErrorImageText, ErrorImageInfo, InfoWrapper, InfoLabel, InfoData, PasswordForm, Fieldset, Legend, InputsGroup }
+export { DataBoxNavProfile, ImageDataContainer, ImageWrapper, InputImage, Image, TopImageText, ErrorImageText, ErrorDataText, InfoWrapper, InfoLabel, InfoData, PasswordForm, Fieldset, Legend, InputsGroup }
