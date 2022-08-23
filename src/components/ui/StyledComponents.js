@@ -41,6 +41,10 @@ const SmallButton = styled.button `
     &:active {
         transform: translate(3px, 3px);
     }
+    &:disabled {
+        color: green;
+        pointer-events: none;
+    }
 `
 
 const LargeButton = styled(SmallButton) `

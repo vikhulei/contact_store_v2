@@ -5,16 +5,17 @@ const Wrapper = styled.div`
     top: 20vh;
     left: 50%;
     transform: translateX(-50%);
-    width: 90%;
+    width: 95%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media screen and (max-width: 1450px) {
+    // background-color: lightblue;
+    @media screen and (max-width: 1350px) {
         flex-direction: column-reverse;
         height: 1500px;
         padding-bottom: 10%;
     }
-    @media screen and (max-width: 1050px) {
+    @media screen and (max-width: 1000px) {
         top: 5vh;
         height: 2150px;
     }
@@ -27,7 +28,7 @@ width: 100%;
 display: flex;
 justify-content: space-evenly;
 align-items: center;
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 1000px) {
     flex-direction: column;
     height: 1500px;
 }
