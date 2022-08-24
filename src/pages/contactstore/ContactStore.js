@@ -1,10 +1,11 @@
 import { Wrapper, ProfileWrapper, ContactsWrapper } from "./ContactStoreStyle"
 import Profile from "./profile/Profile"
-import ContactList from "./contactlist/ContactList"
+import ContactList from "./selectcontact/SelectContact"
 import ContactDetails from "./contactdetails/ContactDetails"
 import Buttons from "./buttons/Buttons"
 
 const ContactStore = () => {
+
     return (
         <Wrapper>
             <ProfileWrapper>
@@ -13,7 +14,7 @@ const ContactStore = () => {
             <ContactsWrapper>
                 <ContactList />
                 <ContactDetails />
-                {/* <Buttons /> */}
+                <Buttons />
             </ContactsWrapper>
         </Wrapper>
     )

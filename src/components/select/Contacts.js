@@ -81,7 +81,7 @@ const Contacts = [
   {
     company: "T6",
     contactName: "Teodor Sixth",
-    id: "6",
+    id: "7",
     phoneNumbers: [
       {
         category: "HOME",
@@ -94,7 +94,7 @@ const Contacts = [
   {
     company: "T6",
     contactName: "Teodor Sixth",
-    id: "6",
+    id: "8",
     phoneNumbers: [
       {
         category: "HOME",
@@ -107,7 +107,7 @@ const Contacts = [
   {
     company: "T6",
     contactName: "Teodor Sixth",
-    id: "6",
+    id: "9",
     phoneNumbers: [
       {
         category: "HOME",
@@ -120,7 +120,7 @@ const Contacts = [
   {
     company: "T6",
     contactName: "Teodor Sixth",
-    id: "6",
+    id: "10",
     phoneNumbers: [
       {
         category: "HOME",
@@ -133,7 +133,7 @@ const Contacts = [
   {
     company: "T6",
     contactName: "Teodor Sixth",
-    id: "6",
+    id: "11",
     phoneNumbers: [
       {
         category: "HOME",
@@ -146,7 +146,7 @@ const Contacts = [
   {
     company: "T6",
     contactName: "Teodor Sixth",
-    id: "6",
+    id: "12",
     phoneNumbers: [
       {
         category: "HOME",
@@ -159,7 +159,7 @@ const Contacts = [
   {
     company: "T6",
     contactName: "Teodor Sixth",
-    id: "6",
+    id: "13",
     phoneNumbers: [
       {
         category: "HOME",
@@ -172,7 +172,7 @@ const Contacts = [
   {
     company: "T6",
     contactName: "Teodor Sixth",
-    id: "6",
+    id: "14",
     phoneNumbers: [
       {
         category: "HOME",
@@ -185,7 +185,7 @@ const Contacts = [
   {
     company: "T6",
     contactName: "Teodor Sixth",
-    id: "6",
+    id: "15",
     phoneNumbers: [
       {
         category: "HOME",
