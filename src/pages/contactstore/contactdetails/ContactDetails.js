@@ -22,7 +22,7 @@ const ContactDetails = () => {
                         <ArrowWrapper onClick={handleSelect}>
                         {showSelect ? <ArrowUp/> : <ArrowDown/>}
                         </ArrowWrapper>
-                        <SelectWrapper>
+                        <SelectWrapper showSelect={showSelect}>
                         {showSelect && <Select 
                             handleSelect={handleSelect}
                             />}

@@ -38,11 +38,9 @@ const ArrowUp = styled(ArrowDropUpOutlinedIcon) `
 
 const SelectWrapper = styled.div `
     position: absolute;
-    height: 150%;
+    height: 100%;
     width: 100%;
-    z-index: 99;
-    // margin-top: -16px;
-
+    z-index: ${(({showSelect}) => showSelect ? 99 : 0)};
 `
 
 const DetailsLabel = styled(Label) `
