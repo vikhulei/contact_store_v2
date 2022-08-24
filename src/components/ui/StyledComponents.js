@@ -20,7 +20,7 @@ font-weight: bold;
 
 const Input = styled.input `
     height: 25px;
-    max-width: 55%;
+    max-width: 65%;
     padding-left: 5px;
     background-color: #F2E0FB;
     border: black 1px solid;

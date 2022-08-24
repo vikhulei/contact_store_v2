@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Input } from "../../../components/ui/StyledComponents";
+import { Input, ErrorText } from "../../../components/ui/StyledComponents";
 
 const Wrapper = styled.div `
   @media screen and (max-width: 1000px) {
@@ -11,7 +11,7 @@ const DataWrapper = styled.form `
   position: relative;
   margin-top: 3%;
   width: 90%;
-  height: 70%;
+  height: 80%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -27,7 +27,7 @@ const SelectList = styled.div `
   position: relative;
   margin-top: 5%;
   width: 100%;
-  height: 70%;
+  height: 90%;
   border: 1px grey solid;
   border-radius: 5px;
   box-shadow: gray 0px 5px 5px;
@@ -73,6 +73,10 @@ const OptionButton = styled.input `
       ;
   }
 `
+const ErrorTextSelect = styled(ErrorText) `
+  text-align: center;
+  margin-top: 10px;
+`
 
 
-export { Wrapper, DataWrapper, SearchField, SelectList, OptiontWrapper, OptionLabel, OptionButton };
+export { Wrapper, DataWrapper, SearchField, SelectList, OptiontWrapper, OptionLabel, OptionButton, ErrorTextSelect };

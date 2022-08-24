@@ -17,7 +17,7 @@ const Wrapper = styled.div`
     }
     @media screen and (max-width: 1000px) {
         top: 5vh;
-        height: 2150px;
+        height: 200%;
     }
 `
 

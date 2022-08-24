@@ -4,7 +4,7 @@ const SelectList = styled.div `
   position: relative;
   margin-top: 5%;
   width: 100%;
-  height: 70%;
+  height: 100%;
   border: 1px grey solid;
   border-radius: 5px;
   box-shadow: gray 0px 5px 5px;

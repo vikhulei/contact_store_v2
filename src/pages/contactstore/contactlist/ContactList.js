@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react"
-import { DataBox, DataBoxNav, SmallButton } from "../../../components/ui/StyledComponents";
+import { DataBox, DataBoxNav } from "../../../components/ui/StyledComponents";
 import {
   Wrapper,
   DataWrapper,
+  ErrorTextSelect,
   SearchField,
   SelectList,
   OptionLabel,
@@ -11,6 +12,7 @@ import {
 } from "./ContactListStyle";
 import Contacts from "./Contacts"
 import Select from "./components/select/Select"
+import Search from "./components/search/Search"
 
 const ContactDetails = () => {
 
@@ -48,8 +50,8 @@ const handleDoubleClick = () => {
         <DataBoxNav
         >Select Contact</DataBoxNav>
         <DataWrapper>
-          <SearchField type="text" placeholder="type your text" />
-
+          {/* <SearchField type="text" placeholder="type your text" /> */}
+          <Search/>
           <Select 
           showSelection={showSelection}
           cancelled={cancelled}
@@ -78,12 +80,8 @@ const handleDoubleClick = () => {
                   </OptiontWrapper>
               })}
             </SelectList> */}
-
-            <SmallButton
-            onClick={cancelButton}
-            >
-              Cancel</SmallButton>
         </DataWrapper>
+            <ErrorTextSelect>Data was not loaded</ErrorTextSelect>
       </DataBox>
     </Wrapper>
   );
