@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import { DataBox, DataBoxNav, SmallButton } from "../../../components/ui/StyledComponents";
 import {
+  Wrapper,
   DataWrapper,
   SearchField,
   SelectList,
@@ -9,6 +10,7 @@ import {
   OptiontWrapper
 } from "./ContactListStyle";
 import Contacts from "./Contacts"
+import Select from "./components/select/Select"
 
 const ContactDetails = () => {
 
@@ -32,7 +34,7 @@ const clickOutside = (e) => {
 
 
 const handleDoubleClick = () => {
- alert("hello")
+//  alert("hello")
 }
 
   useEffect(() => {
@@ -41,13 +43,21 @@ const handleDoubleClick = () => {
   }, [window])
 
   return (
-    <>
+    <Wrapper>
       <DataBox>
         <DataBoxNav
         >Select Contact</DataBoxNav>
         <DataWrapper>
           <SearchField type="text" placeholder="type your text" />
-            <SelectList
+
+          <Select 
+          showSelection={showSelection}
+          cancelled={cancelled}
+          refTarget={refTarget}
+          handleDoubleClick={handleDoubleClick}
+          />
+
+            {/* <SelectList
             onClick={showSelection}
             >
               {Contacts.map((val, ind) => {
@@ -67,14 +77,15 @@ const handleDoubleClick = () => {
                   </OptionLabel>
                   </OptiontWrapper>
               })}
-            </SelectList>
+            </SelectList> */}
+
             <SmallButton
             onClick={cancelButton}
             >
               Cancel</SmallButton>
         </DataWrapper>
       </DataBox>
-    </>
+    </Wrapper>
   );
 };
 

@@ -1,27 +1,4 @@
 import styled from "styled-components";
-import { Input } from "../../../components/ui/StyledComponents";
-
-const Wrapper = styled.div `
-  @media screen and (max-width: 1000px) {
-    display: none;
-  }
-`
-
-const DataWrapper = styled.form `
-  position: relative;
-  margin-top: 3%;
-  width: 90%;
-  height: 70%;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-//   justify-content: space-between;
-`;
-
-const SearchField = styled(Input) `
-  width: 100%;
-`;
 
 const SelectList = styled.div `
   position: relative;
@@ -74,5 +51,4 @@ const OptionButton = styled.input `
   }
 `
 
-
-export { Wrapper, DataWrapper, SearchField, SelectList, OptiontWrapper, OptionLabel, OptionButton };
+export { SelectList, OptiontWrapper, OptionLabel, OptionButton };
