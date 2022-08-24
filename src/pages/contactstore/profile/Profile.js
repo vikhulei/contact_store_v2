@@ -1,12 +1,13 @@
 import { DataBox, Label, Input, SmallButton, ErrorText, Visibility } from "../../../components/ui/StyledComponents";
 import {
   DataBoxNavProfile,
+  ImageDataContainer,
   ImageWrapper,
   InputImage,
   Image,
   TopImageText,
   ErrorImageText,
-  ErrorImageInfo,
+  ErrorDataText,
   InfoWrapper,
   InfoLabel,
   InfoData,
@@ -21,15 +22,19 @@ const Profile = () => {
   return (
     <>
       <DataBox>
-        <DataBoxNavProfile>Profile</DataBoxNavProfile>
+        <DataBoxNavProfile>PROFILE</DataBoxNavProfile>
+        <ImageDataContainer>
         <TopImageText>Click the image to change it:</TopImageText>
         <ImageWrapper>
           <Image src={camberbech} />
           <InputImage type="file" size="1" />
         </ImageWrapper>
         <ErrorImageText>The image was not uploaded</ErrorImageText>
-        <ErrorImageInfo>Errror accesing data</ErrorImageInfo>
+        </ImageDataContainer>
+
+        
         <InfoWrapper>
+        <ErrorDataText>Errror accesing data</ErrorDataText>
           <InfoLabel>First Name:</InfoLabel>
           <InfoData>Doctor</InfoData>
           <InfoLabel>Last Name:</InfoLabel>
@@ -56,7 +61,7 @@ const Profile = () => {
                 <Visibility/>
             </Label>
             </InputsGroup>
-            <ErrorText>New password does not meet the requirements</ErrorText>
+            <ErrorText style={{"textAlign": "center"}}>New password does not meet the requirements</ErrorText>
             <SmallButton>Change</SmallButton>
           </Fieldset>
         </PasswordForm>
