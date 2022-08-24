@@ -2,7 +2,7 @@ import { SelectList, OptiontWrapper, OptionLabel, OptionButton } from "./SelectS
 import Contacts from "./Contacts"
 
 
-const Select = ({ showSelection, cancelled, refTarget, handleDoubleClick }) => {
+const Select = ({ showSelection, cancelled, refTarget, handleSelect }) => {
     return (
 
         <SelectList
@@ -17,7 +17,7 @@ const Select = ({ showSelection, cancelled, refTarget, handleDoubleClick }) => {
                         cancelled={cancelled}
                         ref={refTarget}
                         className="optionbutton"
-                        onDoubleClick={handleDoubleClick}
+                        onDoubleClick={handleSelect}
                     />
                     <OptionLabel
                     >

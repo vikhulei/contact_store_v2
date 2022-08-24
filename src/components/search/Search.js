@@ -2,10 +2,8 @@ import styled from "styled-components"
 import {Input} from "../ui/StyledComponents"
 
 const SearchInput = styled(Input) `
+    width: 100%;
     max-width: 100%;
-    @media screen and (min-width: 1000px) {
-        display: none;
-    }
 `
 
 const Search = () => {
