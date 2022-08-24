@@ -15,8 +15,7 @@ const DataWrapper = styled.form `
 
 const SearchWrapper = styled.div `
     width: 100%;
-    // height: 100%;
-    // background-color: red;
+    background-color: red;
     @media screen and (min-width: 1000px) {
         display: none;
     }
@@ -38,8 +37,8 @@ const SelectWrapper = styled.div `
     height: 150%;
     width: 100%;
     z-index: 99;
-    margin-top: -16px;
-    display: ${(({showSelect}) => showSelect ? "block" : "none")}
+    // margin-top: -16px;
+
 `
 
 const DetailsLabel = styled(Label) `

@@ -3,14 +3,9 @@ import { DataBox, DataBoxNav } from "../../../components/ui/StyledComponents";
 import {
   Wrapper,
   DataWrapper,
-  ErrorTextSelect,
-  SearchField,
-  SelectList,
-  OptionLabel,
-  OptionButton,
-  OptiontWrapper
+  SelectWrapper,
+  ErrorTextSelect
 } from "./SelectContactStyle";
-import Contacts from "./Contacts"
 import Select from "../../../components/select/Select"
 import Search from "../../../components/search/Search"
 
@@ -28,16 +23,16 @@ const SelectContact = () => {
     setCancelled(!cancelled)
   }
 
-const clickOutside = (e) => {
-  if(e.target.className !== refTarget.current.className) {
-    setCancelled(!cancelled)
+  const clickOutside = (e) => {
+    if (e.target.className !== refTarget.current.className) {
+      setCancelled(!cancelled)
+    }
   }
-}
 
 
-const handleDoubleClick = () => {
-//  alert("hello")
-}
+  const handleDoubleClick = () => {
+    //  alert("hello")
+  }
 
   useEffect(() => {
     window.addEventListener("click", clickOutside)
@@ -51,15 +46,16 @@ const handleDoubleClick = () => {
         >Select Contact</DataBoxNav>
         <DataWrapper>
           {/* <SearchField type="text" placeholder="type your text" /> */}
-          <Search/>
-          <Select 
-          showSelection={showSelection}
-          cancelled={cancelled}
-          refTarget={refTarget}
-          handleDoubleClick={handleDoubleClick}
-          />
-
-            {/* <SelectList
+          <Search />
+          <SelectWrapper>
+            <Select
+              showSelection={showSelection}
+              cancelled={cancelled}
+              refTarget={refTarget}
+              handleDoubleClick={handleDoubleClick}
+            />
+          </SelectWrapper>
+          {/* <SelectList
             onClick={showSelection}
             >
               {Contacts.map((val, ind) => {
@@ -81,7 +77,7 @@ const handleDoubleClick = () => {
               })}
             </SelectList> */}
         </DataWrapper>
-            <ErrorTextSelect>Data was not loaded</ErrorTextSelect>
+        <ErrorTextSelect>Data was not loaded</ErrorTextSelect>
       </DataBox>
     </Wrapper>
   );
