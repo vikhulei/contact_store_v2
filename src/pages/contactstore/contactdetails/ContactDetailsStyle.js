@@ -28,9 +28,13 @@ const ArrowWrapper = styled.div `
     z-index: 100;
 `
 
-const ArrowDown = styled(ArrowDropDownOutlinedIcon) ``
+const ArrowDown = styled(ArrowDropDownOutlinedIcon) `
+    transform: scale(1.2);
+`
 
-const ArrowUp = styled(ArrowDropUpOutlinedIcon) ``
+const ArrowUp = styled(ArrowDropUpOutlinedIcon) `
+    transform: scale(1.2);
+`
 
 const SelectWrapper = styled.div `
     position: absolute;
