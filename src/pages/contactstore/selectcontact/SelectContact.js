@@ -9,12 +9,12 @@ import {
   OptionLabel,
   OptionButton,
   OptiontWrapper
-} from "./ContactListStyle";
+} from "./SelectContactStyle";
 import Contacts from "./Contacts"
-import Select from "./components/select/Select"
-import Search from "./components/search/Search"
+import Select from "../../../components/select/Select"
+import Search from "../../../components/search/Search"
 
-const ContactDetails = () => {
+const SelectContact = () => {
 
   const [cancelled, setCancelled] = useState(false)
   const refTarget = useRef(false)
@@ -87,4 +87,4 @@ const handleDoubleClick = () => {
   );
 };
 
-export default ContactDetails;
+export default SelectContact;

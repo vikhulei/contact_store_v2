@@ -1,12 +1,14 @@
 import {DataBox, DataBoxNav, Label, Input} from "../../../components/ui/StyledComponents"
 import {DataWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber} from "./ContactDetailsStyle"
+import Search from "../../../components/search/Search"
 
-const ContactList = () => {
+const ContactDetails = () => {
     return (
         <>
             <DataBox>
                 <DataBoxNav>Contact Details</DataBoxNav>
                 <DataWrapper autoComplete="off">
+                    <Search/>
                     <DetailsLabel>
                         Name:
                         <DetailsInput/>
@@ -32,4 +34,4 @@ const ContactList = () => {
     )
 }
 
-export default ContactList
+export default ContactDetails
