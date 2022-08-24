@@ -25,9 +25,14 @@ const ContactDetails = () => {
   }
 
 const clickOutside = (e) => {
-  if(e.target.name !== refTarget.current.name) {
+  if(e.target.className !== refTarget.current.className) {
     setCancelled(!cancelled)
   }
+}
+
+
+const handleDoubleClick = () => {
+ alert("hello")
 }
 
   useEffect(() => {
@@ -38,7 +43,8 @@ const clickOutside = (e) => {
   return (
     <>
       <DataBox>
-        <DataBoxNav>Select Contact</DataBoxNav>
+        <DataBoxNav
+        >Select Contact</DataBoxNav>
         <DataWrapper>
           <SearchField type="text" placeholder="type your text" />
             <SelectList
@@ -52,14 +58,20 @@ const clickOutside = (e) => {
                 name="contacts" id={val.id}
                 cancelled={cancelled}
                 ref={refTarget}
+                className="optionbutton"
+                onDoubleClick={handleDoubleClick}
                  />
-                <OptionLabel>
+                <OptionLabel
+                >
                     {val.contactName}
                   </OptionLabel>
                   </OptiontWrapper>
               })}
             </SelectList>
-            <SmallButton onClick={cancelButton}>Cancel</SmallButton>
+            <SmallButton
+            onClick={cancelButton}
+            >
+              Cancel</SmallButton>
         </DataWrapper>
       </DataBox>
     </>
