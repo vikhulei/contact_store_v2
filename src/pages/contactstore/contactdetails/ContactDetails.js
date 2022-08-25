@@ -1,8 +1,10 @@
 import { useState } from "react"
 import { DataBox, DataBoxNav, Label, Input } from "../../../components/ui/StyledComponents"
-import { DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp } from "./ContactDetailsStyle"
+import { DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper } from "./ContactDetailsStyle"
 import Search from "../../../components/search/Search"
 import Select from "../../../components/select/Select"
+import Buttons from "../buttons/Buttons"
+// import { ButtonsWrapper } from "../buttons/ButtonsStyle"
 
 const ContactDetails = () => {
 
@@ -48,6 +50,9 @@ const ContactDetails = () => {
                     <Extension />
                     <PhoneNumber />
                 </NumbersWrapper>
+                <MobileButtonsWrapper>
+                <Buttons/>
+                </MobileButtonsWrapper>
             </DataBox>
         </>
     )

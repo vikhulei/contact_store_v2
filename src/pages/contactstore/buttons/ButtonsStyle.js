@@ -7,9 +7,9 @@ const ButtonsWrapper = styled.div `
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    // background-color: lightgreen;
     @media screen and (max-width: 1000px) {
-        display: none;
+        flex-direction: row;
+        padding: 0 4%;
     }
 `
 
@@ -17,6 +17,14 @@ const ProfileButton = styled(LargeButton) `
 background-color: #A809CF;
     @media screen and (min-width: 1350px) {
         display: none;
+    }
+    @media screen and (max-width: 1000px) {
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, 45px);
+        &:active {
+            transform: translate(-47%, 48px);
+        }
     }
 `
 

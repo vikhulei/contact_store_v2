@@ -81,5 +81,10 @@ const Extension = styled(DetailsInput) `
 const PhoneNumber = styled(DetailsInput) `
     width: 50%;
 `
+const MobileButtonsWrapper = styled.div `
+@media screen and (min-width: 1000px) {
+    display: none;
+}
+`
 
-export {DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp}
+export {DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper}

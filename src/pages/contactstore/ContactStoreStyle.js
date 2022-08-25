@@ -33,6 +33,12 @@ align-items: center;
 //     flex-direction: column;
 //     min-height: 1000px;
 // }
+
+`
+const ButtonsWrapper = styled.div `
+    @media screen and (max-width: 1000px) {
+        display: none;
+    }
 `
 
-export { Wrapper, ProfileWrapper, ContactsWrapper }
+export { Wrapper, ProfileWrapper, ContactsWrapper, ButtonsWrapper }

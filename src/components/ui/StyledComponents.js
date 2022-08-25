@@ -48,9 +48,11 @@ const SmallButton = styled.button `
 `
 
 const LargeButton = styled(SmallButton) `
+@media screen and (min-width: 1000px) {
     width: 150px;
     height: 40px;
     font-size: 1.2rem;
+}
 `
 
 const ErrorText = styled.p `
