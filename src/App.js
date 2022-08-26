@@ -9,15 +9,15 @@ import Protected from "./util/Protected"
 
 const App = () => {
   
-  const [auth, setAuth] = useState(true)
+  // const [auth, setAuth] = useState(false)
 
   return (
       <Background>
         <NavBar/>
       <Router>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route element={<Protected auth={auth} />}>
+          <Route path="/" element={<Login/>} />
+          <Route element={<Protected/>}>
             <Route path="/contactstore" element={<ContactStore />} />
           </Route>
         </Routes>

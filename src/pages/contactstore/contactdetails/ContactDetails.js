@@ -30,7 +30,8 @@ const ContactDetails = () => {
                     </SearchWrapper>
                     <DetailsLabel>
                         Name:
-                        <DetailsInput />
+                        <DetailsInput
+                        />
                     </DetailsLabel>
                     <DetailsLabel>
                         Company:
