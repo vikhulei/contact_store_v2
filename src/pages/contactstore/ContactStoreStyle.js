@@ -16,8 +16,9 @@ const Wrapper = styled.div`
         padding-bottom: 10%;
     }
     @media screen and (max-width: 1000px) {
-        top: 5vh;
-        height: 200%;
+        top: 15vh;
+        max-height: 1350px;
+        min-height: 1350px;
     }
 `
 
@@ -28,10 +29,16 @@ width: 100%;
 display: flex;
 justify-content: space-evenly;
 align-items: center;
-@media screen and (max-width: 1000px) {
-    flex-direction: column;
-    height: 1500px;
-}
+// @media screen and (max-width: 1000px) {
+//     flex-direction: column;
+//     min-height: 1000px;
+// }
+
+`
+const ButtonsWrapper = styled.div `
+    @media screen and (max-width: 1000px) {
+        display: none;
+    }
 `
 
-export { Wrapper, ProfileWrapper, ContactsWrapper }
+export { Wrapper, ProfileWrapper, ContactsWrapper, ButtonsWrapper }

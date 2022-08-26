@@ -3,7 +3,8 @@ import styled from "styled-components"
 const NavBarWrapper = styled.div `
 position: fixed;
 width: 100%;
-height: 80px;
+height: 9vmin;
+max-height: 80px;
 background-color: #F5EAFB;
 display: grid;
 grid-template-columns: 1fr 50% 1fr;
@@ -17,7 +18,7 @@ z-index: 99;
 `
 
 const Logo = styled.img `
-    width: 10vw;
+    width: 10vmin;
     max-width: 70px;
 `
 
@@ -32,7 +33,7 @@ const Title = styled.div `
 `
 const SignOut = styled.p `
     text-decoration: none;
-    font-size: min(1.2rem, 3vw);
+    font-size: min(1.2rem, 4vmin);
     font-weight: bold;
     text-shadow: grey 1px 1px 10px;
     justify-self: right;
