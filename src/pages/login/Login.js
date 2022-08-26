@@ -1,7 +1,7 @@
 import {useState} from "react"
 import {useNavigate} from "react-router-dom"
 import {useSelector, useDispatch} from "react-redux"
-import { activateAuth } from "../../features/auth/authSlice"
+import { signIn } from "../../features/auth/authSlice"
 
 import { DataBoxNav, SmallButton, Visibility } from "../../components/ui/StyledComponents"
 import { DataBoxLogin, FormLogin, LabelLogin, InputLogin, ErrorTextLogin} from "./LoginStyle"
@@ -22,7 +22,7 @@ const Login = () => {
     const signInButton = (e) => {
         e.preventDefault()
         if(username==="123") {
-            dispatch(activateAuth())
+            dispatch(signIn())
             navigate("/contactstore")
         }
     }

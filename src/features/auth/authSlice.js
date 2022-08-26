@@ -8,12 +8,15 @@ export const authSlice = createSlice({
     name: "authorization",
     initialState,
     reducers: {
-        activateAuth: (state) => {
+        signIn: (state) => {
             state.auth = true
+        },
+        signOut: (state) => {
+            state.auth = false
         }
     }
 })
 
-export const { activateAuth } = authSlice.actions;
+export const { signIn, signOut } = authSlice.actions;
 
 export default authSlice.reducer;
