@@ -15,8 +15,7 @@ const DataWrapper = styled.form `
 
 const SearchWrapper = styled.div `
     width: 100%;
-    // height: 100%;
-    // background-color: red;
+    background-color: red;
     @media screen and (min-width: 1000px) {
         display: none;
     }
@@ -29,17 +28,19 @@ const ArrowWrapper = styled.div `
     z-index: 100;
 `
 
-const ArrowDown = styled(ArrowDropDownOutlinedIcon) ``
+const ArrowDown = styled(ArrowDropDownOutlinedIcon) `
+    transform: scale(1.2);
+`
 
-const ArrowUp = styled(ArrowDropUpOutlinedIcon) ``
+const ArrowUp = styled(ArrowDropUpOutlinedIcon) `
+    transform: scale(1.2);
+`
 
 const SelectWrapper = styled.div `
     position: absolute;
-    height: 150%;
+    height: 100%;
     width: 100%;
-    z-index: 99;
-    margin-top: -16px;
-    display: ${(({showSelect}) => showSelect ? "block" : "none")}
+    z-index: ${(({showSelect}) => showSelect ? 99 : 0)};
 `
 
 const DetailsLabel = styled(Label) `
@@ -80,5 +81,10 @@ const Extension = styled(DetailsInput) `
 const PhoneNumber = styled(DetailsInput) `
     width: 50%;
 `
+const MobileButtonsWrapper = styled.div `
+@media screen and (min-width: 1000px) {
+    display: none;
+}
+`
 
-export {DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp}
+export {DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper}

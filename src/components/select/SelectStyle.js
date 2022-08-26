@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const SelectList = styled.div `
   position: relative;
-  margin-top: 5%;
   width: 100%;
   height: 100%;
   border: 1px grey solid;
