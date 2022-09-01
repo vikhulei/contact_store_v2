@@ -29,7 +29,6 @@ const Profile = () => {
     console.log(profile)
   }
 
-
   return (
     <>
       <DataBox>
