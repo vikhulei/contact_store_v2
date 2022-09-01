@@ -1,54 +1,59 @@
-import {useState} from "react"
-import {useNavigate} from "react-router-dom"
-import {useSelector, useDispatch} from "react-redux"
-import { signIn } from "../../features/auth/authSlice"
-
+import React, { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { fetchToken, getTokenError } from "../../features/getTokenSlice";
+import { fetchProfileData } from "../../features/profileSlice";
 import { DataBoxNav, SmallButton, Visibility } from "../../components/ui/StyledComponents"
-import { DataBoxLogin, FormLogin, LabelLogin, InputLogin, ErrorTextLogin} from "./LoginStyle"
+import { DataBoxLogin, FormLogin, LabelLogin, InputLogin, ErrorTextLogin } from "./LoginStyle"
 
 const Login = () => {
 
     const [visibility, setVisibility] = useState(false)
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
+    const [inputUsername, setInputUsername] = useState("user3@intrinsicgrouplimited.com")
+    const [inputPassword, setInputPassword] = useState("")
 
-    const auth = useSelector((state) => state.authorization.auth)
+    const tokenError = useSelector(getTokenError)
+    const token = useSelector(state => state.token.token)
+    const tokenStorage = sessionStorage.getItem("token")
 
     const dispatch = useDispatch()
 
     const navigate = useNavigate()
 
-
     const signInButton = (e) => {
         e.preventDefault()
-        if(username==="123") {
-            dispatch(signIn())
+        dispatch(fetchToken({username: inputUsername, password: inputPassword}))
+    }
+
+    useEffect(() => {
+        if(token) {
+            // dispatch(fetchProfileData())
             navigate("/contactstore")
         }
-    }
+    }, [token])
 
     return (
         <DataBoxLogin>
-            <DataBoxNav>{auth}</DataBoxNav>
+            <DataBoxNav>{}</DataBoxNav>
             <FormLogin autoComplete="off">
                 <LabelLogin htmlFor="username">Username:
                     <InputLogin
-                    type="text"
-                    id="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                        type="text"
+                        id="username"
+                        value={inputUsername}
+                        onChange={(e) => setInputUsername(e.target.value)}
                     />
                 </LabelLogin>
                 <LabelLogin htmlFor="password">Password:
                     <InputLogin
-                    type={visibility ? "text" : "password"}
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                        type={visibility ? "text" : "password"}
+                        id="password"
+                        value={inputPassword}
+                        onChange={(e) => setInputPassword(e.target.value)}
                     />
-                    <Visibility onClick={(() => setVisibility(!visibility))}/>
+                    <Visibility onClick={(() => setVisibility(!visibility))} />
                 </LabelLogin>
-                <ErrorTextLogin>Your username or password is not correct</ErrorTextLogin>
+                <ErrorTextLogin>{tokenError}</ErrorTextLogin>
                 <SmallButton onClick={signInButton}>Sign In</SmallButton>
             </FormLogin>
         </DataBoxLogin>

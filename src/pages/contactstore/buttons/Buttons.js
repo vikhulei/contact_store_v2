@@ -9,11 +9,15 @@ const Buttons = () => {
         third: false
     })
 
+    const profileButton = () => {
+        console.log(sessionStorage.getItem('token'))
+    }
+
     return (
         <>
         {showButtonsWrapper.first && <ButtonsWrapper>
             <LargeButton disabled={false}>Add</LargeButton>
-            <ProfileButton>Profile</ProfileButton>
+            <ProfileButton onClick={profileButton}>Profile</ProfileButton>
             <LargeButton disabled={false}>Cancel</LargeButton>
         </ButtonsWrapper>}
         {showButtonsWrapper.second && <ButtonsWrapper>

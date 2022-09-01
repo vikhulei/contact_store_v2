@@ -13,8 +13,8 @@ const App = () => {
 
   return (
       <Background>
-        <NavBar/>
       <Router>
+        <NavBar/>
         <Routes>
           <Route path="/" element={<Login/>} />
           <Route element={<Protected/>}>

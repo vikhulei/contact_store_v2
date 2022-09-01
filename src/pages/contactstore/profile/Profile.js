@@ -1,3 +1,4 @@
+import { useSelector, useDispatch } from "react-redux"
 import { DataBox, Label, Input, SmallButton, ErrorText, Visibility } from "../../../components/ui/StyledComponents";
 import {
   DataBoxNavProfile,
@@ -19,6 +20,16 @@ import {
 import camberbech from "../../../assets/camberbech.jpg";
 
 const Profile = () => {
+
+  const dispatch = useDispatch()
+  const profile = useSelector(state => state.profileData.profileData)
+
+  const changeButton = (e) => {
+    e.preventDefault()
+    console.log(profile)
+  }
+
+
   return (
     <>
       <DataBox>
@@ -36,13 +47,13 @@ const Profile = () => {
         <InfoWrapper>
         <ErrorDataText>Errror accesing data</ErrorDataText>
           <InfoLabel>First Name:</InfoLabel>
-          <InfoData>Doctor</InfoData>
+          <InfoData>{profile.firstName}</InfoData>
           <InfoLabel>Last Name:</InfoLabel>
-          <InfoData>Who</InfoData>
+          <InfoData>{profile.lastName}</InfoData>
           <InfoLabel>Email:</InfoLabel>
-          <InfoData>user3@intrinsicgrouplimited.com</InfoData>
+          <InfoData>{profile.emailAddress}</InfoData>
           <InfoLabel>Join Date:</InfoLabel>
-          <InfoData>2022-07-25T13:35:33.066+00:00</InfoData>
+          <InfoData>{profile.joinDate}</InfoData>
         </InfoWrapper>
         <PasswordForm>
           <Fieldset>
@@ -62,7 +73,7 @@ const Profile = () => {
             </Label>
             </InputsGroup>
             <ErrorText style={{"textAlign": "center"}}>New password does not meet the requirements</ErrorText>
-            <SmallButton>Change</SmallButton>
+            <SmallButton onClick={changeButton} >Change</SmallButton>
           </Fieldset>
         </PasswordForm>
       </DataBox>

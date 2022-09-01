@@ -34,6 +34,7 @@ const InputLogin = styled(Input) `
 `
 
 const ErrorTextLogin = styled(ErrorText) `
+    height: 5px;
     margin: 30px 0 25px;
 `
 

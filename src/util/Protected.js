@@ -2,10 +2,10 @@ import {Outlet, Navigate} from "react-router-dom"
 import { useSelector } from "react-redux"
 
 const Protected = () => {
-    const auth = useSelector(state => state.authorization.auth)
+    const token = sessionStorage.getItem("token")
     return (
         <>
-           {auth ? <Outlet/> : <Navigate to="/"/> }
+           {token ? <Outlet/> : <Navigate to="/"/> }
         </>
     )
 }
