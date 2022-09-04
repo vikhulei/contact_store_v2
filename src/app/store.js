@@ -5,7 +5,7 @@ import profileReducer from "../features/profileSlice"
 const store = configureStore({
     reducer: {
         token: tokenReducer,
-        profileData: profileReducer,
+        profile: profileReducer,
     }
 })
 

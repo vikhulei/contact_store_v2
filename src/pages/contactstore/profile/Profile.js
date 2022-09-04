@@ -1,4 +1,7 @@
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
+import FormData from "form-data"
+import { postProfileImage, fetchProfileImage, fetchProfileData } from "../../../features/profileSlice";
 import { DataBox, Label, Input, SmallButton, ErrorText, Visibility } from "../../../components/ui/StyledComponents";
 import {
   DataBoxNavProfile,
@@ -22,12 +25,33 @@ import camberbech from "../../../assets/camberbech.jpg";
 const Profile = () => {
 
   const dispatch = useDispatch()
-  const profile = useSelector(state => state.profileData.profileData)
+  
+  const {firstName, lastName, emailAddress, joinDate} = useSelector(state => state.profile.profileData)
 
+  const image = useSelector(state => state.profile.profileImage)
+  
   const changeButton = (e) => {
     e.preventDefault()
-    console.log(profile)
+    // console.log(firstName)
   }
+
+  const uploadImage = async(e) => {
+    const formData = new FormData()
+    const file = e.target.files[0]
+    if (file) {
+    formData.append("file", file)
+    await dispatch(postProfileImage(formData))
+    await dispatch(fetchProfileImage())
+  }
+}
+
+useEffect(() => {
+  const renderData = async() => {
+    await dispatch(fetchProfileData())
+    await dispatch(fetchProfileImage())
+  }
+  renderData()
+}, [])
 
   return (
     <>
@@ -36,8 +60,12 @@ const Profile = () => {
         <ImageDataContainer>
         <TopImageText>Click the image to change it:</TopImageText>
         <ImageWrapper>
-          <Image src={camberbech} />
-          <InputImage type="file" size="1" />
+          <Image src={image} />
+          <InputImage
+          type="file"
+          size="1"
+          onChange={uploadImage}
+          />
         </ImageWrapper>
         <ErrorImageText>The image was not uploaded</ErrorImageText>
         </ImageDataContainer>
@@ -46,13 +74,13 @@ const Profile = () => {
         <InfoWrapper>
         <ErrorDataText>Errror accesing data</ErrorDataText>
           <InfoLabel>First Name:</InfoLabel>
-          <InfoData>{profile.firstName}</InfoData>
+          <InfoData>{firstName}</InfoData>
           <InfoLabel>Last Name:</InfoLabel>
-          <InfoData>{profile.lastName}</InfoData>
+          <InfoData>{lastName}</InfoData>
           <InfoLabel>Email:</InfoLabel>
-          <InfoData>{profile.emailAddress}</InfoData>
+          <InfoData>{emailAddress}</InfoData>
           <InfoLabel>Join Date:</InfoLabel>
-          <InfoData>{profile.joinDate}</InfoData>
+          <InfoData>{joinDate}</InfoData>
         </InfoWrapper>
         <PasswordForm>
           <Fieldset>

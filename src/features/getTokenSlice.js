@@ -15,8 +15,8 @@ export const fetchToken = createAsyncThunk("token/getToken", async({username, pa
         }}
         )
         sessionStorage.setItem('token', response.data.token);
-
-      return response.data
+        sessionStorage.setItem("username", username)
+        return response.data
 })
 
 export const getTokenSlice = createSlice({

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux"
-import { fetchProfileData } from "../../features/profileSlice";
+import { fetchProfileData, fetchProfileImage } from "../../features/profileSlice";
 import { useEffect } from "react";
 import { Wrapper, ProfileWrapper, ContactsWrapper, ButtonsWrapper } from "./ContactStoreStyle"
 import Profile from "./profile/Profile"
@@ -11,7 +11,7 @@ const ContactStore = () => {
 
     const dispatch = useDispatch()
 
-    const profile = useSelector(state => state.profileData.profileData)
+    const profile = useSelector(state => state.profile.profileData)
 
     const refreshWindow = function() {
         if(!window.location.hash) {
@@ -21,9 +21,11 @@ const ContactStore = () => {
     }
 
     useEffect(() => {
-        dispatch(fetchProfileData())
         if(Object.keys(profile).length === 0 ) {
-            refreshWindow()
+            if(!window.location.hash) {
+                window.location = window.location + '#loaded';
+                window.location.reload();
+            }
             }
      }, [])
 
