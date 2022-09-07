@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
+import { useDispatch } from "react-redux";
 import { DataBox, DataBoxNav } from "../../../components/ui/StyledComponents";
 import {
   Wrapper,
@@ -8,11 +9,13 @@ import {
 } from "./SelectContactStyle";
 import Select from "../../../components/select/Select"
 import Search from "../../../components/search/Search"
+import { resetContact } from "../../../features/contactSlice";
 
 const SelectContact = () => {
 
   const [cancelled, setCancelled] = useState(false)
   const refTarget = useRef(false)
+  const dispatch = useDispatch()
 
   const showSelection = () => {
     setCancelled(false)
@@ -26,12 +29,13 @@ const SelectContact = () => {
   const clickOutside = (e) => {
     if (e.target.className !== refTarget.current.className) {
       setCancelled(!cancelled)
+      dispatch(resetContact())
     }
   }
 
 
   const handleDoubleClick = () => {
-    //  alert("hello")
+     alert("hello")
   }
 
   useEffect(() => {
@@ -55,27 +59,6 @@ const SelectContact = () => {
               handleDoubleClick={handleDoubleClick}
             />
           </SelectWrapper>
-          {/* <SelectList
-            onClick={showSelection}
-            >
-              {Contacts.map((val, ind) => {
-                return <OptiontWrapper
-                key={val.id}
-                >
-                <OptionButton type="radio" 
-                name="contacts" id={val.id}
-                cancelled={cancelled}
-                ref={refTarget}
-                className="optionbutton"
-                onDoubleClick={handleDoubleClick}
-                 />
-                <OptionLabel
-                >
-                    {val.contactName}
-                  </OptionLabel>
-                  </OptiontWrapper>
-              })}
-            </SelectList> */}
         </DataWrapper>
         <ErrorTextSelect>Data was not loaded</ErrorTextSelect>
       </DataBox>

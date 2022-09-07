@@ -1,61 +1,81 @@
+import store from "../app/store"
 import axios from "axios"
 
-
 const baseUrl = "https://interview.intrinsiccloud.net"
-const token = sessionStorage.getItem('token')
-const username = sessionStorage.getItem("username")
-const user = username.split("@")[0]
-const userId = user[user.length-1]
 
-axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
+export const login = ({username, password}) => {
+    return axios({
+        data: {
+            password: password,
+            username: username
+        },
+        baseURL: `${baseUrl}/auth/login`,
+        method: "post"
+    })
+}
 
+const getAuthorization = () => {
+    const token = store.getState().token.token
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
+}
 
-export const login = axios.create({
-    baseURL: `${baseUrl}/auth/login`,
-    method: "post"
-})
+const getUser = () => {
+    return store.getState().token.user
+}
 
-export const getProfileData = axios.create({
+const getUserId = () => {
+    return store.getState().token.userId
+}
+
+export const getProfileData = () => {
+    getAuthorization()
+   return axios({
         baseURL: `${baseUrl}/profile`,
         method: "get",
     })
+}
 
-export const getProfileImage = axios.create({
-    baseURL: `${baseUrl}/profile/profileImage/${userId}`,
-    method: "get",
-    responseType: "blob"
-})
+export const getProfileImage = () => {
+    const userId = getUserId()
+    return axios({
+        baseURL: `${baseUrl}/profile/profileImage/${userId}`,
+        method: "get",
+        responseType: "blob"
+    })
+}
 
-export const uploadProfileImage = axios.create({
-    baseURL: `${baseUrl}/profile/profileImage`,
-    method: "post",
-    params: { name: user },
-    headers: {
-        "content-type": "multipart/form-data"
-    }
-})
+export const uploadProfileImage = (formData) => {
+    getAuthorization()
+    const user = getUser()
+    return axios({
+        data: formData,
+        baseURL: `${baseUrl}/profile/profileImage`,
+        method: "post",
+        params: { name: user },
+        headers: {
+            "content-type": "multipart/form-data"
+        }
+    })
+}
 
-export const changePassword = axios.create({
-    
-})
+export const changePassword = (oldPassword, newPassword) => {
+    getAuthorization()
+    return axios({
+        data: {
+            newPassword: newPassword,
+            oldPassword: oldPassword
+        },
+        baseURL: `${baseUrl}/profile/changePassword`,
+        method: "post",
+    })
+}
 
-export const getContacts = axios.create({
-    
-})
-
-export const newContact = axios.create({
-
-})
-
-export const updateContact = axios.create({
-
-})
-
-
-export const deleteContact = axios.create({
-
-})
-
-export const getCountries = axios.create({
-
-})
+export const getContacts = () => {
+    getAuthorization()
+    const user = getUser()
+    return axios({
+        baseURL: `${baseUrl}/contacts`,
+        method: "get",
+        params: { name: user }
+    })
+}

@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {getProfileData, getProfileImage, uploadProfileImage} from "../axios/requestConfig"
 
 
 const initialState = {
@@ -8,25 +7,26 @@ const initialState = {
     password: ""
 }
 
-export const fetchProfileData = createAsyncThunk("profile/getData", async() => {
+export const fetchProfileData = createAsyncThunk("profile/getData", async(getProfileData) => {
     const response = await getProfileData()
     const profileData = response.data 
     return profileData
 })
 
-export const fetchProfileImage = createAsyncThunk("profile/getImage", async() => {
+export const fetchProfileImage = createAsyncThunk("profile/getImage", async(getProfileImage) => {
     const response = await getProfileImage()
     const image = URL.createObjectURL(response.data)
     return image
 })
 
-export const postProfileImage = createAsyncThunk("profile/postImage", async(formData) => {
-    const response = await uploadProfileImage(
-        {data: formData}
-    )
-
-
+export const postProfileImage = createAsyncThunk("profile/postImage", async(uploadProfileImage) => {
+    const response = await uploadProfileImage()
 })
+
+export const updatePassword = createAsyncThunk("profile/changePassword", async(changePassword) => {
+    const response = await changePassword()
+})
+
 
 export const profileSlice = createSlice({
     name: "profile",

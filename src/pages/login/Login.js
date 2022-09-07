@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import { fetchToken, getTokenError } from "../../features/getTokenSlice";
-import { fetchProfileData } from "../../features/profileSlice";
+import { login } from "../../axios/requestConfig"
+import { fetchToken, getTokenError, setPassword } from "../../features/getTokenSlice"
 import { DataBoxNav, SmallButton, Visibility } from "../../components/ui/StyledComponents"
 import { DataBoxLogin, FormLogin, LabelLogin, InputLogin, ErrorTextLogin } from "./LoginStyle"
 
@@ -14,7 +14,6 @@ const Login = () => {
 
     const tokenError = useSelector(getTokenError)
     const token = useSelector(state => state.token.token)
-    const tokenStorage = sessionStorage.getItem("token")
 
     const dispatch = useDispatch()
 
@@ -22,19 +21,19 @@ const Login = () => {
 
     const signInButton = (e) => {
         e.preventDefault()
-        dispatch(fetchToken({username: inputUsername, password: inputPassword}))
+        dispatch(setPassword(inputPassword))
+        dispatch(fetchToken(function() {return login({username: inputUsername, password: inputPassword})}))
     }
 
     useEffect(() => {
-        if(token) {
-            // dispatch(fetchProfileData())
+        if (token) {
             navigate("/contactstore")
         }
     }, [token])
 
     return (
         <DataBoxLogin>
-            <DataBoxNav>{}</DataBoxNav>
+            <DataBoxNav>{ }</DataBoxNav>
             <FormLogin autoComplete="off">
                 <LabelLogin htmlFor="username">Username:
                     <InputLogin

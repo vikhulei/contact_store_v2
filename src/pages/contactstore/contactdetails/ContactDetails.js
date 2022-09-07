@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
 import { DataBox, DataBoxNav, Label, Input } from "../../../components/ui/StyledComponents"
 import { DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper } from "./ContactDetailsStyle"
 import Search from "../../../components/search/Search"
@@ -9,10 +10,24 @@ import Buttons from "../buttons/Buttons"
 const ContactDetails = () => {
 
     const [showSelect, setShowSelect] = useState(false)
+    // const [contactdetails, setcontactdetails] = useState({})
+
+    const contact = useSelector(state => state.contact.contact)
+
+    const {contactName, company, primaryEmailAddress} = contact
+    
+    // const contname = cName
 
     const handleSelect = () => {
         setShowSelect(!showSelect)
     }
+    
+    // useEffect(() => {
+    //     if(contact) {
+    //     //     setcontactdetails(contact)
+    //         // console.log(contact)
+    //     }
+    // }, [contact])
 
     return (
         <>
@@ -33,15 +48,26 @@ const ContactDetails = () => {
                     <DetailsLabel>
                         Name:
                         <DetailsInput
+                        value={contactName ? contactName : ""}
+                        // readonly
+                        onChange={e => e.target.value}
                         />
                     </DetailsLabel>
                     <DetailsLabel>
                         Company:
-                        <DetailsInput />
+                        <DetailsInput
+                        value={company ? company : ""}
+                        // readonly
+                        onChange={e => e.target.value}
+                        />
                     </DetailsLabel>
                     <DetailsLabel>
                         Email:
-                        <DetailsInput />
+                        <DetailsInput
+                        value={primaryEmailAddress ? primaryEmailAddress : ""}
+                        // readonly
+                        onChange={e => e.target.value}
+                        />
                     </DetailsLabel>
                     <DetailsLabel>Phone numbers:</DetailsLabel>
                 </DataWrapper>
