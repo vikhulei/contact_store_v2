@@ -46,7 +46,6 @@ const Profile = () => {
 
   useEffect(() => {
       dispatch(fetchProfileData(getProfileData))
-      // dispatch(fetchProfileData(token))
       dispatch(fetchProfileImage(getProfileImage))
   }, [])
 

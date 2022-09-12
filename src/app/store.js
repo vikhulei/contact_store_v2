@@ -7,7 +7,7 @@ const store = configureStore({
     reducer: {
         token: tokenReducer,
         profile: profileReducer,
-        contact: contactReducer,
+        contacts: contactReducer,
     }
 })
 

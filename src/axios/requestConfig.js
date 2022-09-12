@@ -79,3 +79,24 @@ export const getContacts = () => {
         params: { name: user }
     })
 }
+
+export const addContact = (contact) => {
+    getAuthorization()
+    const user = getUser()
+    return axios({
+        data: contact,
+        baseURL: `${baseUrl}/contacts`,
+        method: "post",
+        params: {name: user}
+    })
+}
+
+export const deleteContact = (contactId) => {
+    getAuthorization()
+    const user = getUser()
+    return axios({
+        baseURL: `${baseUrl}/contacts/${contactId}`,
+        method: "delete",
+        params: {name: user}
+    })
+}

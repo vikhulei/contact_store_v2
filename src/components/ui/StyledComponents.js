@@ -26,6 +26,8 @@ const Input = styled.input `
     border: black 1px solid;
     border-radius: 5px;
     box-shadow: gray 0px 5px 5px;
+    color: black;
+    font-weight: bold
 `
 const SmallButton = styled.button `
     width: 110px;

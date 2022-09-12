@@ -18,19 +18,15 @@ const ChangePassword = () => {
     const [newPassword, setNewPassword] = useState("")
     const [retypePassword, setRetypePassword] = useState("")
     const [errorMessage, setErrorMessage] = useState()
+    const [visibility, setVisibility] = useState({
+        old: false,
+        new: false,
+        retype: false,
+    })
 
     const dispatch = useDispatch()
 
-    const token = useSelector(state => state.token.token)
-    const user = useSelector(state => state.token.user)
     const passwordFromStore = useSelector(state => state.token.password)
-
-
-    const testButton = (e) => {
-        e.preventDefault()
-        console.log("test")
-        // getToken()
-    }
 
     const buttonChangePassword = (e) => {
         e.preventDefault()
@@ -56,27 +52,27 @@ const ChangePassword = () => {
                     <InputsGroup>
                         <Label> Current password:
                             <Input
-                                type="password"
+                                type={visibility.old ? "text" :"password"}
                                 value={oldPassword}
                                 onChange={e => setOldPassword(e.target.value)}
                             />
-                            <Visibility />
+                            <Visibility onClick={() => setVisibility(prev => ({...prev, old: !visibility.old}))} />
                         </Label>
                         <Label> New password:
                             <Input
-                                type="password"
+                                type={visibility.new ? "text" :"password"}
                                 value={newPassword}
                                 onChange={e => setNewPassword(e.target.value)}
                             />
-                            <Visibility />
+                            <Visibility onClick={() => setVisibility(prev => ({...prev, new: !visibility.new}))} />
                         </Label>
                         <Label> Retype new password:
                             <Input
-                                type="password"
+                                type={visibility.retype ? "text" :"password"}
                                 value={retypePassword}
                                 onChange={e => setRetypePassword(e.target.value)}
                             />
-                            <Visibility />
+                            <Visibility onClick={() => setVisibility(prev => ({...prev, retype: !visibility.retype}))} />
                         </Label>
                     </InputsGroup>
                     <ErrorText style={{ "textAlign": "center" }}>{errorMessage}</ErrorText>

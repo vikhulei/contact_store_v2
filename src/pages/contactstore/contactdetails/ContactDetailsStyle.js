@@ -51,7 +51,6 @@ const DetailsInput = styled(Input) `
     position: relative;
     width: 70%;
     height: 1.5rem;
-
 `
 
 const NumbersWrapper = styled.div `
