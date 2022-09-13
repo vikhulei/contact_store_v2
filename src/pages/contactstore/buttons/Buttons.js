@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { LargeButton } from "../../../components/ui/StyledComponents"
 import { ButtonsWrapper, ProfileButton } from "./ButtonsStyle"
-import { cancelSelection, resetContactId, disableButton, showAddButton, cancelButtonAction, addButtonAction, deleteButtonAction } from "../../../features/contactSlice"
+import { cancelSelection, resetContactId, disableButton, showAddButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction } from "../../../features/contactSlice"
 
 const Buttons = () => {
 
@@ -21,7 +21,8 @@ const Buttons = () => {
         dispatch(deleteButtonAction(true))
     }
     const updateButton = () => {
-        console.log("update")
+        // console.log("update")
+        dispatch(updateButtonAction(true))
     }
 
     const profileButton = () => {

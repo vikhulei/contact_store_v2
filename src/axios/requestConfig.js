@@ -100,3 +100,15 @@ export const deleteContact = (contactId) => {
         params: {name: user}
     })
 }
+
+export const updateContact = (contactId, contact) => {
+    getAuthorization()
+    const user = getUser()
+    return axios({
+        baseURL: `${baseUrl}/contacts/${contactId}`,
+        data: contact,
+        method: "put",
+        params: {name: user}
+    })
+}
+

@@ -16,6 +16,7 @@ const initialState = {
     cancelButtonPressed: false,
     addButtonPressed: false,
     deleteButtonPressed: false,
+    updateButtonPressed: false
 }
 
 export const fetchContacts = createAsyncThunk("contacts/getData", async(getContacts) => {
@@ -30,6 +31,10 @@ export const addContactThunk = createAsyncThunk("contacts/addContact", async(add
 
 export const deleteContactThunk = createAsyncThunk("contacts/deleteContact", async(deleteContact) => {
     const response = await deleteContact()
+})
+
+export const updateContactThunk = createAsyncThunk("contacts/updateContact", async(updateContact) => {
+    const response = await updateContact()
 })
 
 export const contactSlice = createSlice({
@@ -90,7 +95,9 @@ export const contactSlice = createSlice({
         deleteButtonAction: (state, action) => {
             state.deleteButtonPressed = action.payload
         },
-
+        updateButtonAction: (state, action) => {
+            state.updateButtonPressed = action.payload
+        }
     },
     extraReducers(builder) {
      builder
@@ -100,6 +107,6 @@ export const contactSlice = createSlice({
     }
 })
 
-export const {selectContact, getContactId, resetContactId, populateContact, makeSelection, cancelSelection, enableButton, disableButton, showAddButton, showDeleteButton, showUpdateButton, cancelButtonAction, addButtonAction, deleteButtonAction} = contactSlice.actions
+export const {selectContact, getContactId, resetContactId, populateContact, makeSelection, cancelSelection, enableButton, disableButton, showAddButton, showDeleteButton, showUpdateButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction} = contactSlice.actions
 
 export default contactSlice.reducer

@@ -6,8 +6,8 @@ import Search from "../../../components/search/Search"
 import Select from "../../../components/select/Select"
 import Buttons from "../buttons/Buttons"
 import { emptyContact } from "../../../util/emptyContact"
-import { getContacts, addContact, deleteContact } from "../../../axios/requestConfig"
-import { fetchContacts, enableButton, showAddButton, showDeleteButton, showUpdateButton, disableButton, addContactThunk, addButtonAction, deleteContactThunk, deleteButtonAction, resetContactId, cancelButtonAction, cancelSelection } from "../../../features/contactSlice"
+import { getContacts, addContact, deleteContact, updateContact } from "../../../axios/requestConfig"
+import { fetchContacts, enableButton, showAddButton, showDeleteButton, showUpdateButton, disableButton, addContactThunk, deleteContactThunk, updateContactThunk, addButtonAction, deleteButtonAction, updateButtonAction, resetContactId, cancelButtonAction, cancelSelection } from "../../../features/contactSlice"
 
 const ContactDetails = () => {
 
@@ -24,6 +24,7 @@ const ContactDetails = () => {
     const cancelButtonPressed = useSelector(state => state.contacts.cancelButtonPressed)
     const addButtonPressed = useSelector(state => state.contacts.addButtonPressed)
     const deleteButtonPressed = useSelector(state => state.contacts.deleteButtonPressed)
+    const updateButtonPressed = useSelector(state => state.contacts.updateButtonPressed)
 
     const contactFromStore = contactsFromStore.filter(value => value.id === contactId)[0]
 
@@ -53,7 +54,14 @@ const ContactDetails = () => {
         dispatch(deleteContactThunk(function(){return deleteContact(contactId)}))
         setContact(emptyContact)
         dispatch(deleteButtonAction(false))
+        dispatch(showAddButton())
         dispatch(disableButton())
+    }
+
+    const handleUpdateContact = () => {
+        dispatch(updateContactThunk(function() {return updateContact(contactId, contact)}))
+        dispatch(updateButtonAction(false))
+        dispatch(showDeleteButton())
     }
 
     useEffect(() => {
@@ -72,6 +80,7 @@ const ContactDetails = () => {
             dispatch(cancelSelection())
             setContact(emptyContact)
             dispatch(showAddButton())
+            dispatch(disableButton())
             dispatch(cancelButtonAction(false))
         }
     }, [cancelButtonPressed])
@@ -94,6 +103,12 @@ const ContactDetails = () => {
             handleDeleteContact()
         }
     }, [deleteButtonPressed])
+
+    useEffect(() => {
+        if(updateButtonPressed) {
+            handleUpdateContact()
+        }
+    }, [updateButtonPressed])
 
     return (
         <>
