@@ -29,7 +29,7 @@ const Login = () => {
         if (token) {
             navigate("/contactstore")
         }
-    }, [token])
+    }, [token, navigate])
 
     return (
         <DataBoxLogin>

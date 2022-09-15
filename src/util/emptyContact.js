@@ -1,5 +1,16 @@
 export const emptyContact = {
+    id: "",
     contactName: "",
     company: "",
-    primaryEmailAddress: ""
+    primaryEmailAddress: "",
+    phoneNumbers: [
+        {
+            areaCode: "",
+            category: "HOME",
+            countryCode: "",
+            extension: "",
+            id: "empty",
+            number: ""
+        }
+    ]
 }

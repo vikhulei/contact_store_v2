@@ -13,29 +13,21 @@ const Buttons = () => {
     const disabledButton = useSelector(state => state.contacts.disabledButton)
 
     const addButton = () => {
-        // alert("add")\
         dispatch(addButtonAction(true))
     }
     const deleteButton = () => {
-        // console.log("delete")
         dispatch(deleteButtonAction(true))
     }
     const updateButton = () => {
-        // console.log("update")
         dispatch(updateButtonAction(true))
     }
 
     const profileButton = () => {
-        console.log(sessionStorage.getItem('token'))
+        console.log('profileButton')
     }
 
-    const cancelButton = (e) => {
-        e.preventDefault()
+    const cancelButton = () => {
         dispatch(cancelButtonAction(true))
-        // dispatch(cancelSelection())
-        // dispatch(resetContactId())
-        // // dispatch(showAddButton())
-        // dispatch(disableButton())
     }
 
     return (

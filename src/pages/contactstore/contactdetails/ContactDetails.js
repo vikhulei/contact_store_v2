@@ -1,18 +1,21 @@
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { v4 as uuid } from "uuid"
 import { DataBox, DataBoxNav } from "../../../components/ui/StyledComponents"
-import { DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper } from "./ContactDetailsStyle"
+import { DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon } from "./ContactDetailsStyle"
 import Search from "../../../components/search/Search"
 import Select from "../../../components/select/Select"
 import Buttons from "../buttons/Buttons"
 import { emptyContact } from "../../../util/emptyContact"
-import { getContacts, addContact, deleteContact, updateContact } from "../../../axios/requestConfig"
-import { fetchContacts, enableButton, showAddButton, showDeleteButton, showUpdateButton, disableButton, addContactThunk, deleteContactThunk, updateContactThunk, addButtonAction, deleteButtonAction, updateButtonAction, resetContactId, cancelButtonAction, cancelSelection } from "../../../features/contactSlice"
+import { addContact, deleteContact, updateContact } from "../../../axios/requestConfig"
+import { enableButton, showAddButton, showDeleteButton, showUpdateButton, disableButton, addContactThunk, deleteContactThunk, updateContactThunk, addButtonAction, deleteButtonAction, updateButtonAction, resetContactId, cancelButtonAction, cancelSelection } from "../../../features/contactSlice"
 
 const ContactDetails = () => {
 
     const [showSelect, setShowSelect] = useState(false)
     const [contact, setContact] = useState(emptyContact)
+
+    const numberId = uuid()
 
     const dispatch = useDispatch()
 
@@ -27,6 +30,15 @@ const ContactDetails = () => {
     const updateButtonPressed = useSelector(state => state.contacts.updateButtonPressed)
 
     const contactFromStore = contactsFromStore.filter(value => value.id === contactId)[0]
+
+    const phoneNumberSplit = contactFromStore ? contactFromStore.phoneNumbers.map((val, idx) => ({
+            areaCode: val.phoneNumberFormatted.split("-")[1],
+            category: "HOME",
+            countryCode: val.phoneNumberFormatted.split("-")[0],
+            extension: val.phoneNumberFormatted.split("-")[2].split("#")[1],
+            id: val.id,
+            number: val.phoneNumberFormatted.split("-")[2].split("#")[0]
+        })) : ""
 
     const { contactName, company, primaryEmailAddress } = contact
 
@@ -51,7 +63,7 @@ const ContactDetails = () => {
     }
 
     const handleDeleteContact = () => {
-        dispatch(deleteContactThunk(function(){return deleteContact(contactId)}))
+        dispatch(deleteContactThunk(function () { return deleteContact(contactId) }))
         setContact(emptyContact)
         dispatch(deleteButtonAction(false))
         dispatch(showAddButton())
@@ -59,15 +71,41 @@ const ContactDetails = () => {
     }
 
     const handleUpdateContact = () => {
-        dispatch(updateContactThunk(function() {return updateContact(contactId, contact)}))
+        dispatch(updateContactThunk(function () { return updateContact(contactId, contact) }))
         dispatch(updateButtonAction(false))
         dispatch(showDeleteButton())
+    }
+
+    const updatePhoneNumber = (e, idx, property) => {
+        const newState = contact.phoneNumbers.map(val => ({...val}))
+        newState[idx][`${property}`] = e.target.value 
+        setContact(prev => ({...prev, phoneNumbers: [...newState]}))
+    }
+
+    const deleteNumber = (id) => {
+        const newState = contact.phoneNumbers.filter(val => val.id !== id)
+        setContact(prev => ({...prev, phoneNumbers: [...newState]}))
+        if(deleteButton) {
+            dispatch(showUpdateButton())
+        }
+    }
+
+    const addNumber = () => {
+        const newState = contact.phoneNumbers.map(val => ({...val}))
+        const newNumber = emptyContact.phoneNumbers.map(val => ({...val}))[0]
+        newNumber.id = numberId
+        newState.push(newNumber)
+        setContact(prev => ({...prev, phoneNumbers: [...newState, ]}))
+        if(deleteButton) {
+            dispatch(showUpdateButton())
+        }
     }
 
     useEffect(() => {
         if (contactFromStore) {
             setContact(contactFromStore)
-            if(disabledButton || !deleteButton) {
+            setContact(prev => ({...prev, phoneNumbers: phoneNumberSplit}))
+            if (disabledButton || !deleteButton) {
                 dispatch(enableButton())
                 dispatch(showDeleteButton())
             }
@@ -75,7 +113,7 @@ const ContactDetails = () => {
     }, [contactId])
 
     useEffect(() => {
-        if(cancelButtonPressed) {
+        if (cancelButtonPressed) {
             dispatch(resetContactId())
             dispatch(cancelSelection())
             setContact(emptyContact)
@@ -85,13 +123,6 @@ const ContactDetails = () => {
         }
     }, [cancelButtonPressed])
 
-    // useEffect(() => {
-    //     if(contactName === "" && company === "" && !disabledButton) {
-    //         dispatch(disableButton())
-    //         dispatch(showAddButton())
-    //     }
-    // }, [contactName, company])
-
     useEffect(() => {
         if (addButtonPressed) {
             handleAddContact()
@@ -99,13 +130,13 @@ const ContactDetails = () => {
     }, [addButtonPressed])
 
     useEffect(() => {
-        if(deleteButtonPressed) {
+        if (deleteButtonPressed) {
             handleDeleteContact()
         }
     }, [deleteButtonPressed])
 
     useEffect(() => {
-        if(updateButtonPressed) {
+        if (updateButtonPressed) {
             handleUpdateContact()
         }
     }, [updateButtonPressed])
@@ -159,10 +190,44 @@ const ContactDetails = () => {
                     <DetailsLabel>Phone numbers:</DetailsLabel>
                 </DataWrapper>
                 <NumbersWrapper>
-                    <CountryCode />
-                    <AreaCode />
-                    <Extension />
-                    <PhoneNumber />
+                    {contact.phoneNumbers ? contact.phoneNumbers.map((val, idx) => (
+                        <div key={idx}>
+                            <CountryCode
+                            value={val.countryCode || ""}
+                            onChange={(e) => {
+                                updatePhoneNumber(e, idx, "countryCode")
+                                handleInput()
+                            }}
+                            />
+                            <AreaCode
+                            value={val.areaCode || ""}
+                            onChange={(e) => {
+                                updatePhoneNumber(e, idx, "areaCode") 
+                                handleInput()
+                        }}
+                            />
+                            <Extension
+                            value={val.extension || ""}
+                            onChange={(e) => {
+                                updatePhoneNumber(e, idx, "extension")
+                                handleInput()
+                            }}
+                            />
+                            <PhoneNumber
+                            value={val.number || ""}
+                            onChange={(e) => {
+                                updatePhoneNumber(e, idx, "number") 
+                                handleInput()
+                            }}
+                            />
+                    <DeleteIcon 
+                        onClick={() => deleteNumber(val.id)}
+                    />        
+                        </div>
+                    )) : null}
+                    <AddIcon
+                        onClick={() => addNumber()}
+                    />
                 </NumbersWrapper>
                 <MobileButtonsWrapper>
                     <Buttons />

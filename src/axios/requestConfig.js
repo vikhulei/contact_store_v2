@@ -112,3 +112,9 @@ export const updateContact = (contactId, contact) => {
     })
 }
 
+export const getCountryCodes = () => {
+    return axios({
+        baseURL: `${baseUrl}/utility/countries`,
+        method: "get"
+    })
+}
