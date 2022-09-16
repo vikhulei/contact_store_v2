@@ -7,6 +7,7 @@ const SearchInput = styled(Input) `
 `
 
 const Search = () => {
+    
     return (
     <SearchInput
     type="text"

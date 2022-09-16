@@ -2,15 +2,16 @@ import {useEffect} from "react"
 import {useSelector, useDispatch} from "react-redux"
 import { SelectList, OptiontWrapper, OptionLabel, OptionButton } from "./SelectStyle"
 import { getContacts } from "../../axios/requestConfig"
-// import {fetchContacts, selectContact, getContactId} from "../../features/contactSlice"
-import { fetchContacts, selectContact, getContactId, makeSelection, showDeleteButton, enableButton, disableButton } from "../../features/contactSlice"
+import { fetchContacts, getContactId, makeSelection, showDeleteButton, enableButton, disableButton } from "../../features/contactSlice"
 
 
 const Select = ({handleDoubleClick }) => {
     
     const dispatch = useDispatch()
     
-    const contacts = useSelector(state => state.contacts.contacts)
+    const contactsFromStore = useSelector(state => state.contacts.contacts)
+
+    const contacts = contactsFromStore.filter(val => val = Object.values(val).includes("Viktor"))
 
     const selected = useSelector(state => state.contacts.selected)
 
@@ -21,8 +22,8 @@ const Select = ({handleDoubleClick }) => {
       }
 
     const getId = (e) => {
-        const contact = contacts.filter(value => value.id === e.target.id)[0]
-        dispatch(selectContact(contact))
+        // const contact = contacts.filter(value => value.id === e.target.id)[0]
+        // dispatch(selectContact(contact))
         dispatch(getContactId(e.target.id))
         // dispatch(disableButton())
     }
@@ -30,13 +31,13 @@ const Select = ({handleDoubleClick }) => {
     useEffect(() => {
         dispatch(fetchContacts(getContacts))
 
-    }, [contacts])
+    }, [contactsFromStore])
 
     return (
         <SelectList
             onClick={select}
         >
-            {contacts.map((val, ind) => {
+            {contactsFromStore.map((val, ind) => {
                 return <OptiontWrapper
                     key={val.id}
                 >

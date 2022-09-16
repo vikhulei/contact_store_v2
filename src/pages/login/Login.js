@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { login } from "../../axios/requestConfig"
 import { fetchToken, getTokenError, setPassword } from "../../features/getTokenSlice"
+import { getCountryCodesThunk } from "../../features/contactSlice"
 import { DataBoxNav, SmallButton, Visibility } from "../../components/ui/StyledComponents"
 import { DataBoxLogin, FormLogin, LabelLogin, InputLogin, ErrorTextLogin } from "./LoginStyle"
 
@@ -23,6 +24,7 @@ const Login = () => {
         e.preventDefault()
         dispatch(setPassword(inputPassword))
         dispatch(fetchToken(function() {return login({username: inputUsername, password: inputPassword})}))
+        dispatch(getCountryCodesThunk())
     }
 
     useEffect(() => {

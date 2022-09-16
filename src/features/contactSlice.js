@@ -1,12 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { emptyContact } from "../util/emptyContact";
 import { getCountryCodes } from "../axios/requestConfig";
 
 const initialState = {
     contacts: [],
     countries: [],
     contactId: "",
-    contact: emptyContact,
     selected: false,
     firstButton: {
         add: true,
@@ -40,24 +38,19 @@ export const updateContactThunk = createAsyncThunk("contacts/updateContact", asy
 
 export const getCountryCodesThunk = createAsyncThunk("contacts/getCountryCodes", async() => {
     const response = await getCountryCodes()
-    console.log(response.data)
+    const countries = response.data
+    return countries
 })
 
 export const contactSlice = createSlice({
     name: "contacts",
     initialState,
     reducers: {
-        selectContact: (state, action) => {
-            state.contact = action.payload
-        },
         getContactId: (state, action) => {
             state.contactId = action.payload
         },
         resetContactId: (state) => {
             state.contactId = ""
-        },
-        populateContact: (state, action) => {
-            state.contact = action.payload
         },
         makeSelection: state => {
             state.selected = true
@@ -116,6 +109,6 @@ export const contactSlice = createSlice({
     }
 })
 
-export const {selectContact, getContactId, resetContactId, populateContact, makeSelection, cancelSelection, enableButton, disableButton, showAddButton, showDeleteButton, showUpdateButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction} = contactSlice.actions
+export const {getContactId, resetContactId,  makeSelection, cancelSelection, enableButton, disableButton, showAddButton, showDeleteButton, showUpdateButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction} = contactSlice.actions
 
 export default contactSlice.reducer

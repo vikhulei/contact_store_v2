@@ -21,6 +21,7 @@ const ContactDetails = () => {
 
     const contactsFromStore = useSelector(state => state.contacts.contacts)
     const contactId = useSelector(state => state.contacts.contactId)
+    const countries = useSelector(state => state.contacts.countries)
     const disabledButton = useSelector(state => state.contacts.disabledButton)
     const deleteButton = useSelector(state => state.contacts.firstButton.delete)
     const updateButton = useSelector(state => state.contacts.firstButton.update)
@@ -28,6 +29,7 @@ const ContactDetails = () => {
     const addButtonPressed = useSelector(state => state.contacts.addButtonPressed)
     const deleteButtonPressed = useSelector(state => state.contacts.deleteButtonPressed)
     const updateButtonPressed = useSelector(state => state.contacts.updateButtonPressed)
+    
 
     const contactFromStore = contactsFromStore.filter(value => value.id === contactId)[0]
 
@@ -39,6 +41,17 @@ const ContactDetails = () => {
             id: val.id,
             number: val.phoneNumberFormatted.split("-")[2].split("#")[0]
         })) : ""
+
+    const selectContact = () => {
+        if (contactFromStore) {
+            setContact(contactFromStore)
+            setContact(prev => ({...prev, phoneNumbers: phoneNumberSplit}))
+            if (disabledButton || !deleteButton) {
+                dispatch(enableButton())
+                dispatch(showDeleteButton())
+            }
+        }
+    }
 
     const { contactName, company, primaryEmailAddress } = contact
 
@@ -102,15 +115,9 @@ const ContactDetails = () => {
     }
 
     useEffect(() => {
-        if (contactFromStore) {
-            setContact(contactFromStore)
-            setContact(prev => ({...prev, phoneNumbers: phoneNumberSplit}))
-            if (disabledButton || !deleteButton) {
-                dispatch(enableButton())
-                dispatch(showDeleteButton())
-            }
-        }
-    }, [contactId])
+        selectContact()
+        // console.log(contactFromStore)
+    }, [contactId, ])
 
     useEffect(() => {
         if (cancelButtonPressed) {
@@ -192,6 +199,26 @@ const ContactDetails = () => {
                 <NumbersWrapper>
                     {contact.phoneNumbers ? contact.phoneNumbers.map((val, idx) => (
                         <div key={idx}>
+                            <select
+                            style={{"position": "absolute", "width": "5%", "margin": "3% 0 0 40px", "background": "transparent", "border": "none"}}
+                            // value={countryCode}
+                            onChange={(e) => {
+                                updatePhoneNumber(e, idx, "countryCode")
+                                handleInput()
+                            }}
+                            // onChange={((e) => setCountryCode(e.target.value))}
+                            >
+                            {countries ? countries.map((val, idxx) => (
+                                <option
+                                key={idxx}
+                                value={val.dialCode}
+                                >
+                                        {`${val.name} ${val.dialCode}`}
+                                    </option>
+                            ))
+                            : null}
+                            </select>
+  
                             <CountryCode
                             value={val.countryCode || ""}
                             onChange={(e) => {
