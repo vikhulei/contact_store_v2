@@ -3,7 +3,6 @@ import {Label, Input} from "../../../components/ui/StyledComponents"
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import ArrowDropUpOutlinedIcon from '@mui/icons-material/ArrowDropUpOutlined';
 import DeleteOutlined from '@mui/icons-material/DeleteOutlined';
-// import AddIcon from '@mui/icons-material/Add';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 
@@ -45,6 +44,7 @@ const SelectWrapper = styled.div `
     height: 100%;
     width: 100%;
     z-index: ${(({showSelect}) => showSelect ? 99 : 0)};
+    opacity: ${(({showSelect}) => showSelect ? 1 : 0)}
 `
 
 const DetailsLabel = styled(Label) `

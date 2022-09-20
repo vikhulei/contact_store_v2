@@ -13,7 +13,9 @@ const NavBar = () => {
     const logOut = () => {
         dispatch(signOut());
         sessionStorage.removeItem("token")
+        sessionStorage.removeItem("username")
         navigate("/")
+        window.location.reload()
     }
 
     return (

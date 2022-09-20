@@ -45,13 +45,15 @@ const Profile = () => {
   }
 
   useEffect(() => {
+      // dispatch(fetchProfileData())
       dispatch(fetchProfileData(getProfileData))
       dispatch(fetchProfileImage(getProfileImage))
+      console.log(localStorage.getItem("token"))
   }, [])
 
   return (
     <>
-      <DataBox>
+      <DataBox id="profile">
         <DataBoxNavProfile>PROFILE</DataBoxNavProfile>
         <ImageDataContainer>
           <TopImageText>Click the image to change it:</TopImageText>

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+// import { getProfileData } from "../axios/requestConfig";
 
 
 const initialState = {
@@ -8,6 +9,7 @@ const initialState = {
 }
 
 export const fetchProfileData = createAsyncThunk("profile/getData", async(getProfileData) => {
+    // console.log(`token: ${sessionStorage.getItem("token")}`)
     const response = await getProfileData()
     const profileData = response.data 
     return profileData

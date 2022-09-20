@@ -11,6 +11,7 @@ const initialState = {
 export const fetchToken = createAsyncThunk("token/getToken", async(login) => {
     const response = await login()
         sessionStorage.setItem('token', response.data.token);
+        sessionStorage.setItem('username', response.data.username);
         return response.data
 })
 

@@ -15,7 +15,8 @@ const initialState = {
     cancelButtonPressed: false,
     addButtonPressed: false,
     deleteButtonPressed: false,
-    updateButtonPressed: false
+    updateButtonPressed: false,
+    searchValue: "",
 }
 
 export const fetchContacts = createAsyncThunk("contacts/getData", async(getContacts) => {
@@ -96,6 +97,9 @@ export const contactSlice = createSlice({
         },
         updateButtonAction: (state, action) => {
             state.updateButtonPressed = action.payload
+        },
+        setSearchValue: (state, action) => {
+            state.searchValue = action.payload
         }
     },
     extraReducers(builder) {
@@ -109,6 +113,6 @@ export const contactSlice = createSlice({
     }
 })
 
-export const {getContactId, resetContactId,  makeSelection, cancelSelection, enableButton, disableButton, showAddButton, showDeleteButton, showUpdateButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction} = contactSlice.actions
+export const {getContactId, resetContactId,  makeSelection, cancelSelection, enableButton, disableButton, showAddButton, showDeleteButton, showUpdateButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction, setSearchValue} = contactSlice.actions
 
 export default contactSlice.reducer

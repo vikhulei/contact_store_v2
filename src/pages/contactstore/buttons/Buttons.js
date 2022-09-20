@@ -23,7 +23,9 @@ const Buttons = () => {
     }
 
     const profileButton = () => {
-        console.log('profileButton')
+        document.getElementById("profile").scrollIntoView({
+            behavior: "smooth"
+        })
     }
 
     const cancelButton = () => {

@@ -1,43 +1,50 @@
-import {useEffect} from "react"
-import {useSelector, useDispatch} from "react-redux"
+import { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
 import { SelectList, OptiontWrapper, OptionLabel, OptionButton } from "./SelectStyle"
 import { getContacts } from "../../axios/requestConfig"
-import { fetchContacts, getContactId, makeSelection, showDeleteButton, enableButton, disableButton } from "../../features/contactSlice"
+import { fetchContacts, getContactId, makeSelection } from "../../features/contactSlice"
 
 
-const Select = ({handleDoubleClick }) => {
-    
+const Select = ({ handleSelect, showSelect, setShowSelect }) => {
+
     const dispatch = useDispatch()
-    
-    const contactsFromStore = useSelector(state => state.contacts.contacts)
 
-    const contacts = contactsFromStore.filter(val => val = Object.values(val).includes("Viktor"))
+    let contacts = []
+
+    const contactsFromStore = useSelector(state => state.contacts.contacts)
 
     const selected = useSelector(state => state.contacts.selected)
 
-    const firstButton = useSelector(state => state.contacts.firstButton)
+    const searchValue = useSelector(state => state.contacts.searchValue).toUpperCase()
+
+    contacts = contactsFromStore.filter((val) => {
+        return val.contactName.toUpperCase().includes(searchValue) ||
+            val.company.toUpperCase().includes(searchValue) ||
+            val.primaryEmailAddress.toUpperCase().includes(searchValue) ||
+            val.phoneNumbers.some((vall) => vall.phoneNumberFormatted.toUpperCase().includes(searchValue))
+    })
+
 
     const select = () => {
         dispatch(makeSelection())
-      }
+    }
 
     const getId = (e) => {
-        // const contact = contacts.filter(value => value.id === e.target.id)[0]
-        // dispatch(selectContact(contact))
         dispatch(getContactId(e.target.id))
-        // dispatch(disableButton())
+        if(showSelect) {
+            setShowSelect(false)
+        }
     }
 
     useEffect(() => {
         dispatch(fetchContacts(getContacts))
-
-    }, [contactsFromStore])
+    }, [])
 
     return (
         <SelectList
             onClick={select}
         >
-            {contactsFromStore.map((val, ind) => {
+            {contacts.map((val) => {
                 return <OptiontWrapper
                     key={val.id}
                 >
@@ -45,7 +52,7 @@ const Select = ({handleDoubleClick }) => {
                         name="contacts" id={val.id}
                         selected={selected}
                         className="optionbutton"
-                        onDoubleClick={handleDoubleClick}
+                        // onDoubleClick={handleDoubleClick}
                         onClick={getId}
                     />
                     <OptionLabel

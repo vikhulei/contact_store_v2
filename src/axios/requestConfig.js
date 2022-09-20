@@ -1,4 +1,3 @@
-import store from "../app/store"
 import axios from "axios"
 
 const baseUrl = "https://interview.intrinsiccloud.net"
@@ -14,18 +13,21 @@ export const login = ({username, password}) => {
     })
 }
 
+
 const getAuthorization = () => {
-    const token = store.getState().token.token
+    const token = sessionStorage.getItem("token") 
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
 }
 
 const getUser = () => {
-    return store.getState().token.user
+    return sessionStorage.getItem("username").split("@")[0]
 }
 
 const getUserId = () => {
-    return store.getState().token.userId
+    // const user = sessionStorage.getItem("username").split("@")[0]
+    return getUser().match(/\d+/g)[0]
 }
+
 
 export const getProfileData = () => {
     getAuthorization()
@@ -34,6 +36,8 @@ export const getProfileData = () => {
         method: "get",
     })
 }
+
+
 
 export const getProfileImage = () => {
     const userId = getUserId()

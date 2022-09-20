@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { v4 as uuid } from "uuid"
+import useWindowWidth from "../../../util/useWindowWidth"
 import { DataBox, DataBoxNav } from "../../../components/ui/StyledComponents"
 import { DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon } from "./ContactDetailsStyle"
 import Search from "../../../components/search/Search"
 import Select from "../../../components/select/Select"
 import Buttons from "../buttons/Buttons"
 import { emptyContact } from "../../../util/emptyContact"
-import { addContact, deleteContact, updateContact } from "../../../axios/requestConfig"
-import { enableButton, showAddButton, showDeleteButton, showUpdateButton, disableButton, addContactThunk, deleteContactThunk, updateContactThunk, addButtonAction, deleteButtonAction, updateButtonAction, resetContactId, cancelButtonAction, cancelSelection } from "../../../features/contactSlice"
+import { getContacts, addContact, deleteContact, updateContact } from "../../../axios/requestConfig"
+import { fetchContacts, enableButton, showAddButton, showDeleteButton, showUpdateButton, disableButton, addContactThunk, deleteContactThunk, updateContactThunk, addButtonAction, deleteButtonAction, updateButtonAction, resetContactId, cancelButtonAction, cancelSelection } from "../../../features/contactSlice"
 
 const ContactDetails = () => {
 
     const [showSelect, setShowSelect] = useState(false)
     const [contact, setContact] = useState(emptyContact)
+
+    const [desktop] = useWindowWidth()
 
     const numberId = uuid()
 
@@ -73,6 +76,7 @@ const ContactDetails = () => {
         setContact(emptyContact)
         dispatch(addButtonAction(false))
         dispatch(disableButton())
+        dispatch(fetchContacts(getContacts))
     }
 
     const handleDeleteContact = () => {
@@ -81,12 +85,14 @@ const ContactDetails = () => {
         dispatch(deleteButtonAction(false))
         dispatch(showAddButton())
         dispatch(disableButton())
+        dispatch(fetchContacts(getContacts))
     }
 
     const handleUpdateContact = () => {
         dispatch(updateContactThunk(function () { return updateContact(contactId, contact) }))
         dispatch(updateButtonAction(false))
         dispatch(showDeleteButton())
+        dispatch(fetchContacts(getContacts))
     }
 
     const updatePhoneNumber = (e, idx, property) => {
@@ -95,7 +101,7 @@ const ContactDetails = () => {
         setContact(prev => ({...prev, phoneNumbers: [...newState]}))
     }
 
-    const deleteNumber = (id) => {
+    const deletePhoneNumber = (id) => {
         const newState = contact.phoneNumbers.filter(val => val.id !== id)
         setContact(prev => ({...prev, phoneNumbers: [...newState]}))
         if(deleteButton) {
@@ -103,7 +109,7 @@ const ContactDetails = () => {
         }
     }
 
-    const addNumber = () => {
+    const addPhoneNumber = () => {
         const newState = contact.phoneNumbers.map(val => ({...val}))
         const newNumber = emptyContact.phoneNumbers.map(val => ({...val}))[0]
         newNumber.id = numberId
@@ -116,7 +122,6 @@ const ContactDetails = () => {
 
     useEffect(() => {
         selectContact()
-        // console.log(contactFromStore)
     }, [contactId, ])
 
     useEffect(() => {
@@ -159,8 +164,9 @@ const ContactDetails = () => {
                             {showSelect ? <ArrowUp /> : <ArrowDown />}
                         </ArrowWrapper>
                         <SelectWrapper showSelect={showSelect}>
-                            {showSelect && <Select
-                                handleSelect={handleSelect}
+                            {!desktop && <Select
+                            showSelect={showSelect}
+                            setShowSelect={setShowSelect}
                             />}
                         </SelectWrapper>
                     </SearchWrapper>
@@ -201,12 +207,10 @@ const ContactDetails = () => {
                         <div key={idx}>
                             <select
                             style={{"position": "absolute", "width": "5%", "margin": "3% 0 0 40px", "background": "transparent", "border": "none"}}
-                            // value={countryCode}
                             onChange={(e) => {
                                 updatePhoneNumber(e, idx, "countryCode")
                                 handleInput()
                             }}
-                            // onChange={((e) => setCountryCode(e.target.value))}
                             >
                             {countries ? countries.map((val, idxx) => (
                                 <option
@@ -248,12 +252,18 @@ const ContactDetails = () => {
                             }}
                             />
                     <DeleteIcon 
-                        onClick={() => deleteNumber(val.id)}
+                        onClick={() =>{
+                            deletePhoneNumber(val.id)
+                            handleInput()
+                        }}
                     />        
                         </div>
                     )) : null}
                     <AddIcon
-                        onClick={() => addNumber()}
+                        onClick={() => {
+                            addPhoneNumber()
+                            handleInput()
+                        }}
                     />
                 </NumbersWrapper>
                 <MobileButtonsWrapper>

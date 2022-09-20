@@ -48,6 +48,10 @@ const OptionButton = styled.input `
     background-color: ${(({selected}) => selected ? "#d29dfb" : "transparent" )}
       ;
   }
+  &:active + ${OptionLabel} {
+    background-color: ${(({selected}) => selected ? "#d29dfb" : "transparent" )}
+      ;
+  }
 `
 
 export { SelectList, OptiontWrapper, OptionLabel, OptionButton };
