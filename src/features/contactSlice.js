@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCountryCodes, getContacts } from "../axios/requestConfig";
+import { getCountryCodes } from "../axios/requestConfig";
 
 const initialState = {
     contacts: [],
@@ -31,7 +31,6 @@ export const addContactThunk = createAsyncThunk("contacts/addContact", async(add
 
 export const deleteContactThunk = createAsyncThunk("contacts/deleteContact", async(deleteContact) => {
     const response = await deleteContact()
-    fetchContacts(getContacts)
 })
 
 export const updateContactThunk = createAsyncThunk("contacts/updateContact", async(updateContact) => {
