@@ -1,5 +1,6 @@
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { emptyContact } from "../../util/emptyContact"
 import { SelectList, OptiontWrapper, OptionLabel, OptionButton } from "./SelectStyle"
 import { getContacts } from "../../axios/requestConfig"
 import { fetchContacts, getContactId, makeSelection } from "../../features/contactSlice"
@@ -7,17 +8,15 @@ import { fetchContacts, getContactId, makeSelection } from "../../features/conta
 
 const Select = ({ handleSelect, showSelect, setShowSelect }) => {
 
+    const [contacts, setContacts] = useState([])
+
     const dispatch = useDispatch()
 
-    let contacts = []
-
     const contactsFromStore = useSelector(state => state.contacts.contacts)
-
     const selected = useSelector(state => state.contacts.selected)
-
     const searchValue = useSelector(state => state.contacts.searchValue).toUpperCase()
 
-    contacts = contactsFromStore.filter((val) => {
+    const contactsFiltered = contactsFromStore.filter((val) => {
         return val.contactName.toUpperCase().includes(searchValue) ||
             val.company.toUpperCase().includes(searchValue) ||
             val.primaryEmailAddress.toUpperCase().includes(searchValue) ||
@@ -40,11 +39,15 @@ const Select = ({ handleSelect, showSelect, setShowSelect }) => {
         dispatch(fetchContacts(getContacts))
     }, [])
 
+useEffect(() => {
+    setContacts(contactsFiltered)
+}, [contactsFromStore])
+
     return (
         <SelectList
             onClick={select}
         >
-            {contacts.map((val) => {
+            {contacts?.map((val) => {
                 return <OptiontWrapper
                     key={val.id}
                 >
@@ -52,7 +55,6 @@ const Select = ({ handleSelect, showSelect, setShowSelect }) => {
                         name="contacts" id={val.id}
                         selected={selected}
                         className="optionbutton"
-                        // onDoubleClick={handleDoubleClick}
                         onClick={getId}
                     />
                     <OptionLabel

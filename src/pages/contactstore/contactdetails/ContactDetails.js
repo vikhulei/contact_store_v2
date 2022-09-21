@@ -38,7 +38,7 @@ const ContactDetails = () => {
 
     const phoneNumberSplit = contactFromStore ? contactFromStore.phoneNumbers.map((val, idx) => ({
             areaCode: val.phoneNumberFormatted.split("-")[1],
-            category: "HOME",
+            category: val.category,
             countryCode: val.phoneNumberFormatted.split("-")[0],
             extension: val.phoneNumberFormatted.split("-")[2].split("#")[1],
             id: val.id,
@@ -71,28 +71,28 @@ const ContactDetails = () => {
         setShowSelect(!showSelect)
     }
 
-    const handleAddContact = () => {
-        dispatch(addContactThunk(function () { return addContact(contact) }))
+    const handleAddContact = async() => {
+        await dispatch(addContactThunk(function () { return addContact(contact) }))
+        await dispatch(fetchContacts(getContacts))
         setContact(emptyContact)
         dispatch(addButtonAction(false))
         dispatch(disableButton())
-        dispatch(fetchContacts(getContacts))
     }
 
-    const handleDeleteContact = () => {
-        dispatch(deleteContactThunk(function () { return deleteContact(contactId) }))
+    const handleDeleteContact = async() => {
+        await dispatch(deleteContactThunk(function () { return deleteContact(contactId) }))
+        await dispatch(fetchContacts(getContacts))
         setContact(emptyContact)
         dispatch(deleteButtonAction(false))
         dispatch(showAddButton())
         dispatch(disableButton())
-        dispatch(fetchContacts(getContacts))
     }
 
-    const handleUpdateContact = () => {
-        dispatch(updateContactThunk(function () { return updateContact(contactId, contact) }))
+    const handleUpdateContact = async() => {
+        await dispatch(updateContactThunk(function () { return updateContact(contactId, contact) }))
+        await dispatch(fetchContacts(getContacts))
         dispatch(updateButtonAction(false))
         dispatch(showDeleteButton())
-        dispatch(fetchContacts(getContacts))
     }
 
     const updatePhoneNumber = (e, idx, property) => {
@@ -122,7 +122,8 @@ const ContactDetails = () => {
 
     useEffect(() => {
         selectContact()
-    }, [contactId, ])
+        // console.log("hi")
+    }, [contactId])
 
     useEffect(() => {
         if (cancelButtonPressed) {
