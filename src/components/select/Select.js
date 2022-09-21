@@ -8,15 +8,13 @@ import { fetchContacts, getContactId, makeSelection } from "../../features/conta
 
 const Select = ({ handleSelect, showSelect, setShowSelect }) => {
 
-    const [contacts, setContacts] = useState([])
-
     const dispatch = useDispatch()
 
     const contactsFromStore = useSelector(state => state.contacts.contacts)
     const selected = useSelector(state => state.contacts.selected)
     const searchValue = useSelector(state => state.contacts.searchValue).toUpperCase()
 
-    const contactsFiltered = contactsFromStore.filter((val) => {
+    const contacts = contactsFromStore.filter((val) => {
         return val.contactName.toUpperCase().includes(searchValue) ||
             val.company.toUpperCase().includes(searchValue) ||
             val.primaryEmailAddress.toUpperCase().includes(searchValue) ||
@@ -38,10 +36,6 @@ const Select = ({ handleSelect, showSelect, setShowSelect }) => {
     useEffect(() => {
         dispatch(fetchContacts(getContacts))
     }, [])
-
-useEffect(() => {
-    setContacts(contactsFiltered)
-}, [contactsFromStore])
 
     return (
         <SelectList
