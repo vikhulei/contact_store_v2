@@ -6,7 +6,7 @@ import { getContacts } from "../../axios/requestConfig"
 import { fetchContacts, getContactId, makeSelection } from "../../features/contactSlice"
 
 
-const Select = ({ handleSelect, showSelect, setShowSelect }) => {
+const Select = ({ handleSelect, showSelect, showSelectList }) => {
 
     const dispatch = useDispatch()
 
@@ -29,7 +29,7 @@ const Select = ({ handleSelect, showSelect, setShowSelect }) => {
     const getId = (e) => {
         dispatch(getContactId(e.target.id))
         if(showSelect) {
-            setShowSelect(false)
+            handleSelect()
         }
     }
 

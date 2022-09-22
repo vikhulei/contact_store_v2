@@ -1,11 +1,24 @@
-import { getProfileData } from "./requestConfig"
-import token from "../app/store"
+import { login } from "./requestConfig";
 
-getProfileData.interceptors.request.use(async auth => {
-    // const token = store.getState().token.token
-    console.log(token)
-    return auth
-})
+const handleError = (error) => {
+    switch (error.response.status) {
+        case 405:
+            error = "Bad request method has been sent to the server"
+            break;
+        case 401:
+            error = "Wrong credentials are used";
+            break;
+    }
+    return error
+}
 
 
-export {getProfileData}
+login.interceptors.response.use(
+    response => response,
+    error => {
+        error = handleError(error)
+        return Promise.reject(error)
+    }
+)
+
+export { login }

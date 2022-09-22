@@ -2,18 +2,6 @@ import axios from "axios"
 
 const baseUrl = "https://interview.intrinsiccloud.net"
 
-export const login = ({username, password}) => {
-    return axios({
-        data: {
-            password: password,
-            username: username
-        },
-        baseURL: `${baseUrl}/auth/login`,
-        method: "post"
-    })
-}
-
-
 const getAuthorization = () => {
     const token = sessionStorage.getItem("token") 
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
@@ -24,9 +12,25 @@ const getUser = () => {
 }
 
 const getUserId = () => {
-    // const user = sessionStorage.getItem("username").split("@")[0]
     return getUser().match(/\d+/g)[0]
 }
+
+// export const login = ({username, password}) => {
+//     return axios({
+//         data: {
+//             password: password,
+//             username: username
+//         },
+//         baseURL: `${baseUrl}/auth/login`,
+//         method: "post"
+//     })
+// }
+
+
+export const login = axios.create({
+    baseURL: `${baseUrl}/auth/login`,
+    method: "post"
+})
 
 
 export const getProfileData = () => {

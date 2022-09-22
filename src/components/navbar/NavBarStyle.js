@@ -20,7 +20,8 @@ const Logo = styled.img `
 `
 
 const Title = styled.h1 `
-    font-size: min(3.5rem, 6vw);
+    // font-size: min(3.5rem, 6vw);
+    font-size: 6vmin;
     font-weight: bold;
     color: #450577;
     justify-self: center;

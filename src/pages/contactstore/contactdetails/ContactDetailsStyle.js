@@ -18,7 +18,7 @@ const DataWrapper = styled.form `
 
 const SearchWrapper = styled.div `
     width: 100%;
-    background-color: red;
+    z-index: 101;
     @media screen and (min-width: 1000px) {
         display: none;
     }
@@ -62,11 +62,23 @@ const NumbersWrapper = styled.div `
     width: 90%;
     height: 20%;
     margin: 5% auto 0;
+    padding: 10px;
+    overflow-y: auto;
+    border: grey 1px solid;
+    box-shadow: gray 0px 0px 10px;
+    &::-webkit-scrollbar {
+        width: 5px;
+        background-color: grey;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        outline: 1px solid slategrey;
+      }
 `
 
 const CountryCode = styled.input `
     height: 1.5rem;
-    width: 18%;
+    width: 20%;
     padding-left: 5px;
     background-color: #F2E0FB;
     border: black 1px solid;
@@ -75,14 +87,14 @@ const CountryCode = styled.input `
 `
 
 const AreaCode = styled(DetailsInput) `
-    width: 20%;
+    width: 18%;
 `
 
 const Extension = styled(DetailsInput) `
     width: 12%;
 `
 const PhoneNumber = styled(DetailsInput) `
-    width: 42%;
+    width: 40%;
 `
 
 const DeleteIcon = styled(DeleteOutlined) `
@@ -93,13 +105,23 @@ const DeleteIcon = styled(DeleteOutlined) `
 `
 const AddIcon = styled(AddCircleOutlineIcon) `
     float: right;
+    margin-right: 5px;
     transform: translate(10%, 30%);
     &:active {
         transform: translate(10%, 30%) scale(1.2);
     }
 `
 
+const SelectMobile = styled.select `
+    position: absolute;
+    width: 5%;
+    margin: 3% 0 0 43px;
+    background: transparent;
+    border: none;
+`
+
 const MobileButtonsWrapper = styled.div `
+margin-top: 15px;
 @media screen and (min-width: 1000px) {
     display: none;
 }
@@ -107,4 +129,4 @@ const MobileButtonsWrapper = styled.div `
 
 
 
-export {DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon}
+export {DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon, SelectMobile}

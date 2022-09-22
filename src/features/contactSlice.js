@@ -17,6 +17,7 @@ const initialState = {
     deleteButtonPressed: false,
     updateButtonPressed: false,
     searchValue: "",
+    showSelect: false,
 }
 
 export const fetchContacts = createAsyncThunk("contacts/getData", async(getContacts) => {
@@ -100,6 +101,9 @@ export const contactSlice = createSlice({
         },
         setSearchValue: (state, action) => {
             state.searchValue = action.payload
+        },
+        showSelectList: (state) => {
+            state.showSelect = !state.showSelect
         }
     },
     extraReducers(builder) {
@@ -109,10 +113,11 @@ export const contactSlice = createSlice({
      }) 
      .addCase(getCountryCodesThunk.fulfilled, (state,action) => {
         state.countries = action.payload
+        sessionStorage.setItem("countryCodes", JSON.stringify(action.payload))
      })
     }
 })
 
-export const {getContactId, resetContactId,  makeSelection, cancelSelection, enableButton, disableButton, showAddButton, showDeleteButton, showUpdateButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction, setSearchValue} = contactSlice.actions
+export const {getContactId, resetContactId,  makeSelection, cancelSelection, enableButton, disableButton, showAddButton, showDeleteButton, showUpdateButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction, setSearchValue, showSelectList} = contactSlice.actions
 
 export default contactSlice.reducer

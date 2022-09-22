@@ -3,17 +3,16 @@ import { useSelector, useDispatch } from "react-redux"
 import { v4 as uuid } from "uuid"
 import useWindowWidth from "../../../util/useWindowWidth"
 import { DataBox, DataBoxNav } from "../../../components/ui/StyledComponents"
-import { DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon } from "./ContactDetailsStyle"
+import { DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon, SelectMobile } from "./ContactDetailsStyle"
 import Search from "../../../components/search/Search"
 import Select from "../../../components/select/Select"
 import Buttons from "../buttons/Buttons"
 import { emptyContact } from "../../../util/emptyContact"
 import { getContacts, addContact, deleteContact, updateContact } from "../../../axios/requestConfig"
-import { fetchContacts, enableButton, showAddButton, showDeleteButton, showUpdateButton, disableButton, addContactThunk, deleteContactThunk, updateContactThunk, addButtonAction, deleteButtonAction, updateButtonAction, resetContactId, cancelButtonAction, cancelSelection } from "../../../features/contactSlice"
+import { fetchContacts, enableButton, showAddButton, showDeleteButton, showUpdateButton, disableButton, addContactThunk, deleteContactThunk, updateContactThunk, addButtonAction, deleteButtonAction, updateButtonAction, resetContactId, cancelButtonAction, cancelSelection, showSelectList } from "../../../features/contactSlice"
 
 const ContactDetails = () => {
 
-    const [showSelect, setShowSelect] = useState(false)
     const [contact, setContact] = useState(emptyContact)
 
     const [desktop] = useWindowWidth()
@@ -24,7 +23,6 @@ const ContactDetails = () => {
 
     const contactsFromStore = useSelector(state => state.contacts.contacts)
     const contactId = useSelector(state => state.contacts.contactId)
-    const countries = useSelector(state => state.contacts.countries)
     const disabledButton = useSelector(state => state.contacts.disabledButton)
     const deleteButton = useSelector(state => state.contacts.firstButton.delete)
     const updateButton = useSelector(state => state.contacts.firstButton.update)
@@ -32,6 +30,9 @@ const ContactDetails = () => {
     const addButtonPressed = useSelector(state => state.contacts.addButtonPressed)
     const deleteButtonPressed = useSelector(state => state.contacts.deleteButtonPressed)
     const updateButtonPressed = useSelector(state => state.contacts.updateButtonPressed)
+    const showSelect = useSelector(state => state.contacts.showSelect)
+
+    const countries = JSON.parse(sessionStorage.countryCodes)
     
 
     const contactFromStore = contactsFromStore.filter(value => value.id === contactId)[0]
@@ -68,8 +69,17 @@ const ContactDetails = () => {
     }
 
     const handleSelect = () => {
-        setShowSelect(!showSelect)
+        dispatch(showSelectList())
     }
+
+const handleCancelButton = () => {
+    dispatch(resetContactId())
+    dispatch(cancelSelection())
+    setContact(emptyContact)
+    dispatch(showAddButton())
+    dispatch(disableButton())
+    dispatch(cancelButtonAction(false))
+}
 
     const handleAddContact = async() => {
         await dispatch(addContactThunk(function () { return addContact(contact) }))
@@ -122,17 +132,17 @@ const ContactDetails = () => {
 
     useEffect(() => {
         selectContact()
-        // console.log("hi")
     }, [contactId])
 
     useEffect(() => {
         if (cancelButtonPressed) {
-            dispatch(resetContactId())
-            dispatch(cancelSelection())
-            setContact(emptyContact)
-            dispatch(showAddButton())
-            dispatch(disableButton())
-            dispatch(cancelButtonAction(false))
+            handleCancelButton()
+            // dispatch(resetContactId())
+            // dispatch(cancelSelection())
+            // setContact(emptyContact)
+            // dispatch(showAddButton())
+            // dispatch(disableButton())
+            // dispatch(cancelButtonAction(false))
         }
     }, [cancelButtonPressed])
 
@@ -160,14 +170,16 @@ const ContactDetails = () => {
                 <DataBoxNav>Contact Details</DataBoxNav>
                 <DataWrapper autoComplete="off">
                     <SearchWrapper>
-                        <Search />
+                        <Search
+                        onClick={() => console.log("hi")}
+                        />
                         <ArrowWrapper onClick={handleSelect}>
                             {showSelect ? <ArrowUp /> : <ArrowDown />}
                         </ArrowWrapper>
                         <SelectWrapper showSelect={showSelect}>
                             {!desktop && <Select
                             showSelect={showSelect}
-                            setShowSelect={setShowSelect}
+                            handleSelect={handleSelect}
                             />}
                         </SelectWrapper>
                     </SearchWrapper>
@@ -206,8 +218,9 @@ const ContactDetails = () => {
                 <NumbersWrapper>
                     {contact.phoneNumbers ? contact.phoneNumbers.map((val, idx) => (
                         <div key={idx}>
-                            <select
-                            style={{"position": "absolute", "width": "5%", "margin": "3% 0 0 40px", "background": "transparent", "border": "none"}}
+                            
+                            <SelectMobile
+                            
                             onChange={(e) => {
                                 updatePhoneNumber(e, idx, "countryCode")
                                 handleInput()
@@ -222,9 +235,10 @@ const ContactDetails = () => {
                                     </option>
                             ))
                             : null}
-                            </select>
+                            </SelectMobile>
   
                             <CountryCode
+                            
                             value={val.countryCode || ""}
                             onChange={(e) => {
                                 updatePhoneNumber(e, idx, "countryCode")

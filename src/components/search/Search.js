@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import { Input } from "../ui/StyledComponents"
-import { setSearchValue } from "../../features/contactSlice"
+import { setSearchValue, showSelectList } from "../../features/contactSlice"
 
 const SearchInput = styled(Input)`
     width: 100%;
@@ -25,6 +25,7 @@ const Search = () => {
             placeholder="Start typing..."
             value={value}
             onChange={(e) => setValue(e.target.value)}
+            onClick={() => dispatch(showSelectList())}
         />
     )
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { login } from "../../axios/requestConfig"
-import { fetchToken, getTokenError, setPassword } from "../../features/getTokenSlice"
+import { fetchToken, getTokenError } from "../../features/getTokenSlice"
 import { getCountryCodesThunk } from "../../features/contactSlice"
 import { DataBoxNav, SmallButton, Visibility } from "../../components/ui/StyledComponents"
 import { DataBoxLogin, FormLogin, LabelLogin, InputLogin, ErrorTextLogin } from "./LoginStyle"
@@ -15,6 +15,7 @@ const Login = () => {
 
     const tokenError = useSelector(getTokenError)
     const token = useSelector(state => state.token.token)
+    const errorMessage = useSelector(state => state.token.errorMessage)
 
     const dispatch = useDispatch()
 
@@ -22,10 +23,17 @@ const Login = () => {
 
     const signInButton = (e) => {
         e.preventDefault()
-        dispatch(setPassword(inputPassword))
-        dispatch(fetchToken(function() {return login({username: inputUsername, password: inputPassword})}))
+        dispatch(fetchToken({username: inputUsername, password: inputPassword}))
         dispatch(getCountryCodesThunk())
+        console.log(errorMessage)
+
     }
+    // const signInButton = (e) => {
+    //     e.preventDefault()
+    //     dispatch(fetchToken(function() {return login({username: inputUsername, password: inputPassword})}))
+    //     dispatch(getCountryCodesThunk())
+    //     // console.log(tokenError)
+    // }
 
     useEffect(() => {
         if (token) {
@@ -54,7 +62,9 @@ const Login = () => {
                     />
                     <Visibility onClick={(() => setVisibility(!visibility))} />
                 </LabelLogin>
-                <ErrorTextLogin>{tokenError}</ErrorTextLogin>
+                <ErrorTextLogin>
+                    {errorMessage}
+                    </ErrorTextLogin>
                 <SmallButton onClick={signInButton}>Sign In</SmallButton>
             </FormLogin>
         </DataBoxLogin>

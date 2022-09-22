@@ -16,7 +16,7 @@ const Wrapper = styled.div`
         padding-bottom: 10%;
     }
     @media screen and (max-width: 1000px) {
-        top: 15vh;
+        top: 15vmin;
         max-height: 1350px;
         min-height: 1350px;
     }
