@@ -104,6 +104,6 @@ export const updateContact = (contactId, contact) => {
 }
  
 export const getCountryCodes = axios.create({
-        baseURL: `${baseUrl}/utility/countrie`,
+        baseURL: `${baseUrl}/utility/countries`,
         method: "get"
     })
