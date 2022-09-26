@@ -2,21 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { login } from "../axios/intercept"
 
 
-// const handleError = (action, state) => {
-//     if(action.payload.status === 405) {
-//         state.error = "Wrong axios method is used"
-//     } else if (action.payload.status === 401) {
-//         state.error = "Wrong credentials are used"
-//     }
-// }
-
 const initialState = {
     token: "",
     errorMessage: "",
 }
 
 export const fetchToken = createAsyncThunk("token/getToken", async({username, password}, {rejectWithValue}) => {
-
     try {
         const response = await login({
             data: {
@@ -24,39 +15,27 @@ export const fetchToken = createAsyncThunk("token/getToken", async({username, pa
                 password: password
             }
         })
-        console.log(response.data)
         return response.data
     } catch(error) {
         return rejectWithValue(error)
     }
 })
-// export const fetchToken = createAsyncThunk("token/getToken", async(login, {rejectWithValue}) => {
-//     try {
-//         const response = await login()
-//         return response.data
-//     } catch(error) {
-//         // console.log(error)
-//         return rejectWithValue(error.response.data)
-//     }
-// })
 
 export const getTokenSlice = createSlice({
     name: "token",
     initialState,
     reducers: {
-        signOut: state => {
-            state.token = ""
-            state.error = ""
+        setPassword: (state, action) => {
+            sessionStorage.setItem("psw", action.payload)
         },
-        setErrorMessage: (state, action) => {
-            state.errorMessage = action.payload
-        }
+        clearToken: () => initialState
     },
     extraReducers(builder) {
         builder
         .addCase(fetchToken.fulfilled, (state, action) => {
             state.status = "succeeded"
             state.token = action.payload.token
+            state.password = action.payload.password
             sessionStorage.setItem('token', action.payload.token);
             sessionStorage.setItem('username', action.payload.username);
         })
@@ -67,9 +46,8 @@ export const getTokenSlice = createSlice({
     }
 })
 
-
 export const getTokenError = (state) => state.token.error;
 
-export const { signOut, setPassword, setErrorMessage } = getTokenSlice.actions;
+export const { clearToken, setPassword } = getTokenSlice.actions;
 
 export default getTokenSlice.reducer

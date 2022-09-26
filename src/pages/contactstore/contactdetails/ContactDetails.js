@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { v4 as uuid } from "uuid"
 import useWindowWidth from "../../../util/useWindowWidth"
-import { DataBox, DataBoxNav } from "../../../components/ui/StyledComponents"
+import { DataBox, DataBoxNav, ErrorText } from "../../../components/ui/StyledComponents"
 import { DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon, SelectMobile } from "./ContactDetailsStyle"
 import Search from "../../../components/search/Search"
 import Select from "../../../components/select/Select"
@@ -23,6 +23,7 @@ const ContactDetails = () => {
 
     const contactsFromStore = useSelector(state => state.contacts.contacts)
     const contactId = useSelector(state => state.contacts.contactId)
+    const countries = useSelector(state => state.contacts.countries)
     const disabledButton = useSelector(state => state.contacts.disabledButton)
     const deleteButton = useSelector(state => state.contacts.firstButton.delete)
     const updateButton = useSelector(state => state.contacts.firstButton.update)
@@ -31,8 +32,9 @@ const ContactDetails = () => {
     const deleteButtonPressed = useSelector(state => state.contacts.deleteButtonPressed)
     const updateButtonPressed = useSelector(state => state.contacts.updateButtonPressed)
     const showSelect = useSelector(state => state.contacts.showSelect)
+    const errorMessage = useSelector(state => state.contacts.errorContactDetails)
 
-    const countries = JSON.parse(sessionStorage.countryCodes)
+    // const countries = sessionStorage.countryCodes ? JSON.parse(sessionStorage.countryCodes) : null
     
 
     const contactFromStore = contactsFromStore.filter(value => value.id === contactId)[0]
@@ -168,6 +170,7 @@ const handleCancelButton = () => {
         <>
             <DataBox>
                 <DataBoxNav>Contact Details</DataBoxNav>
+                    <ErrorText>{errorMessage}</ErrorText>
                 <DataWrapper autoComplete="off">
                     <SearchWrapper>
                         <Search

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import FormData from "form-data"
-import { postProfileImage, fetchProfileImage, fetchProfileData } from "../../../features/profileSlice";
+import { postProfileImage, fetchProfileImage, fetchProfileData  } from "../../../features/profileSlice";
 import { DataBox } from "../../../components/ui/StyledComponents";
 import {
   DataBoxNavProfile,
@@ -27,28 +27,22 @@ const Profile = () => {
   const { firstName, lastName, emailAddress, joinDate } = useSelector(state => state.profile.profileData)
 
   const image = useSelector(state => state.profile.profileImage)
-
-  // const changeButton = (e) => {
-  //   e.preventDefault()
-  //   console.log(token())
-  // }
+  const errorProfileData = useSelector(state => state.profile.errorProfileData) 
+  const errorProfileImage = useSelector(state => state.profile.errorProfileImage)
 
   const uploadImage = async (e) => {
     const formData = new FormData()
     const file = e.target.files[0]
     if (file) {
       formData.append("file", file)
-      await dispatch(postProfileImage(function() {return uploadProfileImage(formData)}))
-      // await dispatch(postProfileImage({token, user, formData}))
-      await dispatch(fetchProfileImage(getProfileImage))
+      await dispatch(postProfileImage(formData))
+      await dispatch(fetchProfileImage())
     }
   }
 
   useEffect(() => {
-      // dispatch(fetchProfileData())
-      dispatch(fetchProfileData(getProfileData))
-      dispatch(fetchProfileImage(getProfileImage))
-      // console.log(localStorage.getItem("token"))
+      dispatch(fetchProfileData())
+      dispatch(fetchProfileImage())
   }, [])
 
   return (
@@ -65,12 +59,12 @@ const Profile = () => {
               onChange={uploadImage}
             />
           </ImageWrapper>
-          <ErrorImageText>The image was not uploaded</ErrorImageText>
+          <ErrorImageText>{errorProfileImage}</ErrorImageText>
         </ImageDataContainer>
 
 
         <InfoWrapper>
-          <ErrorDataText>Errror accesing data</ErrorDataText>
+          <ErrorDataText>{errorProfileData}</ErrorDataText>
           <InfoLabel>First Name:</InfoLabel>
           <InfoData>{firstName}</InfoData>
           <InfoLabel>Last Name:</InfoLabel>

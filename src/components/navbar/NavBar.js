@@ -2,20 +2,26 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { NavBarWrapper, Title, Logo, SignOut } from "./NavBarStyle"
 import logo from "../../assets/logo.png"
-import {signOut} from "../../features/getTokenSlice"
+import {clearToken} from "../../features/getTokenSlice"
+import { clearProfile } from "../../features/profileSlice"
+import { clearContacts } from "../../features/contactSlice"
 
 const NavBar = () => {
     const token = sessionStorage.getItem("token")
+
+    const contactId = useSelector(state => state.contacts.contactId)
     
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const logOut = () => {
-        dispatch(signOut());
+        dispatch(clearToken());
+        dispatch(clearProfile());
+        dispatch(clearContacts());
         sessionStorage.removeItem("token")
         sessionStorage.removeItem("username")
+        sessionStorage.removeItem("psw")
         navigate("/")
-        window.location.reload()
     }
 
     return (

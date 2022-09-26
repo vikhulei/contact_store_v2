@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import { updatePassword } from "../../../../features/profileSlice";
 import { changePassword } from "../../../../axios/requestConfig";
@@ -26,23 +26,31 @@ const ChangePassword = () => {
 
     const dispatch = useDispatch()
 
-    const passwordFromStore = useSelector(state => state.token.password)
+    const passwordFromStore = sessionStorage.getItem("psw")
+    const errorProfilePassword = useSelector(state => state.profile.errorProfilePassword)
 
     const buttonChangePassword = (e) => {
+        console.log("here")
         e.preventDefault()
         if (oldPassword !== passwordFromStore) {
                 setErrorMessage("Your current password has not been entered correctly")
         } else if (newPassword !== retypePassword) {
             setErrorMessage("New password is not retyped correctly")
         } else if (newPassword.match(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/)) {
-            setErrorMessage("all good")
-            dispatch(updatePassword(function() {return changePassword(oldPassword, newPassword)}))
-    
-            // dispatch(updatePassword({token, user, oldPassword, newPassword}))
+            dispatch(updatePassword({oldPassword, newPassword}))
+            setOldPassword("")
+            setNewPassword("")
+            setRetypePassword("")
+            setErrorMessage(errorProfilePassword)
+            // dispatch(updatePassword(function() {return changePassword(oldPassword, newPassword)}))
         } else {
             setErrorMessage("Password must be at least 8 characters long, containing at least one upper case, one lower case, one numeric and one special character")
         }
     }
+
+    useEffect(() => {
+        setErrorMessage(errorProfilePassword)
+    }, [errorProfilePassword])
 
     return (
         <>

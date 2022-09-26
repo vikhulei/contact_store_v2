@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { emptyContact } from "../../util/emptyContact"
 import { SelectList, OptiontWrapper, OptionLabel, OptionButton } from "./SelectStyle"
 import { getContacts } from "../../axios/requestConfig"
-import { fetchContacts, getContactId, makeSelection } from "../../features/contactSlice"
+import { fetchContacts, getContactId, makeSelection, getCountryCodesThunk } from "../../features/contactSlice"
 
 
 const Select = ({ handleSelect, showSelect, showSelectList }) => {
@@ -35,6 +35,7 @@ const Select = ({ handleSelect, showSelect, showSelectList }) => {
 
     useEffect(() => {
         dispatch(fetchContacts(getContacts))
+        dispatch(getCountryCodesThunk())
     }, [])
 
     return (

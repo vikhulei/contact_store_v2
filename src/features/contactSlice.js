@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCountryCodes } from "../axios/requestConfig";
+import { getCountryCodes } from "../axios/intercept";
 
 const initialState = {
     contacts: [],
@@ -18,6 +18,8 @@ const initialState = {
     updateButtonPressed: false,
     searchValue: "",
     showSelect: false,
+    errorSelectContact: "",
+    errorContactDetails: "",
 }
 
 export const fetchContacts = createAsyncThunk("contacts/getData", async(getContacts) => {
@@ -38,10 +40,14 @@ export const updateContactThunk = createAsyncThunk("contacts/updateContact", asy
     const response = await updateContact()
 })
 
-export const getCountryCodesThunk = createAsyncThunk("contacts/getCountryCodes", async() => {
-    const response = await getCountryCodes()
-    const countries = response.data
-    return countries
+export const getCountryCodesThunk = createAsyncThunk("contacts/getCountryCodes", async(data, {rejectWithValue}) => {
+    try {
+        const response = await getCountryCodes()
+        const countries = response.data
+        return countries
+    } catch(error) {
+        return rejectWithValue(error)
+    }
 })
 
 export const contactSlice = createSlice({
@@ -104,7 +110,8 @@ export const contactSlice = createSlice({
         },
         showSelectList: (state) => {
             state.showSelect = !state.showSelect
-        }
+        },
+        clearContacts: () => initialState
     },
     extraReducers(builder) {
      builder
@@ -112,12 +119,19 @@ export const contactSlice = createSlice({
         state.contacts = action.payload
      }) 
      .addCase(getCountryCodesThunk.fulfilled, (state,action) => {
+        state.status = "succeeded"
         state.countries = action.payload
-        sessionStorage.setItem("countryCodes", JSON.stringify(action.payload))
+        // sessionStorage.setItem("countryCodes", JSON.stringify(action.payload))
      })
+     .addCase(getCountryCodesThunk.rejected,
+        (state, action) => {
+            state.status = "failed"
+            state.errorContactDetails = action.payload
+        }
+        )
     }
 })
 
-export const {getContactId, resetContactId,  makeSelection, cancelSelection, enableButton, disableButton, showAddButton, showDeleteButton, showUpdateButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction, setSearchValue, showSelectList} = contactSlice.actions
+export const {getContactId, resetContactId,  makeSelection, cancelSelection, enableButton, disableButton, showAddButton, showDeleteButton, showUpdateButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction, setSearchValue, showSelectList, clearContacts} = contactSlice.actions
 
 export default contactSlice.reducer

@@ -29,6 +29,7 @@ const Input = styled.input `
     color: black;
     font-weight: bold
 `
+
 const SmallButton = styled.button `
     width: 110px;
     height: 30px;
@@ -57,7 +58,10 @@ const LargeButton = styled(SmallButton) `
 }
 `
 
-const ErrorText = styled.p `
+const ErrorText = styled.div `
+    // height: 40px;
+    // height: auto;
+    position: absolute;
     color: #B70606;
     font-size: min(0.8rem, 4.5vw);
     font-weight: bold;
@@ -91,6 +95,7 @@ const DataBoxNav = styled.div `
         height: 50px;
     }
 `
+
 const Visibility = styled(VisibilityIcon) `
 position: absolute;
 right: 5%;

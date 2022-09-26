@@ -59,12 +59,14 @@ const Image = styled.img`
 `
 const ErrorImageText = styled(ErrorText)`
     // position: absolute;
+    height: auto;
     top: 190px;
     right: 5px;
     // visibility: hidden;
 `
 
 const ErrorDataText = styled(ErrorText) `
+      height: auto;
       grid-column: 1/3;
       @media screen and (max-width: 600px) {
           grid-column: 1/2;

@@ -10,7 +10,7 @@ const DataWrapper = styled.form `
     position: relative;
     width: 90%;
     height: 45%;
-    margin: 10% auto 0;
+    margin: 15% auto 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

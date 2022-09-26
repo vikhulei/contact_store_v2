@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import { login } from "../../axios/requestConfig"
-import { fetchToken, getTokenError } from "../../features/getTokenSlice"
-import { getCountryCodesThunk } from "../../features/contactSlice"
+import { fetchToken, setPassword } from "../../features/getTokenSlice"
 import { DataBoxNav, SmallButton, Visibility } from "../../components/ui/StyledComponents"
 import { DataBoxLogin, FormLogin, LabelLogin, InputLogin, ErrorTextLogin } from "./LoginStyle"
 
@@ -13,7 +11,6 @@ const Login = () => {
     const [inputUsername, setInputUsername] = useState("user3@intrinsicgrouplimited.com")
     const [inputPassword, setInputPassword] = useState("")
 
-    const tokenError = useSelector(getTokenError)
     const token = useSelector(state => state.token.token)
     const errorMessage = useSelector(state => state.token.errorMessage)
 
@@ -24,16 +21,8 @@ const Login = () => {
     const signInButton = (e) => {
         e.preventDefault()
         dispatch(fetchToken({username: inputUsername, password: inputPassword}))
-        dispatch(getCountryCodesThunk())
-        console.log(errorMessage)
-
+        dispatch(setPassword(inputPassword))
     }
-    // const signInButton = (e) => {
-    //     e.preventDefault()
-    //     dispatch(fetchToken(function() {return login({username: inputUsername, password: inputPassword})}))
-    //     dispatch(getCountryCodesThunk())
-    //     // console.log(tokenError)
-    // }
 
     useEffect(() => {
         if (token) {
