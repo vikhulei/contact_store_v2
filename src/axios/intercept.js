@@ -128,4 +128,43 @@ addContact.interceptors.response.use(
     }
 )
 
+deleteContact.interceptors.request.use(
+    request => {
+        getAuthorization(request)
+        const user = getUser()
+        request["params"] = {name: user}
+        return request
+    },
+    error => {
+        error = handleError(error)
+        return Promise.reject(error)
+    })
+
+deleteContact.interceptors.response.use(
+    response => response,
+    error => {
+        error = handleError(error)
+        return Promise.reject(error)
+    })
+
+updateContact.interceptors.request.use(
+    request => {
+        getAuthorization(request)
+        const user = getUser()
+        request["params"] = {name: user}
+        return request
+    },
+    error => {
+        error = handleError(error)
+        return Promise.reject(error)
+    })
+
+updateContact.interceptors.response.use(
+    response => response,
+    error => {
+        error = handleError(error)
+        return Promise.reject(error)
+    })
+
+
 export { login, getProfileData, getProfileImage, uploadProfileImage, changePassword, getContacts, addContact, deleteContact, updateContact, getCountryCodes }

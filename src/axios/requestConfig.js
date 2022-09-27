@@ -59,28 +59,16 @@ export const addContact = axios.create({
         method: "post",
     })
 
-
-
-export const deleteContact = (contactId) => {
-    getAuthorization()
-    const user = getUser()
-    return axios({
-        baseURL: `${baseUrl}/contacts/${contactId}`,
-        method: "delete",
-        params: {name: user}
+export const deleteContact = axios.create({
+        baseURL: `${baseUrl}/contacts`,
+        method: "delete"
     })
-}
 
-export const updateContact = (contactId, contact) => {
-    getAuthorization()
-    const user = getUser()
-    return axios({
-        baseURL: `${baseUrl}/contacts/${contactId}`,
-        data: contact,
+export const updateContact = axios.create({
+        baseURL: `${baseUrl}/contacts`,
         method: "put",
-        params: {name: user}
     })
-}
+
  
 export const getCountryCodes = axios.create({
         baseURL: `${baseUrl}/utility/countries`,

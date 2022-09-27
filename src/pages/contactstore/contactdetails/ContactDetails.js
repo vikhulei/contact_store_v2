@@ -92,16 +92,8 @@ const handleCancelButton = () => {
         dispatch(disableButton())
     }
 
-    // const handleAddContact = async() => {
-    //     await dispatch(addContactThunk(function () { return addContact(contact) }))
-    //     await dispatch(fetchContacts())
-    //     setContact(emptyContact)
-    //     dispatch(addButtonAction(false))
-    //     dispatch(disableButton())
-    // }
-
     const handleDeleteContact = async() => {
-        await dispatch(deleteContactThunk(function () { return deleteContact(contactId) }))
+        await dispatch(deleteContactThunk(contactId))
         await dispatch(fetchContacts())
         setContact(emptyContact)
         dispatch(deleteButtonAction(false))
@@ -110,7 +102,10 @@ const handleCancelButton = () => {
     }
 
     const handleUpdateContact = async() => {
-        await dispatch(updateContactThunk(function () { return updateContact(contactId, contact) }))
+
+        await dispatch(updateContactThunk({contactId, contact}))
+        // await dispatch(updateContactThunk(function () { return updateContact(contactId, contact) }))
+
         await dispatch(fetchContacts())
         dispatch(updateButtonAction(false))
         dispatch(showDeleteButton())
