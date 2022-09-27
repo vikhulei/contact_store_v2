@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { useSelector } from "react-redux";
 import useWindowWidth from "../../../util/useWindowWidth" 
 import { DataBox, DataBoxNav } from "../../../components/ui/StyledComponents";
 import {
@@ -26,7 +27,6 @@ const [desktop] = useWindowWidth()
             />}
           </SelectWrapper>
         </DataWrapper>
-        <ErrorTextSelect>Data was not loaded</ErrorTextSelect>
       </DataBox>
     </Wrapper>
   );

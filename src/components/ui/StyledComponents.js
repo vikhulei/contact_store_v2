@@ -59,12 +59,12 @@ const LargeButton = styled(SmallButton) `
 `
 
 const ErrorText = styled.div `
-    // height: 40px;
-    // height: auto;
     position: absolute;
+    width: 100%;
     color: #B70606;
     font-size: min(0.8rem, 4.5vw);
     font-weight: bold;
+    text-align: center;
 `
 
 const DataBox = styled.div `

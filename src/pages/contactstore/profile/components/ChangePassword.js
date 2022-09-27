@@ -7,7 +7,8 @@ import {
     PasswordForm,
     Fieldset,
     Legend,
-    InputsGroup
+    InputsGroup,
+    ErrorTextPassword
 } from "../ProfileStyle";
 
 

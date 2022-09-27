@@ -49,38 +49,17 @@ export const changePassword = axios.create({
         method: "post",
     })
 
-// export const changePassword = (oldPassword, newPassword) => {
-//     getAuthorization()
-//     return axios({
-//         data: {
-//             newPassword: newPassword,
-//             oldPassword: oldPassword
-//         },
-//         baseURL: `${baseUrl}/profile/changePassword`,
-//         method: "post",
-//     })
-// }
-
-export const getContacts = () => {
-    getAuthorization()
-    const user = getUser()
-    return axios({
+export const getContacts = axios.create({
         baseURL: `${baseUrl}/contacts`,
         method: "get",
-        params: { name: user }
     })
-}
 
-export const addContact = (contact) => {
-    getAuthorization()
-    const user = getUser()
-    return axios({
-        data: contact,
+export const addContact = axios.create({
         baseURL: `${baseUrl}/contacts`,
         method: "post",
-        params: {name: user}
     })
-}
+
+
 
 export const deleteContact = (contactId) => {
     getAuthorization()

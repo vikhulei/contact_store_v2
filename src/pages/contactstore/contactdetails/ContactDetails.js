@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { v4 as uuid } from "uuid"
 import useWindowWidth from "../../../util/useWindowWidth"
 import { DataBox, DataBoxNav, ErrorText } from "../../../components/ui/StyledComponents"
-import { DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon, SelectMobile } from "./ContactDetailsStyle"
+import { DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon, SelectMobile, ErrorTextContactDetails } from "./ContactDetailsStyle"
 import Search from "../../../components/search/Search"
 import Select from "../../../components/select/Select"
 import Buttons from "../buttons/Buttons"
@@ -32,7 +32,8 @@ const ContactDetails = () => {
     const deleteButtonPressed = useSelector(state => state.contacts.deleteButtonPressed)
     const updateButtonPressed = useSelector(state => state.contacts.updateButtonPressed)
     const showSelect = useSelector(state => state.contacts.showSelect)
-    const errorMessage = useSelector(state => state.contacts.errorContactDetails)
+    const errorMessage = useSelector(state => state.contacts.errorContacts)
+
 
     // const countries = sessionStorage.countryCodes ? JSON.parse(sessionStorage.countryCodes) : null
     
@@ -84,16 +85,24 @@ const handleCancelButton = () => {
 }
 
     const handleAddContact = async() => {
-        await dispatch(addContactThunk(function () { return addContact(contact) }))
-        await dispatch(fetchContacts(getContacts))
+        await dispatch(addContactThunk(contact))
+        await dispatch(fetchContacts())
         setContact(emptyContact)
         dispatch(addButtonAction(false))
         dispatch(disableButton())
     }
 
+    // const handleAddContact = async() => {
+    //     await dispatch(addContactThunk(function () { return addContact(contact) }))
+    //     await dispatch(fetchContacts())
+    //     setContact(emptyContact)
+    //     dispatch(addButtonAction(false))
+    //     dispatch(disableButton())
+    // }
+
     const handleDeleteContact = async() => {
         await dispatch(deleteContactThunk(function () { return deleteContact(contactId) }))
-        await dispatch(fetchContacts(getContacts))
+        await dispatch(fetchContacts())
         setContact(emptyContact)
         dispatch(deleteButtonAction(false))
         dispatch(showAddButton())
@@ -102,7 +111,7 @@ const handleCancelButton = () => {
 
     const handleUpdateContact = async() => {
         await dispatch(updateContactThunk(function () { return updateContact(contactId, contact) }))
-        await dispatch(fetchContacts(getContacts))
+        await dispatch(fetchContacts())
         dispatch(updateButtonAction(false))
         dispatch(showDeleteButton())
     }
@@ -170,7 +179,8 @@ const handleCancelButton = () => {
         <>
             <DataBox>
                 <DataBoxNav>Contact Details</DataBoxNav>
-                    <ErrorText>{errorMessage}</ErrorText>
+                    <ErrorTextContactDetails>{errorMessage}
+                    </ErrorTextContactDetails>
                 <DataWrapper autoComplete="off">
                     <SearchWrapper>
                         <Search

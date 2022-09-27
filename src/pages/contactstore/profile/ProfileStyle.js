@@ -29,8 +29,8 @@ const TopImageText = styled.p`
     // right: 5px;
 `
 const ImageWrapper = styled.div`
-    position: relative;
-    // top: 85px;
+    position: absolute;
+    top: 15px;
     // right: 5px;
     height: 100px;
     width: 100px;
@@ -58,19 +58,24 @@ const Image = styled.img`
     object-fit: cover;
 `
 const ErrorImageText = styled(ErrorText)`
-    // position: absolute;
+    position: relative;
     height: auto;
-    top: 190px;
-    right: 5px;
-    // visibility: hidden;
+    text-align: right;
+    // top: 190px;
+    // right: 5px;
+    // display: none;
 `
 
 const ErrorDataText = styled(ErrorText) `
-      height: auto;
-      grid-column: 1/3;
-      @media screen and (max-width: 600px) {
-          grid-column: 1/2;
-      }
+// background-color: green;
+      width: 50%;
+      left: 5px;
+      word-break: break-all;
+
+    //   grid-column: 1/3;
+    //   @media screen and (max-width: 600px) {
+    //       grid-column: 1/2;
+    //   }
     //   visibility: hidden;
 `
 
@@ -78,12 +83,13 @@ const InfoWrapper = styled.div`
       position: absolute;
       left: 50%;
       transform: translate(-50%);
-      top: 12%;
+      top: 15%;
       width: 90%;
       height: 38%;
       display: grid;
       grid-template-columns: 1fr 1fr;
       font-size: 0.8rem;
+    //   background-color: green;
       @media screen and (max-width: 600px) {
           grid-template-columns: 1fr;
           grid-template-row: repeat(8, 1fr);
@@ -125,9 +131,9 @@ const Fieldset = styled.fieldset`
       border-radius: 10px;
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
-      padding: 3% 0;
+      padding: 10px 0 15px;
 `
 
 const Legend = styled.legend`
@@ -138,6 +144,7 @@ const Legend = styled.legend`
 const InputsGroup = styled.div`
       width: 100%;
       height: 35%;
+      margin-top: 30px;
       padding: 0 10px;
       display: flex;
       flex-direction: column;
@@ -146,4 +153,9 @@ const InputsGroup = styled.div`
       font-size: 0.5rem;
 `
 
-export { DataBoxNavProfile, ImageDataContainer, ImageWrapper, InputImage, Image, TopImageText, ErrorImageText, ErrorDataText, InfoWrapper, InfoLabel, InfoData, PasswordForm, Fieldset, Legend, InputsGroup }
+const ErrorTextPassword = styled(ErrorText) `
+    top: 180px;
+    width: 97%;
+`
+
+export { DataBoxNavProfile, ImageDataContainer, ImageWrapper, InputImage, Image, TopImageText, ErrorImageText, ErrorDataText, InfoWrapper, InfoLabel, InfoData, PasswordForm, Fieldset, Legend, InputsGroup, ErrorTextPassword }

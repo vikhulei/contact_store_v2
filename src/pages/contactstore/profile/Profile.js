@@ -49,6 +49,7 @@ const Profile = () => {
     <>
       <DataBox id="profile">
         <DataBoxNavProfile>PROFILE</DataBoxNavProfile>
+        <ErrorDataText>{errorProfileData}</ErrorDataText>
         <ImageDataContainer>
           <TopImageText>Click the image to change it:</TopImageText>
           <ImageWrapper>
@@ -64,7 +65,6 @@ const Profile = () => {
 
 
         <InfoWrapper>
-          <ErrorDataText>{errorProfileData}</ErrorDataText>
           <InfoLabel>First Name:</InfoLabel>
           <InfoData>{firstName}</InfoData>
           <InfoLabel>Last Name:</InfoLabel>

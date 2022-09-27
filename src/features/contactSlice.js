@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCountryCodes } from "../axios/intercept";
+import { getContacts, addContact, deleteContact, updateContact, getCountryCodes } from "../axios/intercept";
 
 const initialState = {
     contacts: [],
@@ -18,18 +18,27 @@ const initialState = {
     updateButtonPressed: false,
     searchValue: "",
     showSelect: false,
-    errorSelectContact: "",
-    errorContactDetails: "",
+    errorContacts: "",
 }
 
-export const fetchContacts = createAsyncThunk("contacts/getData", async(getContacts) => {
-    const response = await getContacts()
-    const contactsData = response.data
-    return contactsData
+export const fetchContacts = createAsyncThunk("contacts/getData", async(data, {rejectWithValue}) => {
+    try {
+        const response = await getContacts(data)
+        const contactsData = response.data
+        return contactsData
+    } catch(error) {
+        return rejectWithValue(error)
+    }
 })
 
-export const addContactThunk = createAsyncThunk("contacts/addContact", async(addContact) => {
-    const response = await addContact()
+export const addContactThunk = createAsyncThunk("contacts/addContact", async(contact, {rejectWithValue}) => {
+    try {
+        const response = await addContact({
+            data: contact
+        })
+    } catch(error) {
+        return rejectWithValue(error)
+    }
 })
 
 export const deleteContactThunk = createAsyncThunk("contacts/deleteContact", async(deleteContact) => {
@@ -118,6 +127,21 @@ export const contactSlice = createSlice({
      .addCase(fetchContacts.fulfilled, (state, action) => {
         state.contacts = action.payload
      }) 
+     .addCase(fetchContacts.rejected,
+        (state, action) => {
+            state.errorContacts = action.payload
+        })
+    .addCase(addContactThunk.fulfilled,
+        (state, action) => {
+            state.status = "succeeded"
+        })
+    .addCase(addContactThunk.rejected, 
+        (state, action) => {
+            state.errorContacts = action.payload
+        }
+        )
+
+
      .addCase(getCountryCodesThunk.fulfilled, (state,action) => {
         state.status = "succeeded"
         state.countries = action.payload
@@ -126,7 +150,7 @@ export const contactSlice = createSlice({
      .addCase(getCountryCodesThunk.rejected,
         (state, action) => {
             state.status = "failed"
-            state.errorContactDetails = action.payload
+            state.errorContacts = action.payload
         }
         )
     }

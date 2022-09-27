@@ -34,7 +34,7 @@ const Select = ({ handleSelect, showSelect, showSelectList }) => {
     }
 
     useEffect(() => {
-        dispatch(fetchContacts(getContacts))
+        dispatch(fetchContacts())
         dispatch(getCountryCodesThunk())
     }, [])
 

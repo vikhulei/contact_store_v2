@@ -85,5 +85,47 @@ getCountryCodes.interceptors.response.use(
     }
 )
 
+getContacts.interceptors.request.use(
+    request => {
+        getAuthorization(request)
+        const user = getUser()
+        request["params"] = {name: user}
+        return request
+    },
+    error => {
+        error = handleError(error)
+        return Promise.reject(error)
+    }
+)
+
+getContacts.interceptors.response.use(
+    response => response,
+    error => {
+        error = handleError(error)
+        return Promise.reject(error)
+    }
+)
+
+addContact.interceptors.request.use(
+    request => {
+        getAuthorization(request)
+        const user = getUser()
+        request["params"] = {name: user}
+        return request
+    },
+    error => {
+        error = handleError(error)
+        return Promise.reject(error)
+    }
+)
+
+addContact.interceptors.response.use(
+    response => {
+        return response},
+    error => {
+        error = handleError(error)
+        return Promise.reject(error)
+    }
+)
 
 export { login, getProfileData, getProfileImage, uploadProfileImage, changePassword, getContacts, addContact, deleteContact, updateContact, getCountryCodes }

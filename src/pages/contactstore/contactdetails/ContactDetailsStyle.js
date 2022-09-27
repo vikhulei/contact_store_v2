@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import {Label, Input} from "../../../components/ui/StyledComponents"
+import {Label, Input, ErrorText} from "../../../components/ui/StyledComponents"
 import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
 import ArrowDropUpOutlinedIcon from '@mui/icons-material/ArrowDropUpOutlined';
 import DeleteOutlined from '@mui/icons-material/DeleteOutlined';
@@ -14,6 +14,9 @@ const DataWrapper = styled.form `
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+`
+const ErrorTextContactDetails = styled(ErrorText) `
+    margin-top: 5%;
 `
 
 const SearchWrapper = styled.div `
@@ -129,4 +132,4 @@ margin-top: 15px;
 
 
 
-export {DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon, SelectMobile}
+export {DataWrapper, ErrorTextContactDetails, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon, SelectMobile}
