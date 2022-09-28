@@ -10,6 +10,8 @@ const ButtonsWrapper = styled.div `
     @media screen and (max-width: 1000px) {
         flex-direction: row;
         padding: 0 4%;
+        height: 50px;
+        // background-color: red;
     }
 `
 

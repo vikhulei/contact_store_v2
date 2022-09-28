@@ -1,5 +1,5 @@
 import NavBar from "../navbar/NavBar";
-import {Wrapper, BackgroundColor, BackgroundImage} from "./BackgroundStyle"
+import {Wrapper, BackgroundImage} from "./BackgroundStyle"
 import background from "../../assets/background.jpg"
 
 

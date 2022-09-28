@@ -16,7 +16,7 @@ const ContactStore = () => {
                 <SelectContact />
                 <ContactDetails />
                 <ButtonsWrapper>
-                <Buttons />
+                    <Buttons />
                 </ButtonsWrapper>
             </ContactsWrapper>
         </Wrapper>

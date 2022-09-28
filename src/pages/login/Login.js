@@ -2,8 +2,8 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
 import { fetchToken, setPassword } from "../../features/getTokenSlice"
-import { DataBoxNav, SmallButton, Visibility } from "../../components/ui/StyledComponents"
-import { DataBoxLogin, FormLogin, LabelLogin, InputLogin, ErrorTextLogin } from "./LoginStyle"
+import { DataBoxNav, Visibility } from "../../components/ui/StyledComponents"
+import { DataBoxLogin, FormLogin, LabelLogin, InputLogin, ErrorTextLogin, ButtonLogin } from "./LoginStyle"
 
 const Login = () => {
 
@@ -32,7 +32,7 @@ const Login = () => {
 
     return (
         <DataBoxLogin>
-            <DataBoxNav>{ }</DataBoxNav>
+            <DataBoxNav>Log In</DataBoxNav>
             <FormLogin autoComplete="off">
                 <LabelLogin htmlFor="username">Username:
                     <InputLogin
@@ -51,11 +51,11 @@ const Login = () => {
                     />
                     <Visibility onClick={(() => setVisibility(!visibility))} />
                 </LabelLogin>
+                <ButtonLogin onClick={signInButton}>Sign In</ButtonLogin>
+            </FormLogin>
                 <ErrorTextLogin>
                     {errorMessage}
                     </ErrorTextLogin>
-                <SmallButton onClick={signInButton}>Sign In</SmallButton>
-            </FormLogin>
         </DataBoxLogin>
     )
 }
