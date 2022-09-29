@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import { updatePassword } from "../../../../features/profileSlice";
-import { changePassword } from "../../../../axios/requestConfig";
-import { Label, Input, SmallButton, ErrorText, Visibility } from "../../../../components/ui/StyledComponents";
+import { Label, Input, SmallButton, Visibility } from "../../../../components/ui/StyledComponents";
 import {
     PasswordForm,
     Fieldset,
@@ -43,7 +42,6 @@ const ChangePassword = () => {
             setNewPassword("")
             setRetypePassword("")
             setErrorMessage(errorProfilePassword)
-            // dispatch(updatePassword(function() {return changePassword(oldPassword, newPassword)}))
         } else {
             setErrorMessage("Password must be at least 8 characters long, containing at least one upper case, one lower case, one numeric and one special character")
         }
@@ -84,7 +82,9 @@ const ChangePassword = () => {
                             <Visibility onClick={() => setVisibility(prev => ({...prev, retype: !visibility.retype}))} />
                         </Label>
                     </InputsGroup>
-                    <ErrorText style={{ "textAlign": "center" }}>{errorMessage}</ErrorText>
+                    <ErrorTextPassword>
+                        {errorMessage}
+                    </ErrorTextPassword>
                     <SmallButton
                         onClick={buttonChangePassword}
                     >Change</SmallButton>

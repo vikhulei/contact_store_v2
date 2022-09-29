@@ -23,10 +23,4 @@ const SelectWrapper = styled.div `
   height: 90%;
 `
 
-const ErrorTextSelect = styled(ErrorText) `
-  text-align: center;
-  margin-top: 10px;
-`
-
-
-export { Wrapper, DataWrapper, SelectWrapper, ErrorTextSelect };
+export { Wrapper, DataWrapper, SelectWrapper };

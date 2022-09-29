@@ -17,8 +17,6 @@ import {
   InfoData,
 } from "./ProfileStyle";
 import ChangePassword from "./components/ChangePassword";
-// import camberbech from "../../../assets/camberbech.jpg";
-import { getProfileData, getProfileImage, uploadProfileImage } from "../../../axios/requestConfig";
 
 const Profile = () => {
 
@@ -48,6 +46,7 @@ const Profile = () => {
   return (
     <>
       <DataBox id="profile">
+      <div id="ScrollToProfile" style={{ "position": "absolute", "top": "-100px"}}></div>  
         <DataBoxNavProfile>PROFILE</DataBoxNavProfile>
         <ErrorDataText>{errorProfileData}</ErrorDataText>
         <ImageDataContainer>

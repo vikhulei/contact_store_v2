@@ -2,13 +2,12 @@ import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { v4 as uuid } from "uuid"
 import useWindowWidth from "../../../util/useWindowWidth"
-import { DataBox, DataBoxNav, ErrorText } from "../../../components/ui/StyledComponents"
+import { DataBox, DataBoxNav } from "../../../components/ui/StyledComponents"
 import { DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon, SelectMobile, ErrorTextContactDetails } from "./ContactDetailsStyle"
 import Search from "../../../components/search/Search"
 import Select from "../../../components/select/Select"
 import Buttons from "../buttons/Buttons"
 import { emptyContact } from "../../../util/emptyContact"
-import { getContacts, addContact, deleteContact, updateContact } from "../../../axios/requestConfig"
 import { fetchContacts, enableButton, showAddButton, showDeleteButton, showUpdateButton, disableButton, addContactThunk, deleteContactThunk, updateContactThunk, addButtonAction, deleteButtonAction, updateButtonAction, resetContactId, cancelButtonAction, cancelSelection, showSelectList } from "../../../features/contactSlice"
 
 const ContactDetails = () => {
@@ -34,9 +33,6 @@ const ContactDetails = () => {
     const showSelect = useSelector(state => state.contacts.showSelect)
     const errorMessage = useSelector(state => state.contacts.errorContacts)
 
-
-    // const countries = sessionStorage.countryCodes ? JSON.parse(sessionStorage.countryCodes) : null
-    
 
     const contactFromStore = contactsFromStore.filter(value => value.id === contactId)[0]
 
@@ -102,10 +98,7 @@ const handleCancelButton = () => {
     }
 
     const handleUpdateContact = async() => {
-
         await dispatch(updateContactThunk({contactId, contact}))
-        // await dispatch(updateContactThunk(function () { return updateContact(contactId, contact) }))
-
         await dispatch(fetchContacts())
         dispatch(updateButtonAction(false))
         dispatch(showDeleteButton())
@@ -143,12 +136,6 @@ const handleCancelButton = () => {
     useEffect(() => {
         if (cancelButtonPressed) {
             handleCancelButton()
-            // dispatch(resetContactId())
-            // dispatch(cancelSelection())
-            // setContact(emptyContact)
-            // dispatch(showAddButton())
-            // dispatch(disableButton())
-            // dispatch(cancelButtonAction(false))
         }
     }, [cancelButtonPressed])
 

@@ -1,12 +1,9 @@
-import { useState, useEffect } from "react"
-import { useSelector } from "react-redux";
 import useWindowWidth from "../../../util/useWindowWidth" 
 import { DataBox, DataBoxNav } from "../../../components/ui/StyledComponents";
 import {
   Wrapper,
   DataWrapper,
-  SelectWrapper,
-  ErrorTextSelect
+  SelectWrapper
 } from "./SelectContactStyle";
 import Select from "../../../components/select/Select"
 import Search from "../../../components/search/Search"

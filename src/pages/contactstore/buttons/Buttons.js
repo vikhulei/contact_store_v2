@@ -23,7 +23,7 @@ const Buttons = () => {
     }
 
     const profileButton = () => {
-        document.getElementById("profile").scrollIntoView({
+        document.getElementById("ScrollToProfile").scrollIntoView({
             behavior: "smooth"
         })
     }

@@ -16,9 +16,11 @@ const Wrapper = styled.div`
         transform: translate(-50%, 0%);
     }
     @media screen and (max-width: 1350px) {
+        top: 15vh;
+        transform: translate(-50%, 0%);
         flex-direction: column-reverse;
         height: 1500px;
-        padding-bottom: 10%;
+        padding-bottom: 15%;
     }
     @media screen and (max-width: 1000px) {
         top: 15vmin;
