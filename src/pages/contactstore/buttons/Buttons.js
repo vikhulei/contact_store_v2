@@ -2,15 +2,15 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { LargeButton } from "../../../components/ui/StyledComponents"
 import { ButtonsWrapper, ProfileButton } from "./ButtonsStyle"
-import { cancelSelection, resetContactId, disableButton, showAddButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction } from "../../../features/contactSlice"
+import { cancelSelection, resetContactId, disableButton, showAddButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction } from "../../../features/buttonsSlice"
 
 const Buttons = () => {
 
     const dispatch = useDispatch()
 
-    const firstButton = useSelector(state => state.contacts.firstButton)
+    const firstButton = useSelector(state => state.buttons.firstButton)
 
-    const disabledButton = useSelector(state => state.contacts.disabledButton)
+    const disabledButton = useSelector(state => state.buttons.disabledButton)
 
     const addButton = () => {
         dispatch(addButtonAction(true))

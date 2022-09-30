@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import styled from "styled-components"
-import { Input } from "../ui/StyledComponents"
-import { setSearchValue, showSelectList } from "../../features/contactSlice"
+import { Input } from "../../../../components/ui/StyledComponents"
+import { setSearchValue, showSelectList } from "../../../../features/contactSlice"
 
 const SearchInput = styled(Input)`
     width: 100%;

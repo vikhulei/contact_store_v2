@@ -6,7 +6,7 @@ import {
   SelectWrapper
 } from "./SelectContactStyle";
 import Select from "../../../components/select/Select"
-import Search from "../../../components/search/Search"
+import Search from "../components/search/Search"
 
 const SelectContact = () => {
 

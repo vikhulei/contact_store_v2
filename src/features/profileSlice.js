@@ -34,7 +34,7 @@ export const fetchProfileImage = createAsyncThunk("profile/getImage", async (dat
 
 export const postProfileImage = createAsyncThunk("profile/postImage", async (formData, { rejectWithValue }) => {
     try {
-        const response = await uploadProfileImage({
+        await uploadProfileImage({
             data: formData,
         })
     } catch (error) {
@@ -44,14 +44,13 @@ export const postProfileImage = createAsyncThunk("profile/postImage", async (for
 
 export const updatePassword = createAsyncThunk("profile/changePassword", async ({ newPassword, oldPassword }, { rejectWithValue }) => {
     try {
-        const response = await changePassword({
+        await changePassword({
             data: {
                 newPassword: newPassword,
                 oldPassword: oldPassword
             }
         }
         )
-        sessionStorage.setItem("psw", newPassword)
     } catch (error) {
         return rejectWithValue(error)
     }

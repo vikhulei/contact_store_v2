@@ -6,16 +6,6 @@ const initialState = {
     countries: [],
     contactId: "",
     selected: false,
-    firstButton: {
-        add: true,
-        delete: false,
-        update: false
-    },
-    disabledButton: true,
-    cancelButtonPressed: false,
-    addButtonPressed: false,
-    deleteButtonPressed: false,
-    updateButtonPressed: false,
     searchValue: "",
     showSelect: false,
     errorContacts: "",
@@ -33,7 +23,7 @@ export const fetchContacts = createAsyncThunk("contacts/getData", async (data, {
 
 export const addContactThunk = createAsyncThunk("contacts/addContact", async (contact, { rejectWithValue }) => {
     try {
-        const response = await addContact({
+        await addContact({
             data: contact
         })
     } catch (error) {
@@ -43,7 +33,7 @@ export const addContactThunk = createAsyncThunk("contacts/addContact", async (co
 
 export const deleteContactThunk = createAsyncThunk("contacts/deleteContact", async (contactId, { rejectWithValue }) => {
     try {
-        const response = await deleteContact(
+        await deleteContact(
             {
                 url: `/${contactId}`
             }
@@ -55,7 +45,7 @@ export const deleteContactThunk = createAsyncThunk("contacts/deleteContact", asy
 
 export const updateContactThunk = createAsyncThunk("contacts/updateContact", async ({ contactId, contact }, { rejectWithValue }) => {
     try {
-        const response = await updateContact({
+        await updateContact({
             url: `/${contactId}`,
             data: contact
         })
@@ -90,45 +80,6 @@ export const contactSlice = createSlice({
         cancelSelection: state => {
             state.selected = false
         },
-        enableButton: state => {
-            state.disabledButton = false
-        },
-        disableButton: state => {
-            state.disabledButton = true
-        },
-        showAddButton: state => {
-            state.firstButton = {
-                add: true,
-                delete: false,
-                update: false
-            }
-        },
-        showDeleteButton: state => {
-            state.firstButton = {
-                add: false,
-                delete: true,
-                update: false
-            }
-        },
-        showUpdateButton: state => {
-            state.firstButton = {
-                add: false,
-                delete: false,
-                update: true
-            }
-        },
-        cancelButtonAction: (state, action) => {
-            state.cancelButtonPressed = action.payload
-        },
-        addButtonAction: (state, action) => {
-            state.addButtonPressed = action.payload
-        },
-        deleteButtonAction: (state, action) => {
-            state.deleteButtonPressed = action.payload
-        },
-        updateButtonAction: (state, action) => {
-            state.updateButtonPressed = action.payload
-        },
         setSearchValue: (state, action) => {
             state.searchValue = action.payload
         },
@@ -152,7 +103,7 @@ export const contactSlice = createSlice({
                     state.status = "failed"
                 })
             .addCase(addContactThunk.fulfilled,
-                (state, action) => {
+                (state) => {
                     state.status = "succeeded"
                     state.errorContacts = ""
                 })
@@ -161,7 +112,7 @@ export const contactSlice = createSlice({
                     state.errorContacts = action.payload
                 })
             .addCase(deleteContactThunk.fulfilled,
-                (state, action) => {
+                (state) => {
                     state.status = "succeeded"
                     state.errorContacts = ""
                 })
@@ -170,7 +121,7 @@ export const contactSlice = createSlice({
                     state.errorContacts = action.payload
                 })
             .addCase(updateContactThunk.fulfilled,
-                (state, action) => {
+                (state) => {
                     state.status = "succeeded"
                     state.errorContacts = ""
                 })
@@ -181,7 +132,6 @@ export const contactSlice = createSlice({
             .addCase(getCountryCodesThunk.fulfilled, (state, action) => {
                 state.status = "succeeded"
                 state.countries = action.payload
-                // sessionStorage.setItem("countryCodes", JSON.stringify(action.payload))
             })
             .addCase(getCountryCodesThunk.rejected,
                 (state, action) => {
@@ -192,6 +142,6 @@ export const contactSlice = createSlice({
     }
 })
 
-export const { getContactId, resetContactId, makeSelection, cancelSelection, enableButton, disableButton, showAddButton, showDeleteButton, showUpdateButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction, setSearchValue, showSelectList, clearContacts } = contactSlice.actions
+export const { getContactId, resetContactId, makeSelection, cancelSelection, setSearchValue, showSelectList, clearContacts } = contactSlice.actions
 
 export default contactSlice.reducer

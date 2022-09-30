@@ -4,11 +4,12 @@ import { v4 as uuid } from "uuid"
 import useWindowWidth from "../../../util/useWindowWidth"
 import { DataBox, DataBoxNav } from "../../../components/ui/StyledComponents"
 import { DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon, SelectMobile, ErrorTextContactDetails } from "./ContactDetailsStyle"
-import Search from "../../../components/search/Search"
+import Search from "../components/search/Search"
 import Select from "../../../components/select/Select"
 import Buttons from "../buttons/Buttons"
 import { emptyContact } from "../../../util/emptyContact"
-import { fetchContacts, enableButton, showAddButton, showDeleteButton, showUpdateButton, disableButton, addContactThunk, deleteContactThunk, updateContactThunk, addButtonAction, deleteButtonAction, updateButtonAction, resetContactId, cancelButtonAction, cancelSelection, showSelectList } from "../../../features/contactSlice"
+import { fetchContacts, addContactThunk, deleteContactThunk, updateContactThunk,  resetContactId, cancelSelection, showSelectList } from "../../../features/contactSlice"
+import { enableButton, showAddButton, showDeleteButton, showUpdateButton, disableButton, addButtonAction, deleteButtonAction, updateButtonAction, cancelButtonAction } from "../../../features/buttonsSlice"
 
 const ContactDetails = () => {
 
@@ -24,13 +25,13 @@ const ContactDetails = () => {
     const contactsFromStore = useSelector(state => state.contacts.contacts)
     const contactId = useSelector(state => state.contacts.contactId)
     const countries = useSelector(state => state.contacts.countries)
-    const disabledButton = useSelector(state => state.contacts.disabledButton)
-    const deleteButton = useSelector(state => state.contacts.firstButton.delete)
-    const updateButton = useSelector(state => state.contacts.firstButton.update)
-    const cancelButtonPressed = useSelector(state => state.contacts.cancelButtonPressed)
-    const addButtonPressed = useSelector(state => state.contacts.addButtonPressed)
-    const deleteButtonPressed = useSelector(state => state.contacts.deleteButtonPressed)
-    const updateButtonPressed = useSelector(state => state.contacts.updateButtonPressed)
+    const disabledButton = useSelector(state => state.buttons.disabledButton)
+    const deleteButton = useSelector(state => state.buttons.firstButton.delete)
+    const updateButton = useSelector(state => state.buttons.firstButton.update)
+    const cancelButtonPressed = useSelector(state => state.buttons.cancelButtonPressed)
+    const addButtonPressed = useSelector(state => state.buttons.addButtonPressed)
+    const deleteButtonPressed = useSelector(state => state.buttons.deleteButtonPressed)
+    const updateButtonPressed = useSelector(state => state.buttons.updateButtonPressed)
     const showSelect = useSelector(state => state.contacts.showSelect)
     const errorMessage = useSelector(state => state.contacts.errorContacts)
     const status = useSelector(state => state.contacts.status)
