@@ -130,10 +130,4 @@ margin-top: 25px;
 }
 `
 
-
-
 export {DataWrapper, ErrorTextContactDetails, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon, SelectMobile}
-
-
-    // z-index: ${(({showSelect}) => showSelect ? 0 : 99)};
-    // opacity: ${(({showSelect}) => showSelect ? 1 : 1)};

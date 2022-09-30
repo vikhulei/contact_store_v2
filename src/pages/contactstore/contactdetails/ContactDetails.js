@@ -151,10 +151,8 @@ const ContactDetails = () => {
     }, [addButtonPressed])
 
     useEffect(() => {
-        // console.log(deleteButtonPressed)
         if (deleteButtonPressed) {
             handleDeleteContact()
-            // console.log(deleteButtonPressed)
         }
     }, [deleteButtonPressed])
 
@@ -178,7 +176,6 @@ const ContactDetails = () => {
     }, [status, errorMessage])
 
     return (
-        <>
             <DataBox>
                 <DataBoxNav>Contact Details</DataBoxNav>
                 <ErrorTextContactDetails>
@@ -308,7 +305,6 @@ const ContactDetails = () => {
                     <Buttons />
                 </MobileButtonsWrapper>
             </DataBox>
-        </>
     )
 }
 
