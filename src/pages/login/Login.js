@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import axios from "axios"
 import { fetchToken, setPassword } from "../../features/getTokenSlice"
 import { DataBoxNav, Visibility } from "../../components/ui/StyledComponents"
 import { DataBoxLogin, FormLogin, LabelLogin, InputLogin, ErrorTextLogin, ButtonLogin } from "./LoginStyle"
@@ -27,15 +26,10 @@ const Login = () => {
 
     useEffect(() => {
         if (token) {
-            console.log(token)
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             navigate("/contactstore")
         }
     }, [token, navigate])
 
-    useEffect(() => {
-
-    })
 
     return (
         <DataBoxLogin>
