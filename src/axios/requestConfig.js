@@ -2,7 +2,6 @@ import axios from "axios"
 
 const baseUrl = "https://interview.intrinsiccloud.net"
 
-
 export const login = axios.create({
     baseURL: `${baseUrl}/auth/login`,
     method: "post"

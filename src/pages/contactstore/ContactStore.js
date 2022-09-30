@@ -3,10 +3,11 @@ import Profile from "./profile/Profile"
 import SelectContact from "./selectcontact/SelectContact"
 import ContactDetails from "./contactdetails/ContactDetails"
 import Buttons from "./buttons/Buttons"
+import Footer from "../../components/footer/Footer"
 
 
 const ContactStore = () => {
-
+ 
     return (
         <Wrapper>
             <ProfileWrapper>
@@ -19,6 +20,7 @@ const ContactStore = () => {
                     <Buttons />
                 </ButtonsWrapper>
             </ContactsWrapper>
+            <Footer />
         </Wrapper>
     )
 }

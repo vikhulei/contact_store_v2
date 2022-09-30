@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   position: fixed;
   width: 100vw;
-  height: 110vh;
+  height: 100vh;
   background-color: rgba(163, 152, 251, 0.6);
   overflow: auto;
   &::-webkit-scrollbar {
