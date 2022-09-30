@@ -57,6 +57,8 @@ const DetailsInput = styled(Input) `
     position: relative;
     width: 70%;
     height: 1.5rem;
+    transition: color 2s;
+    color: ${(({deleteButtonPressed}) => deleteButtonPressed ? "rgba(0, 0, 0, 0)" : "rgba(0, 0, 0, 1)")};
 `
 
 const NumbersWrapper = styled.div `
@@ -78,14 +80,10 @@ const NumbersWrapper = styled.div `
       }
 `
 
-const CountryCode = styled.input `
+const CountryCode = styled(DetailsInput) `
+    position: static;
     height: 1.5rem;
     width: 20%;
-    padding-left: 5px;
-    background-color: #F2E0FB;
-    border: black 1px solid;
-    border-radius: 5px;
-    box-shadow: gray 0px 5px 5px;
 `
 
 const AreaCode = styled(DetailsInput) `

@@ -91,12 +91,14 @@ const ContactDetails = () => {
     }
 
     const handleDeleteContact = async () => {
-        await dispatch(deleteContactThunk(contactId))
-        await dispatch(fetchContacts())
-        setContact(emptyContact)
-        dispatch(deleteButtonAction(false))
-        dispatch(showAddButton())
-        dispatch(disableButton())
+        setTimeout(async() => {
+            await dispatch(deleteContactThunk(contactId))
+            await dispatch(fetchContacts())
+            setContact(emptyContact)
+            dispatch(deleteButtonAction(false))
+            dispatch(showAddButton())
+            dispatch(disableButton())
+        }, "1000")
     }
 
     const handleUpdateContact = async () => {
@@ -148,8 +150,10 @@ const ContactDetails = () => {
     }, [addButtonPressed])
 
     useEffect(() => {
+        // console.log(deleteButtonPressed)
         if (deleteButtonPressed) {
             handleDeleteContact()
+            // console.log(deleteButtonPressed)
         }
     }, [deleteButtonPressed])
 
@@ -197,6 +201,7 @@ const ContactDetails = () => {
                     <DetailsLabel>
                         Name:
                         <DetailsInput
+                            deleteButtonPressed={deleteButtonPressed}
                             value={contactName}
                             onChange={e => {
                                 setContact(prev => ({ ...prev, contactName: e.target.value }))
@@ -207,6 +212,7 @@ const ContactDetails = () => {
                     <DetailsLabel>
                         Company:
                         <DetailsInput
+                        deleteButtonPressed={deleteButtonPressed}
                             value={company}
                             onChange={e => {
                                 setContact((prev) => ({ ...prev, company: e.target.value }))
@@ -217,6 +223,7 @@ const ContactDetails = () => {
                     <DetailsLabel>
                         Email:
                         <DetailsInput
+                        deleteButtonPressed={deleteButtonPressed}
                             value={primaryEmailAddress}
                             onChange={e => {
                                 setContact((prev) => ({ ...prev, primaryEmailAddress: e.target.value }))
@@ -249,7 +256,7 @@ const ContactDetails = () => {
                             </SelectMobile>
 
                             <CountryCode
-
+                                deleteButtonPressed={deleteButtonPressed}
                                 value={val.countryCode || ""}
                                 onChange={(e) => {
                                     updatePhoneNumber(e, idx, "countryCode")
@@ -257,6 +264,7 @@ const ContactDetails = () => {
                                 }}
                             />
                             <AreaCode
+                                deleteButtonPressed={deleteButtonPressed}
                                 value={val.areaCode || ""}
                                 onChange={(e) => {
                                     updatePhoneNumber(e, idx, "areaCode")
@@ -264,6 +272,7 @@ const ContactDetails = () => {
                                 }}
                             />
                             <Extension
+                                deleteButtonPressed={deleteButtonPressed}
                                 value={val.extension || ""}
                                 onChange={(e) => {
                                     updatePhoneNumber(e, idx, "extension")
@@ -271,6 +280,7 @@ const ContactDetails = () => {
                                 }}
                             />
                             <PhoneNumber
+                                deleteButtonPressed={deleteButtonPressed}
                                 value={val.number || ""}
                                 onChange={(e) => {
                                     updatePhoneNumber(e, idx, "number")
