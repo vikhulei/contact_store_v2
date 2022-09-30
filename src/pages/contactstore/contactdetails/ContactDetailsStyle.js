@@ -83,18 +83,18 @@ const NumbersWrapper = styled.div `
 const CountryCode = styled(DetailsInput) `
     position: static;
     height: 1.5rem;
-    width: 20%;
+    width: 23%;
 `
 
 const AreaCode = styled(DetailsInput) `
-    width: 18%;
+    width: 20%;
 `
 
 const Extension = styled(DetailsInput) `
-    width: 12%;
+    width: 10%;
 `
 const PhoneNumber = styled(DetailsInput) `
-    width: 40%;
+    width: 37%;
 `
 
 const DeleteIcon = styled(DeleteOutlined) `
@@ -114,10 +114,12 @@ const AddIcon = styled(AddCircleOutlineIcon) `
 
 const SelectMobile = styled.select `
     position: absolute;
-    width: 5%;
-    margin: 3% 0 0 43px;
-    background: transparent;
+    width: 15px;
+    margin: 10px 0 0 50px;
+    background: #F2E0FB;
     border: none;
+    // padding-left: 10px;
+    // color: transparent;
 `
 
 const MobileButtonsWrapper = styled.div `

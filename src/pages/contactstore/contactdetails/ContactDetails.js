@@ -246,6 +246,7 @@ const ContactDetails = () => {
                             >
                                 {countries ? countries.map((val, idxx) => (
                                     <option
+                                    style={{"color": "black"}}
                                         key={idxx}
                                         value={val.dialCode}
                                     >

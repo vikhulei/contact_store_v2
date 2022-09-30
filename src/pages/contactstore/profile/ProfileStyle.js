@@ -8,16 +8,18 @@ const DataBoxNavProfile = styled(DataBoxNav)`
 
 const ImageDataContainer = styled.div `
     position: absolute;
-    left: 50%;
-    transform: translate(-50%);
+    // left: 50%;
+    // transform: translate(-50%);
     top: 12%;
+    right: 5%;
     width: 90%;
     height: 22%;
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-    justify-content: space-between;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: end;
+    // justify-content: space-between;
     z-index: 99;
+    text-align: right;
     // background-color: red;
 `
 
@@ -29,17 +31,19 @@ const TopImageText = styled.p`
     // right: 5px;
 `
 const ImageWrapper = styled.div`
-    position: absolute;
-    top: 15px;
+    position: relative;
+    // top: 15px;
     // right: 5px;
     height: 100px;
     width: 100px;
+    float: right;
 `
 
 const InputImage = styled.input`
     position: absolute;
     width: 100%;
     height: 100%;
+    right: 0;
     &:hover {
         cursor: pointer;
     }
@@ -52,7 +56,6 @@ const InputImage = styled.input`
     z-index: 99;
 `
 const Image = styled.img`
-    position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -61,6 +64,7 @@ const ErrorImageText = styled(ErrorText)`
     position: relative;
     height: auto;
     text-align: right;
+    float: right;
     // top: 190px;
     // right: 5px;
     // display: none;
