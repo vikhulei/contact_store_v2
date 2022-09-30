@@ -14,16 +14,31 @@ export const getUserId = () => {
 export const handleError = (error) => {
     switch (error.response.status) {
         case 400:
-            error = "Bad request to server";
+            error = "Bad request to server (400)";
             break;
         case 401:
-            error = "Wrong credentials";
+            error = "Wrong credentials (401)";
             break;
         case 403:
-            error = "Request not correct";
+            error = "Request not correct (403)";
+            break;
+        case 404:
+            error = "Resource not found (404)";
             break;
         case 405:
-            error = "Error in request method"
+            error = "Error in request method (405)"
+            break;
+        case 500:
+            error = "Server error (500)"
+            break;
+        case 502:
+            error = "Bad gateway (502)"
+            break;
+        case 503:
+            error = "Server overload (503)"
+            break;
+        case 504:
+            error = "Gateway Time-Out (504)"
             break;
         default:
             error = error.message
