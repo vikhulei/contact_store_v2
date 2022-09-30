@@ -4,12 +4,13 @@ export const getAuthorization = (request) => {
 }
 
 export const getUser = () => {
-    return sessionStorage.getItem("username").split("@")[0]
+        return sessionStorage.getItem("username").split("@")[0]
 }
 
 export const getUserId = () => {
-    return getUser().match(/\d+/g)[0]
+        return getUser().match(/\d+/g)[0]
 }
+
 
 export const handleError = (error) => {
     switch (error.response.status) {

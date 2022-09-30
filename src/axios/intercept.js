@@ -1,4 +1,3 @@
-import { postProfileImage } from "../features/profileSlice";
 import { getAuthorization, getUser, getUserId, handleError } from "./params"
 import { login, getProfileData, getProfileImage, uploadProfileImage, changePassword, getContacts, addContact, deleteContact, updateContact, getCountryCodes } from "./requestConfig";
 
