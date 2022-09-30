@@ -11,52 +11,51 @@ const initialState = {
     errorProfilePassword: "",
 }
 
-export const fetchProfileData = createAsyncThunk("profile/getData", async(data, {rejectWithValue}) => {
+export const fetchProfileData = createAsyncThunk("profile/getData", async (data, { rejectWithValue }) => {
     try {
-        const response = await getProfileData(data)
-        const profileData = response.data 
+        const response = await getProfileData()
+        const profileData = response.data
         return profileData
-    } catch(error) {
+    } catch (error) {
         return rejectWithValue(error)
     }
 })
 
 
-export const fetchProfileImage = createAsyncThunk("profile/getImage", async(data, {rejectWithValue}) => {
+export const fetchProfileImage = createAsyncThunk("profile/getImage", async (data, { rejectWithValue }) => {
     try {
-        const response = await getProfileImage(data)
+        const response = await getProfileImage()
         const image = URL.createObjectURL(response.data)
         return image
-    } catch(error) {
+    } catch (error) {
         return rejectWithValue(error)
     }
 })
 
-export const postProfileImage = createAsyncThunk("profile/postImage", async(formData, {rejectWithValue}) => {
+export const postProfileImage = createAsyncThunk("profile/postImage", async (formData, { rejectWithValue }) => {
     try {
         const response = await uploadProfileImage({
             data: formData,
         })
-    } catch(error) {
+    } catch (error) {
         return rejectWithValue(error)
     }
 })
 
-export const updatePassword = createAsyncThunk("profile/changePassword", async({newPassword, oldPassword}, {rejectWithValue}) => {
+export const updatePassword = createAsyncThunk("profile/changePassword", async ({ newPassword, oldPassword }, { rejectWithValue }) => {
     try {
-        const response = await changePassword({data: {
+        const response = await changePassword({
+            data: {
                 newPassword: newPassword,
                 oldPassword: oldPassword
-            }}
+            }
+        }
         )
         sessionStorage.setItem("psw", newPassword)
-        // console.log(response)
-    } catch(error) {
-        // console.log(error)
+    } catch (error) {
         return rejectWithValue(error)
     }
 })
-
 
 export const profileSlice = createSlice({
     name: "profile",
@@ -66,47 +65,47 @@ export const profileSlice = createSlice({
     },
     extraReducers(builder) {
         builder
-        .addCase(fetchProfileData.fulfilled, (state, action) => {
-            state.status = "succeeded"
-            state.profileData = action.payload
-        })
-        .addCase(fetchProfileData.rejected, (state, action) => {
-            state.status = "failed"
-            state.errorProfileData = action.payload
-        })
-        .addCase(fetchProfileImage.fulfilled, (state, action) => {
-            state.status = "succeeded"
-            state.profileImage = action.payload
-        })
-        .addCase(fetchProfileImage.rejected,
-            (state, action) => {
-                state.status = "failed"
-                state.errorProfileImage = action.payload
+            .addCase(fetchProfileData.fulfilled, (state, action) => {
+                state.status = "succeeded"
+                state.profileData = action.payload
             })
-            .addCase(postProfileImage.fulfilled, 
+            .addCase(fetchProfileData.rejected, (state, action) => {
+                state.status = "failed"
+                state.errorProfileData = action.payload
+            })
+            .addCase(fetchProfileImage.fulfilled, (state, action) => {
+                state.status = "succeeded"
+                state.profileImage = action.payload
+            })
+            .addCase(fetchProfileImage.rejected,
+                (state, action) => {
+                    state.status = "failed"
+                    state.errorProfileImage = action.payload
+                })
+            .addCase(postProfileImage.fulfilled,
                 (state, action) => {
                     state.status = "succeeded"
                     state.errorProfileImage = ""
                 })
-                .addCase(postProfileImage.rejected,
-                    (state, action) => {
-                        state.status = "failed"
-                        state.errorProfileImage = action.payload
-                    })
-                    .addCase(updatePassword.fulfilled,  
-                        (state) => {
-                            state.status = "succeeded"
-                            state.errorProfilePassword = "PASSWORD UPDATED"
-                        })
-                        .addCase(updatePassword.rejected, 
-                            (state, action) => {
-                                state.status = "failed"
-                                state.errorProfilePassword = action.payload
-                            }
+            .addCase(postProfileImage.rejected,
+                (state, action) => {
+                    state.status = "failed"
+                    state.errorProfileImage = action.payload
+                })
+            .addCase(updatePassword.fulfilled,
+                (state) => {
+                    state.status = "succeeded"
+                    state.errorProfilePassword = "PASSWORD UPDATED"
+                })
+            .addCase(updatePassword.rejected,
+                (state, action) => {
+                    state.status = "failed"
+                    state.errorProfilePassword = action.payload
+                }
             )
     }
 })
 
-export const {clearProfile} = profileSlice.actions;
+export const { clearProfile } = profileSlice.actions;
 
 export default profileSlice.reducer

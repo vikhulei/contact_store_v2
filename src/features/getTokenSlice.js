@@ -25,9 +25,6 @@ export const getTokenSlice = createSlice({
     name: "token",
     initialState,
     reducers: {
-        setPassword: (state, action) => {
-            sessionStorage.setItem("psw", action.payload)
-        },
         clearToken: () => initialState
     },
     extraReducers(builder) {
@@ -46,8 +43,6 @@ export const getTokenSlice = createSlice({
     }
 })
 
-export const getTokenError = (state) => state.token.error;
-
-export const { clearToken, setPassword } = getTokenSlice.actions;
+export const { clearToken } = getTokenSlice.actions;
 
 export default getTokenSlice.reducer

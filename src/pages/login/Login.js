@@ -21,7 +21,7 @@ const Login = () => {
     const signInButton = (e) => {
         e.preventDefault()
         dispatch(fetchToken({username: inputUsername, password: inputPassword}))
-        dispatch(setPassword(inputPassword))
+        sessionStorage.setItem("psw", inputPassword)
     }
 
     useEffect(() => {

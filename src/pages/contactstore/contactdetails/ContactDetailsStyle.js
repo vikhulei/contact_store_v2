@@ -46,8 +46,7 @@ const SelectWrapper = styled.div `
     position: absolute;
     height: 100%;
     width: 100%;
-    z-index: ${(({showSelect}) => showSelect ? 99 : 0)};
-    opacity: ${(({showSelect}) => showSelect ? 1 : 0)}
+    visibility: ${(({showSelect}) => showSelect ? "visible" : "hidden")};
 `
 
 const DetailsLabel = styled(Label) `
@@ -124,7 +123,8 @@ const SelectMobile = styled.select `
 `
 
 const MobileButtonsWrapper = styled.div `
-margin-top: 15px;
+margin-top: 25px;
+// background-color: red;
 @media screen and (min-width: 1000px) {
     display: none;
 }
@@ -133,3 +133,7 @@ margin-top: 15px;
 
 
 export {DataWrapper, ErrorTextContactDetails, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon, SelectMobile}
+
+
+    // z-index: ${(({showSelect}) => showSelect ? 0 : 99)};
+    // opacity: ${(({showSelect}) => showSelect ? 1 : 1)};

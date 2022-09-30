@@ -46,7 +46,7 @@ const Profile = () => {
   return (
     <>
       <DataBox id="profile">
-      <div id="ScrollToProfile" style={{ "position": "absolute", "top": "-100px"}}></div>  
+      <div id="ScrollToProfile" style={{ "position": "absolute", "top": "-80px"}}></div>  
         <DataBoxNavProfile>PROFILE</DataBoxNavProfile>
         <ErrorDataText>{errorProfileData}</ErrorDataText>
         <ImageDataContainer>

@@ -11,7 +11,6 @@ const ButtonsWrapper = styled.div `
         flex-direction: row;
         padding: 0 4%;
         height: 50px;
-        // background-color: red;
     }
 `
 
@@ -22,10 +21,11 @@ background-color: #A809CF;
     }
     @media screen and (max-width: 1000px) {
         position: absolute;
+        width: 80px;
         left: 50%;
-        transform: translate(-50%, 45px);
+        transform: translate(-50%, 0px);
         &:active {
-            transform: translate(-47%, 48px);
+            transform: translate(-47%, 3px);
         }
     }
 `

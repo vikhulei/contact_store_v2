@@ -68,11 +68,11 @@ changePassword.interceptors.request.use(
         error = handleError(error)
         return Promise.reject(error)
     })
-    
-    changePassword.interceptors.response.use(
-        response => response,
-        error => {
-            error = handleError(error)
+
+changePassword.interceptors.response.use(
+    response => response,
+    error => {
+        error = handleError(error)
         return Promise.reject(error)
     }
 )
@@ -89,7 +89,7 @@ getContacts.interceptors.request.use(
     request => {
         getAuthorization(request)
         const user = getUser()
-        request["params"] = {name: user}
+        request["params"] = { name: user }
         return request
     },
     error => {
@@ -110,7 +110,7 @@ addContact.interceptors.request.use(
     request => {
         getAuthorization(request)
         const user = getUser()
-        request["params"] = {name: user}
+        request["params"] = { name: user }
         return request
     },
     error => {
@@ -121,7 +121,8 @@ addContact.interceptors.request.use(
 
 addContact.interceptors.response.use(
     response => {
-        return response},
+        return response
+    },
     error => {
         error = handleError(error)
         return Promise.reject(error)
@@ -132,7 +133,7 @@ deleteContact.interceptors.request.use(
     request => {
         getAuthorization(request)
         const user = getUser()
-        request["params"] = {name: user}
+        request["params"] = { name: user }
         return request
     },
     error => {
@@ -151,7 +152,7 @@ updateContact.interceptors.request.use(
     request => {
         getAuthorization(request)
         const user = getUser()
-        request["params"] = {name: user}
+        request["params"] = { name: user }
         return request
     },
     error => {

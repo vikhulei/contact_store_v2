@@ -156,6 +156,7 @@ const InputsGroup = styled.div`
 const ErrorTextPassword = styled(ErrorText) `
     top: 180px;
     width: 97%;
+    color: ${(({errorMessage}) => (errorMessage === "PASSWORD UPDATED") ? "darkgreen" : "red")}
 `
 
 export { DataBoxNavProfile, ImageDataContainer, ImageWrapper, InputImage, Image, TopImageText, ErrorImageText, ErrorDataText, InfoWrapper, InfoLabel, InfoData, PasswordForm, Fieldset, Legend, InputsGroup, ErrorTextPassword }

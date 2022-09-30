@@ -31,13 +31,14 @@ const Input = styled.input `
 `
 
 const SmallButton = styled.button `
-    width: 110px;
+    width: 22vw;
+    max-width: 110px;
     height: 30px;
     color: white;
     background-color: #450577;
     border: black 1px solid;
     border-radius: 5px;
-    // box-shadow: black 0px 0px 8px;
+    box-shadow: black 0px 0px 5px;
     &:hover {
         cursor: pointer;
     }
@@ -45,14 +46,14 @@ const SmallButton = styled.button `
         transform: translate(3px, 3px);
     }
     &:disabled {
-        color: green;
+        color: rgba(255, 255, 255, 0.6);
         pointer-events: none;
     }
 `
 
 const LargeButton = styled(SmallButton) `
 @media screen and (min-width: 1000px) {
-    width: 150px;
+    max-width: 150px;
     height: 40px;
     font-size: 1.2rem;
 }

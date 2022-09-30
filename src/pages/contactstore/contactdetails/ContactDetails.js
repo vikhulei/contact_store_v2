@@ -13,6 +13,7 @@ import { fetchContacts, enableButton, showAddButton, showDeleteButton, showUpdat
 const ContactDetails = () => {
 
     const [contact, setContact] = useState(emptyContact)
+    const [errorText, setErrorText] = useState("")
 
     const [desktop] = useWindowWidth()
 
@@ -32,23 +33,24 @@ const ContactDetails = () => {
     const updateButtonPressed = useSelector(state => state.contacts.updateButtonPressed)
     const showSelect = useSelector(state => state.contacts.showSelect)
     const errorMessage = useSelector(state => state.contacts.errorContacts)
+    const status = useSelector(state => state.contacts.status)
 
 
     const contactFromStore = contactsFromStore.filter(value => value.id === contactId)[0]
 
     const phoneNumberSplit = contactFromStore ? contactFromStore.phoneNumbers.map((val, idx) => ({
-            areaCode: val.phoneNumberFormatted.split("-")[1],
-            category: val.category,
-            countryCode: val.phoneNumberFormatted.split("-")[0],
-            extension: val.phoneNumberFormatted.split("-")[2].split("#")[1],
-            id: val.id,
-            number: val.phoneNumberFormatted.split("-")[2].split("#")[0]
-        })) : ""
+        areaCode: val.phoneNumberFormatted.split("-")[1],
+        category: val.category,
+        countryCode: val.phoneNumberFormatted.split("-")[0],
+        extension: val.phoneNumberFormatted.split("-")[2].split("#")[1],
+        id: val.id,
+        number: val.phoneNumberFormatted.split("-")[2].split("#")[0]
+    })) : ""
 
     const selectContact = () => {
         if (contactFromStore) {
             setContact(contactFromStore)
-            setContact(prev => ({...prev, phoneNumbers: phoneNumberSplit}))
+            setContact(prev => ({ ...prev, phoneNumbers: phoneNumberSplit }))
             if (disabledButton || !deleteButton) {
                 dispatch(enableButton())
                 dispatch(showDeleteButton())
@@ -71,16 +73,16 @@ const ContactDetails = () => {
         dispatch(showSelectList())
     }
 
-const handleCancelButton = () => {
-    dispatch(resetContactId())
-    dispatch(cancelSelection())
-    setContact(emptyContact)
-    dispatch(showAddButton())
-    dispatch(disableButton())
-    dispatch(cancelButtonAction(false))
-}
+    const handleCancelButton = () => {
+        dispatch(resetContactId())
+        dispatch(cancelSelection())
+        setContact(emptyContact)
+        dispatch(showAddButton())
+        dispatch(disableButton())
+        dispatch(cancelButtonAction(false))
+    }
 
-    const handleAddContact = async() => {
+    const handleAddContact = async () => {
         await dispatch(addContactThunk(contact))
         await dispatch(fetchContacts())
         setContact(emptyContact)
@@ -88,7 +90,7 @@ const handleCancelButton = () => {
         dispatch(disableButton())
     }
 
-    const handleDeleteContact = async() => {
+    const handleDeleteContact = async () => {
         await dispatch(deleteContactThunk(contactId))
         await dispatch(fetchContacts())
         setContact(emptyContact)
@@ -97,34 +99,34 @@ const handleCancelButton = () => {
         dispatch(disableButton())
     }
 
-    const handleUpdateContact = async() => {
-        await dispatch(updateContactThunk({contactId, contact}))
+    const handleUpdateContact = async () => {
+        await dispatch(updateContactThunk({ contactId, contact }))
         await dispatch(fetchContacts())
         dispatch(updateButtonAction(false))
         dispatch(showDeleteButton())
     }
 
     const updatePhoneNumber = (e, idx, property) => {
-        const newState = contact.phoneNumbers.map(val => ({...val}))
-        newState[idx][`${property}`] = e.target.value 
-        setContact(prev => ({...prev, phoneNumbers: [...newState]}))
+        const newState = contact.phoneNumbers.map(val => ({ ...val }))
+        newState[idx][`${property}`] = e.target.value
+        setContact(prev => ({ ...prev, phoneNumbers: [...newState] }))
     }
 
     const deletePhoneNumber = (id) => {
         const newState = contact.phoneNumbers.filter(val => val.id !== id)
-        setContact(prev => ({...prev, phoneNumbers: [...newState]}))
-        if(deleteButton) {
+        setContact(prev => ({ ...prev, phoneNumbers: [...newState] }))
+        if (deleteButton) {
             dispatch(showUpdateButton())
         }
     }
 
     const addPhoneNumber = () => {
-        const newState = contact.phoneNumbers.map(val => ({...val}))
-        const newNumber = emptyContact.phoneNumbers.map(val => ({...val}))[0]
+        const newState = contact.phoneNumbers.map(val => ({ ...val }))
+        const newNumber = emptyContact.phoneNumbers.map(val => ({ ...val }))[0]
         newNumber.id = numberId
         newState.push(newNumber)
-        setContact(prev => ({...prev, phoneNumbers: [...newState, ]}))
-        if(deleteButton) {
+        setContact(prev => ({ ...prev, phoneNumbers: [...newState,] }))
+        if (deleteButton) {
             dispatch(showUpdateButton())
         }
     }
@@ -157,24 +159,38 @@ const handleCancelButton = () => {
         }
     }, [updateButtonPressed])
 
+
+    useEffect(() => {
+        if(status==="loading") {
+            setErrorText("Please wait, still loading...")
+        } else {
+            setErrorText("")
+        }
+        if(errorMessage) {
+            setErrorText(errorMessage)
+        }
+
+    }, [status, errorMessage])
+
     return (
         <>
             <DataBox>
                 <DataBoxNav>Contact Details</DataBoxNav>
-                    <ErrorTextContactDetails>{errorMessage}
-                    </ErrorTextContactDetails>
+                <ErrorTextContactDetails>
+                    {errorText}
+                </ErrorTextContactDetails>
                 <DataWrapper autoComplete="off">
                     <SearchWrapper>
                         <Search
-                        onClick={() => console.log("hi")}
+                            onClick={() => console.log("hi")}
                         />
                         <ArrowWrapper onClick={handleSelect}>
                             {showSelect ? <ArrowUp /> : <ArrowDown />}
                         </ArrowWrapper>
                         <SelectWrapper showSelect={showSelect}>
                             {!desktop && <Select
-                            showSelect={showSelect}
-                            handleSelect={handleSelect}
+                                showSelect={showSelect}
+                                handleSelect={handleSelect}
                             />}
                         </SelectWrapper>
                     </SearchWrapper>
@@ -213,60 +229,60 @@ const handleCancelButton = () => {
                 <NumbersWrapper>
                     {contact.phoneNumbers ? contact.phoneNumbers.map((val, idx) => (
                         <div key={idx}>
-                            
+
                             <SelectMobile
-                            
-                            onChange={(e) => {
-                                updatePhoneNumber(e, idx, "countryCode")
-                                handleInput()
-                            }}
+
+                                onChange={(e) => {
+                                    updatePhoneNumber(e, idx, "countryCode")
+                                    handleInput()
+                                }}
                             >
-                            {countries ? countries.map((val, idxx) => (
-                                <option
-                                key={idxx}
-                                value={val.dialCode}
-                                >
+                                {countries ? countries.map((val, idxx) => (
+                                    <option
+                                        key={idxx}
+                                        value={val.dialCode}
+                                    >
                                         {`${val.name} ${val.dialCode}`}
                                     </option>
-                            ))
-                            : null}
+                                ))
+                                    : null}
                             </SelectMobile>
-  
+
                             <CountryCode
-                            
-                            value={val.countryCode || ""}
-                            onChange={(e) => {
-                                updatePhoneNumber(e, idx, "countryCode")
-                                handleInput()
-                            }}
+
+                                value={val.countryCode || ""}
+                                onChange={(e) => {
+                                    updatePhoneNumber(e, idx, "countryCode")
+                                    handleInput()
+                                }}
                             />
                             <AreaCode
-                            value={val.areaCode || ""}
-                            onChange={(e) => {
-                                updatePhoneNumber(e, idx, "areaCode") 
-                                handleInput()
-                        }}
+                                value={val.areaCode || ""}
+                                onChange={(e) => {
+                                    updatePhoneNumber(e, idx, "areaCode")
+                                    handleInput()
+                                }}
                             />
                             <Extension
-                            value={val.extension || ""}
-                            onChange={(e) => {
-                                updatePhoneNumber(e, idx, "extension")
-                                handleInput()
-                            }}
+                                value={val.extension || ""}
+                                onChange={(e) => {
+                                    updatePhoneNumber(e, idx, "extension")
+                                    handleInput()
+                                }}
                             />
                             <PhoneNumber
-                            value={val.number || ""}
-                            onChange={(e) => {
-                                updatePhoneNumber(e, idx, "number") 
-                                handleInput()
-                            }}
+                                value={val.number || ""}
+                                onChange={(e) => {
+                                    updatePhoneNumber(e, idx, "number")
+                                    handleInput()
+                                }}
                             />
-                    <DeleteIcon 
-                        onClick={() =>{
-                            deletePhoneNumber(val.id)
-                            handleInput()
-                        }}
-                    />        
+                            <DeleteIcon
+                                onClick={() => {
+                                    deletePhoneNumber(val.id)
+                                    handleInput()
+                                }}
+                            />
                         </div>
                     )) : null}
                     <AddIcon

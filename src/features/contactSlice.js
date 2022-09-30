@@ -45,21 +45,21 @@ export const deleteContactThunk = createAsyncThunk("contacts/deleteContact", asy
     try {
         const response = await deleteContact(
             {
-            url: `/${contactId}`
-        }
+                url: `/${contactId}`
+            }
         )
     } catch (error) {
         return rejectWithValue(error)
     }
 })
 
-export const updateContactThunk = createAsyncThunk("contacts/updateContact", async ({contactId, contact}, {rejectWithValue}) => {
+export const updateContactThunk = createAsyncThunk("contacts/updateContact", async ({ contactId, contact }, { rejectWithValue }) => {
     try {
         const response = await updateContact({
             url: `/${contactId}`,
             data: contact
         })
-    } catch(error) {
+    } catch (error) {
         return rejectWithValue(error)
     }
 })
@@ -139,12 +139,17 @@ export const contactSlice = createSlice({
     },
     extraReducers(builder) {
         builder
+            .addCase(fetchContacts.pending, (state, action) => {
+                state.status = "loading"
+            })
             .addCase(fetchContacts.fulfilled, (state, action) => {
                 state.contacts = action.payload
+                state.status = "succeeded"
             })
             .addCase(fetchContacts.rejected,
                 (state, action) => {
                     state.errorContacts = action.payload
+                    state.status = "failed"
                 })
             .addCase(addContactThunk.fulfilled,
                 (state, action) => {

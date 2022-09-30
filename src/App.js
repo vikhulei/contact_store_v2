@@ -8,8 +8,6 @@ import ContactStore from "./pages/contactstore/ContactStore"
 import Protected from "./util/Protected"
 
 const App = () => {
-  
-  // const [auth, setAuth] = useState(false)
 
   return (
       <Background>

@@ -26,11 +26,12 @@ const ChangePassword = () => {
 
     const dispatch = useDispatch()
 
+    
     const passwordFromStore = sessionStorage.getItem("psw")
-    const errorProfilePassword = useSelector(state => state.profile.errorProfilePassword)
+    const errorPassword = useSelector(state => state.profile.errorProfilePassword)
 
     const buttonChangePassword = (e) => {
-        console.log("here")
+        // console.log("passwordUpdated")
         e.preventDefault()
         if (oldPassword !== passwordFromStore) {
                 setErrorMessage("Your current password has not been entered correctly")
@@ -41,15 +42,15 @@ const ChangePassword = () => {
             setOldPassword("")
             setNewPassword("")
             setRetypePassword("")
-            setErrorMessage(errorProfilePassword)
+            setErrorMessage(errorPassword)
         } else {
             setErrorMessage("Password must be at least 8 characters long, containing at least one upper case, one lower case, one numeric and one special character")
         }
     }
 
     useEffect(() => {
-        setErrorMessage(errorProfilePassword)
-    }, [errorProfilePassword])
+        setErrorMessage(errorPassword)
+    }, [errorPassword])
 
     return (
         <>
@@ -82,7 +83,7 @@ const ChangePassword = () => {
                             <Visibility onClick={() => setVisibility(prev => ({...prev, retype: !visibility.retype}))} />
                         </Label>
                     </InputsGroup>
-                    <ErrorTextPassword>
+                    <ErrorTextPassword errorMessage={errorMessage}>
                         {errorMessage}
                     </ErrorTextPassword>
                     <SmallButton

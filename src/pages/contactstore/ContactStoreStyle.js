@@ -10,22 +10,21 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    // background-color: lightblue;
     @media screen and (max-height: 750px) {
-        // background-color: lightblue;
         top: 15vh;
         transform: translate(-50%, 0%);
     }
     @media screen and (max-width: 1350px) {
-        top: 15vh;
+        top: 15vmin;
         transform: translate(-50%, 0%);
         flex-direction: column-reverse;
         height: 1500px;
-        padding-bottom: 15%;
+        padding-bottom: 250px;
     }
     @media screen and (max-width: 1000px) {
-        top: 15vmin;
-        max-height: 1350px;
-        min-height: 1350px;
+        max-height: 1600px;
+        min-height: 1600px;
     }
 `
 
