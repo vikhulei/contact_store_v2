@@ -27,7 +27,6 @@ const LabelLogin = styled(Label) `
 
 const InputLogin = styled(Input) `
     width: 50vw;
-    // max-width: 210px;
 `
 const ButtonLogin = styled(SmallButton) `
     margin-top: 20px;

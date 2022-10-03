@@ -5,8 +5,8 @@ import useWindowWidth from "../../../util/useWindowWidth"
 import { DataBox, DataBoxNav } from "../../../components/ui/StyledComponents"
 import { DataWrapper, SearchWrapper, SelectWrapper, DetailsLabel, DetailsInput, NumbersWrapper, CountryCode, AreaCode, Extension, PhoneNumber, ArrowWrapper, ArrowDown, ArrowUp, MobileButtonsWrapper, DeleteIcon, AddIcon, SelectMobile, ErrorTextContactDetails } from "./ContactDetailsStyle"
 import Search from "../components/search/Search"
-import Select from "../../../components/select/Select"
-import Buttons from "../buttons/Buttons"
+import Select from "../components/select/Select"
+import Buttons from "../../contactstore/components/buttons/Buttons"
 import { emptyContact } from "../../../util/emptyContact"
 import { fetchContacts, addContactThunk, deleteContactThunk, updateContactThunk,  resetContactId, cancelSelection, showSelectList } from "../../../features/contactSlice"
 import { enableButton, showAddButton, showDeleteButton, showUpdateButton, disableButton, addButtonAction, deleteButtonAction, updateButtonAction, cancelButtonAction } from "../../../features/buttonsSlice"
@@ -39,7 +39,7 @@ const ContactDetails = () => {
 
     const contactFromStore = contactsFromStore.filter(value => value.id === contactId)[0]
 
-    const phoneNumberSplit = contactFromStore ? contactFromStore.phoneNumbers.map((val, idx) => ({
+    const phoneNumberSplit = contactFromStore ? contactFromStore.phoneNumbers.map((val) => ({
         areaCode: val.phoneNumberFormatted.split("-")[1],
         category: val.category,
         countryCode: val.phoneNumberFormatted.split("-")[0],
@@ -183,9 +183,7 @@ const ContactDetails = () => {
                 </ErrorTextContactDetails>
                 <DataWrapper autoComplete="off">
                     <SearchWrapper>
-                        <Search
-                            onClick={() => console.log("hi")}
-                        />
+                        <Search />
                         <ArrowWrapper onClick={handleSelect}>
                             {showSelect ? <ArrowUp /> : <ArrowDown />}
                         </ArrowWrapper>
@@ -234,9 +232,7 @@ const ContactDetails = () => {
                 <NumbersWrapper>
                     {contact.phoneNumbers ? contact.phoneNumbers.map((val, idx) => (
                         <div key={idx}>
-
                             <SelectMobile
-
                                 onChange={(e) => {
                                     updatePhoneNumber(e, idx, "countryCode")
                                     handleInput()

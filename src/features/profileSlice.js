@@ -82,7 +82,7 @@ export const profileSlice = createSlice({
                     state.errorProfileImage = action.payload
                 })
             .addCase(postProfileImage.fulfilled,
-                (state, action) => {
+                (state) => {
                     state.status = "succeeded"
                     state.errorProfileImage = ""
                 })

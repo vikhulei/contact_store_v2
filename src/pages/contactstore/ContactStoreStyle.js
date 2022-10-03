@@ -11,7 +11,6 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // background-color: lightblue;
     @media screen and (max-height: 750px) {
         top: 15vh;
         transform: translate(-50%, 0%);
@@ -38,14 +37,9 @@ width: 100%;
 display: flex;
 justify-content: space-between;
 align-items: center;
-// background-color: blue;
 @media screen and (max-width: 1000px) {
     width: auto;
 }
-// @media screen and (max-width: 1350px) {
-//     width: 80vw;
-// }
-
 `
 const ButtonsWrapper = styled.div `
     @media screen and (max-width: 1000px) {

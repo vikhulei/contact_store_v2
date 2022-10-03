@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux"
-import { fetchToken, setPassword } from "../../features/getTokenSlice"
+import { fetchToken } from "../../features/getTokenSlice"
 import { DataBoxNav, Visibility } from "../../components/ui/StyledComponents"
 import { DataBoxLogin, FormLogin, LabelLogin, InputLogin, ErrorTextLogin, ButtonLogin } from "./LoginStyle"
 
@@ -14,7 +14,7 @@ const Login = () => {
     const token = useSelector(state => state.token.token)
     const errorMessage = useSelector(state => state.token.errorMessage)
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch()  
 
     const navigate = useNavigate()
 

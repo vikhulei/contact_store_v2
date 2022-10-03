@@ -3,7 +3,9 @@ import { login, getProfileData, getProfileImage, uploadProfileImage, changePassw
 
 
 login.interceptors.response.use(
-    response => response,
+    response => {
+        return response
+    },
     error => {
         error = handleError(error)
         return Promise.reject(error)
@@ -66,7 +68,8 @@ changePassword.interceptors.request.use(
     error => {
         error = handleError(error)
         return Promise.reject(error)
-    })
+    }
+)
 
 changePassword.interceptors.response.use(
     response => response,
@@ -138,14 +141,16 @@ deleteContact.interceptors.request.use(
     error => {
         error = handleError(error)
         return Promise.reject(error)
-    })
+    }
+)
 
 deleteContact.interceptors.response.use(
     response => response,
     error => {
         error = handleError(error)
         return Promise.reject(error)
-    })
+    }
+)
 
 updateContact.interceptors.request.use(
     request => {
@@ -157,14 +162,16 @@ updateContact.interceptors.request.use(
     error => {
         error = handleError(error)
         return Promise.reject(error)
-    })
+    }
+)
 
 updateContact.interceptors.response.use(
     response => response,
     error => {
         error = handleError(error)
         return Promise.reject(error)
-    })
+    }
+)
 
 
 export { login, getProfileData, getProfileImage, uploadProfileImage, changePassword, getContacts, addContact, deleteContact, updateContact, getCountryCodes }

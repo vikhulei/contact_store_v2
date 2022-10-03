@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { emptyContact } from "../../util/emptyContact"
 import { SelectList, OptiontWrapper, OptionLabel, OptionButton } from "./SelectStyle"
-import { getContacts } from "../../axios/requestConfig"
-import { fetchContacts, getContactId, makeSelection, getCountryCodesThunk } from "../../features/contactSlice"
+import { fetchContacts, getContactId, makeSelection, getCountryCodesThunk } from "../../../../features/contactSlice"
 
 
-const Select = ({ handleSelect, showSelect, showSelectList }) => {
+const Select = ({ handleSelect, showSelect }) => {
 
     const dispatch = useDispatch()
 

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { LargeButton } from "../../../components/ui/StyledComponents"
+import { LargeButton } from "../../../../components/ui/StyledComponents"
 
 const ButtonsWrapper = styled.div `
     // width: 200px;
@@ -31,16 +31,3 @@ background-color: #A809CF;
 `
 
 export {ButtonsWrapper, ProfileButton}
-
-
-// @media screen and (max-width: 1050px) {
-//     // background-color: rgba(80,80,80,0.8);
-//     position: sticky;
-//     width: 100vw;
-//     max-width: 350px;
-//     height: 60px;
-//     flex-direction: row;
-//     justify-content: space-around;
-//     bottom: 20px;
-//     margin-top: -150px;
-// }

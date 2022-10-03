@@ -8,9 +8,6 @@ import { clearContacts } from "../../features/contactSlice"
 
 const NavBar = () => {
     const token = sessionStorage.getItem("token")
-
-    const contactId = useSelector(state => state.contacts.contactId)
-    
     const dispatch = useDispatch()
     const navigate = useNavigate()
 

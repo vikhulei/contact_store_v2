@@ -2,7 +2,7 @@ import { Wrapper, ProfileWrapper, ContactsWrapper, ButtonsWrapper } from "./Cont
 import Profile from "./profile/Profile"
 import SelectContact from "./selectcontact/SelectContact"
 import ContactDetails from "./contactdetails/ContactDetails"
-import Buttons from "./buttons/Buttons"
+import Buttons from "./components/buttons/Buttons"
 import Footer from "../../components/footer/Footer"
 
 

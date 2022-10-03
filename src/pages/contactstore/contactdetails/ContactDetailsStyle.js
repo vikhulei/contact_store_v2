@@ -118,13 +118,10 @@ const SelectMobile = styled.select `
     margin: 10px 0 0 50px;
     background: #F2E0FB;
     border: none;
-    // padding-left: 10px;
-    // color: transparent;
 `
 
 const MobileButtonsWrapper = styled.div `
 margin-top: 25px;
-// background-color: red;
 @media screen and (min-width: 1000px) {
     display: none;
 }

@@ -76,7 +76,6 @@ const DataBox = styled.div `
     background-color: #DECDE5;
     border: black 1px solid;
     border-radius: 20px;
-    // box-shadow: black 0px 0px 30px;
 `
 
 const DataBoxNav = styled.div `

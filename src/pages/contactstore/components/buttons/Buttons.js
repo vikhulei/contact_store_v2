@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { LargeButton } from "../../../components/ui/StyledComponents"
+import { LargeButton } from "../../../../components/ui/StyledComponents"
 import { ButtonsWrapper, ProfileButton } from "./ButtonsStyle"
-import { cancelSelection, resetContactId, disableButton, showAddButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction } from "../../../features/buttonsSlice"
+import { cancelSelection, resetContactId, disableButton, showAddButton, cancelButtonAction, addButtonAction, deleteButtonAction, updateButtonAction } from "../../../../features/buttonsSlice"
 
 const Buttons = () => {
 
@@ -22,7 +22,7 @@ const Buttons = () => {
         dispatch(updateButtonAction(true))
     }
 
-    const profileButton = () => {
+    const scrollToProfile = () => {
         document.getElementById("ScrollToProfile").scrollIntoView({
             behavior: "smooth"
         })
@@ -40,7 +40,7 @@ const Buttons = () => {
             >
                 {firstButton.add ? "Add" : firstButton.delete ? "Delete" : "Update"}
             </LargeButton>
-            <ProfileButton onClick={profileButton}>Profile</ProfileButton>
+            <ProfileButton onClick={scrollToProfile}>Profile</ProfileButton>
             <LargeButton
                 disabled={disabledButton}
                 onClick={cancelButton}

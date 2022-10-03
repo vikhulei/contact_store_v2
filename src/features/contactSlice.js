@@ -90,7 +90,7 @@ export const contactSlice = createSlice({
     },
     extraReducers(builder) {
         builder
-            .addCase(fetchContacts.pending, (state, action) => {
+            .addCase(fetchContacts.pending, (state) => {
                 state.status = "loading"
             })
             .addCase(fetchContacts.fulfilled, (state, action) => {

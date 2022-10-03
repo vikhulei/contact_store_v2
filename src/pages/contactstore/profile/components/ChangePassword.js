@@ -31,7 +31,6 @@ const ChangePassword = () => {
     const errorPassword = useSelector(state => state.profile.errorProfilePassword)
 
     const buttonChangePassword = (e) => {
-        // console.log("passwordUpdated")
         e.preventDefault()
         if (oldPassword !== passwordFromStore) {
                 setErrorMessage("Your current password has not been entered correctly")
